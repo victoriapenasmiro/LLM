@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Gestió d'hotels.</title>
+    <script src="scripts.js"></script>
+    <link rel="stylesheet" type="text/css" href="styleGeneral.css">
+    <link rel="stylesheet" type="text/css" href="styleBack.css">
+</head>
+<body>
+    <header id="head">
+        <!--**Aqui posar la imatge del vostre logo**-->
+        <h1>Gestió hotels.</h1>
+    </header>
+    <aside>
+        <h2>Llista Hotels</h2>
+        <ul id="llistaHotels"></ul>
+    </aside>
+    <main id="principal">
+        <p class="mandatory">Les dades amb un * són obligatòries.</p>
+        <input type="hidden" id="idHotel" value="" />
+        <div class="elementHotel">
+            <label>Nom*:</label>
+            <input type="text" id="nomHotel" />
+        </div>
+        <div class="elementHotel">
+            <label>Estrelles*:</label>
+            <input type="number" id="estrellesHotel" min="1" max="5"/>
+        </div>
+        <div class="elementHotel">
+            <label>Email*:</label>
+            <input type="email" id="emailHotel" placeholder="email@email.com"/>
+        </div>
+        <div class="elementHotel">
+            <label>Telèfon*:</label>
+            <input type="tel" id="tlfHotel" placeholder="+34 988776556" pattern="+[0-9]{2}[0-9]{3}[0-9]{3}[0-9]{3}"/>
+        </div>
+        <div class="elementHotel">
+            <label>Direcció*:</label>
+            <input type="text" id="direccioHotel" />
+        </div>
+        <div class="elementHotel">
+            <label>Codi Postal*:</label>
+            <input type="number" id="codiPostalHotel" min=0 max=99999/><!--maximo 5 numeros-->
+        </div>
+        <div class="elementHotel">
+            <label>Ciutat*:</label>
+            <select id="ciutatHotel">
+                <option value="">Selecciona un valor de sa llista</option>
+                <option value="Madrid">Madrid</option>
+                <option value="Barcelona">Barcelona</option>
+                <option value="Palma">Palma</option>
+                <option value="Canarias">Canarias</option>
+            </select>
+        </div>
+        <div>
+            <h3>Marca els serveis inclosos:</h3>
+            <div class="flotaI">
+                <input type="checkbox" id="parkingHotel" />
+                <label>Te aparcament</label>
+            </div>
+            <div class="flotaI" id="checkFormat">
+                <input type="checkbox" id="wifiHotel" />
+                <label>Te WiFi</label>
+            </div>
+            <div>
+                <input type="checkbox" id="animalAdmesos" onclick="controlMascotes()"/>
+                <label>Animals admesos</label>
+                <div id="dvMascotes">
+                    <label>Marca el animals permesos del llistat.</label>
+                    <select id="mascotes" multiple>
+                        <option value="Cans">Cans</option>
+                        <option value="Moixos">Moixos</option>
+                        <option value="Urons">Urons</option>
+                        <option value="Hamster">Hamster</option>
+                        <option value="Lloro">Lloro</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="elementHotel" id="marginT">
+            <label>Foto Principal:</label>
+            <input type="file" id="fotoHotel" />
+        </div>
+        <div class="elementHotel">
+            <label>Puntuació a Booking.com (de 0 a 10):</label>
+            <input type="range" id="puntuacioBooking" min=0 max=10 value=0 list="puntuacions">
+            <!--Nota: Actualmente, ningún navegador soporta todas estas características. Firefox no soporta ni marcas ni etiquetas,
+                mientras que Chrome soporta las marcas pero no las etiquetas.-->
+            <datalist id="puntuacions">
+                <option value="0" label="0">
+                <option value="1" label="1">
+                <option value="2" label="2">
+                <option value="3" label="3">
+                <option value="4" label="4">
+                <option value="5" label="5">
+                <option value="6" label="6">
+                <option value="7" label="7">
+                <option value="8" label="8">
+                <option value="9" label="9">
+                <option value="10" label="10">
+              </datalist>
+        </div>
+        <div style="margin-bottom: 15px;">
+            <label>Enllaç de Trip Advisor:</label>
+            <input type="url" id="advisorHotel" placeholder="https://www.exemple.com/"/>
+        </div>
+        <div>
+            <button id="afegir" onclick="afegirHotel()">Afegir</button>
+            <button id="modificar" onclick="desarModificacioHotel()">Desar</button>
+            <button id="generaJson" onclick="mostrarJSON();generarJsonHotels()">Generar Json</button>
+        </div>
+        <div>
+            <textarea id="JsonText" rows="4" cols="50" style="display: none;"></textarea>
+        </div>
+    </main>
+    <footer id="peu">
+        <!--Els peus a intranets no són molt necessàris. Podeu possar-hi El nom de l'empresa + versió de la pàgina -->
+        Copyrigh Victoria Peñas <a href="mailto:mpenas@cifpfbmoll.eu">mpenas@cifpfbmoll.eu</a>
+    </footer>
+</body>
+</html>
