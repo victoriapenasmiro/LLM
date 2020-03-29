@@ -100,39 +100,27 @@ function generarObjHotel(id) {
     hotel.direccio = document.getElementById("direccioHotel").value;
     hotel.codiPostal = document.getElementById("codiPostalHotel").value;
     hotel.ciutat = document.getElementById("ciutatHotel").value;
-    hotel.parking = document.getElementById("parkingHotel").checked = getCheckPark(); //no funciona, pdte testar
-    hotel.wifi = document.getElementById("wifiHotel").checked = getCheckWifi(); //no funciona, pdte testar
-    hotel.animals = document.getElementById("animalsAdmesos").checked = getCheckAnima(); //no funciona, pdte testar
-    hotel.llistaMascotes = document.getElementById("mascostes").value; //no funciona, pdte testar
-    hotel.fotoPrinc = document.getElementById("fotoHotel").value; 
+    hotel.parking = document.getElementById("parkingHotel").checked;
+    hotel.wifi = document.getElementById("wifiHotel").checked;
+    hotel.animals = document.getElementById("animalAdmesos").checked;
+    hotel.llistaMascotes = getMascotes();
+    hotel.fotoPrinc = document.getElementById("fotoHotel").value; //al modificar el hotel no muestra el value puesto
     hotel.puntuacioBooking = document.getElementById("puntuacioBooking").value;
+    hotel.puntuacioBookingText = document.getElementById("textInputBooking").value;
     hotel.advisorHotel = document.getElementById("advisorHotel").value;
     return hotel;
 }
 
-function getCheckPark() {
-    if(document.getElementById("parkingHotel").checked == false){
-        return false;
+function getMascotes(){
+    var mascotes = new Array ();
+    var opt;
+    for (var i=0; i<document.getElementById("mascotes").length; i++) {
+        opt = document.getElementById("mascotes")[i];
+        if (opt.selected) {
+          mascotes.push(opt.value);
+        }
     }
-    else{
-        return true;
-    }
-}
-function getCheckWifi() {
-    if(document.getElementById("wifiHotel").checked == false){
-        return false;
-    }
-    else{
-        return true;
-    }
-}
-function getCheckAnimal() {
-    if(document.getElementById("animalsAdmesos").checked == false){
-        return false;
-    }
-    else{
-        return true;
-    }
+    return mascotes;
 }
 
 //Afegirem un hotel. Controlarem si les dades són correctes i el ficarem a la llista i generarem el Json.
@@ -188,6 +176,7 @@ function desarModificacioHotel() {
 function modificarHotel(idLi) {
     let objHotel = new Object();
     objHotel = JSON.parse(document.getElementById("jsonHotel" + idLi).value);
+    document.getElementById("idHotel").value = idLi;
     document.getElementById("nomHotel").value = objHotel.nom;
     document.getElementById("estrellesHotel").value = objHotel.estrelles;
     document.getElementById("emailHotel").value = objHotel.email;
@@ -195,14 +184,14 @@ function modificarHotel(idLi) {
     document.getElementById("direccioHotel").value = objHotel.direccio;
     document.getElementById("codiPostalHotel").value = objHotel.codiPostal;
     document.getElementById("ciutatHotel").value = objHotel.ciutat;
-    document.getElementById("parkingHotel").checked = objHotel.parking; //pdte tomeu
-    document.getElementById("wifiHotel").checked = objHotel.wifi; //pdte tomeu
-    document.getElementById("animalsAdmesos").checked = objHotel.animals; //pdte tomeu
-    document.getElementById("mascostes").value; //pdte testar
-    hdocument.getElementById("fotoHotel").value = objHotel.fotoPrinc;
+    document.getElementById("parkingHotel").checked = objHotel.parking;
+    document.getElementById("wifiHotel").checked = objHotel.wifi;
+    document.getElementById("animalAdmesos").checked = objHotel.animals;
+    document.getElementById("mascotes").value = objHotel.llistaMascotes;
+    document.getElementById("fotoHotel").value = objHotel.fotoPrinc;
     document.getElementById("puntuacioBooking").value = objHotel.puntuacioBooking;
+    document.getElementById("textInputBooking").value = objHotel.puntuacioBookingText;
     document.getElementById("advisorHotel").value = objHotel.advisorHotel;
-    document.getElementById("idHotel").value = idLi;
     document.getElementById("modificar").style.display = "inline";
     document.getElementById("afegir").style.display = "none";
 }
@@ -220,8 +209,10 @@ function netejarCamps() {
     document.getElementById("parkingHotel").checked = false;
     document.getElementById("wifiHotel").checked = false;
     document.getElementById("animalAdmesos").checked = false;
+    document.getElementById("mascotes").value = "";
     document.getElementById("fotoHotel").value = "";
     document.getElementById("puntuacioBooking").value = 0;
+    document.getElementById("textInputBooking").value = "";
     document.getElementById("advisorHotel").value = "";
 
     //Deixam la visibilitat dels botons per defecte.
@@ -263,3 +254,8 @@ function validarURL(str) {
     else
         return false;
 }
+
+//funció per veure es valor de sa puntuació a booking.com
+function rangeValues(val) {
+    document.getElementById('textInputBooking').value=val; 
+  }

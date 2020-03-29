@@ -80,3 +80,9 @@ button {
     font-size: 14px;
     margin-top: 10px;
 }
+
+#textInputBooking{
+    border: none;
+    font-weight: 600;
+    color: blue;
+}

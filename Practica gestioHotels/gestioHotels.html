@@ -83,7 +83,8 @@
         </div>
         <div class="elementHotel">
             <label>Puntuació a Booking.com (de 0 a 10):</label>
-            <input type="range" id="puntuacioBooking" min=0 max=10 value=0 list="puntuacions">
+            <input type="range" id="puntuacioBooking" min=0 max=10 value=0 list="puntuacions" onchange="rangeValues(this.value);">
+            <input type="text" id="textInputBooking" value="" placeholder="0">
             <!--Nota: Actualmente, ningún navegador soporta todas estas características. Firefox no soporta ni marcas ni etiquetas,
                 mientras que Chrome soporta las marcas pero no las etiquetas.-->
             <datalist id="puntuacions">
