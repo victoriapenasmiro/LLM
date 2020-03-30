@@ -161,6 +161,14 @@ function generarObjDietes(nom,base,impost,total,moneda) {
     return preu;
 }
 
+//Funció genèrica per seleccionar selects multiples. 
+function setDietes(nomInput) {
+    var multiSel = document.getElementById(nomInput);
+    for (opcio of multiSel.options) {
+
+    }
+}
+
 function getMascotes(){
     var mascotes = new Array ();
     var opt;
@@ -271,6 +279,11 @@ function modificarHotel(idLi) {
     document.getElementById("direccioHotel").value = objHotel.direccio;
     document.getElementById("codiPostalHotel").value = objHotel.codiPostal;
     document.getElementById("ciutatHotel").value = objHotel.ciutat;
+    
+    if (objHotel.dietes != null && objHotel.dietes.length > 0) {
+        setDietes(objHotel.dietes);
+    }
+
     document.getElementById("parkingHotel").checked = objHotel.parking;
     document.getElementById("wifiHotel").checked = objHotel.wifi;
     document.getElementById("animalAdmesos").checked = objHotel.animals;
