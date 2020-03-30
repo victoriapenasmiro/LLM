@@ -43,6 +43,11 @@ function controlDeLesDades() {
         strErrors += "Número d'estrelles no introduït\n";
     }
 
+    if (document.getElementById("descHotel").value == "") {
+        //El \n és un bot de linea.
+        strErrors += "Descripció de s'hotel no introduïda\n";
+    }
+
     if (document.getElementById("emailHotel").value == "") {
         //El \n és un bot de linea.
         strErrors += "E-mail no introduït\n";
@@ -82,6 +87,10 @@ function controlDeLesDades() {
         strErrors += "Ciutat no introduïda\n";
     }
     
+    if(document.getElementById("fotoHotel").value != "" && !validarURL(document.getElementById("fotoHotel").value)){
+        strErrors += "L'enllaç de sa imatge no és correcte";
+    }
+
     if(document.getElementById("advisorHotel").value != "" && !validarURL(document.getElementById("advisorHotel").value)){
         strErrors += "L'enllaç de Tripadvisor indicat no és correcte.";
     }
@@ -95,6 +104,7 @@ function generarObjHotel(id) {
     hotel.id = id;
     hotel.nom = document.getElementById("nomHotel").value;
     hotel.estrelles = document.getElementById("estrellesHotel").value;
+    hotel.descripcio = document.getElementById("descHotel").value;
     hotel.email = document.getElementById("emailHotel").value;
     hotel.tel = document.getElementById("tlfHotel").value;
     hotel.direccio = document.getElementById("direccioHotel").value;
@@ -103,6 +113,7 @@ function generarObjHotel(id) {
     hotel.parking = document.getElementById("parkingHotel").checked;
     hotel.wifi = document.getElementById("wifiHotel").checked;
     hotel.animals = document.getElementById("animalAdmesos").checked;
+    hotel.dietes = getDietes();//¿Y los parametros?
     hotel.llistaMascotes = getMascotes();
     hotel.fotoPrinc = document.getElementById("fotoHotel").value; //al modificar el hotel no muestra el value puesto
     hotel.puntuacioBooking = document.getElementById("puntuacioBooking").value;
@@ -111,16 +122,71 @@ function generarObjHotel(id) {
     return hotel;
 }
 
+function getDietes() {
+    let dietes = new Array();
+    for (let i = 0; i < 3; i++){ //como hago que coja en automático el 3?
+        dietes.push(generarObjDietes());//Como voy enviando los valores en automático?
+    }
+    return dietes;
+}
+
+function generarObjDietes(base,impost,total,moneda) {
+    let preu = new Object();
+    preu.base = base;
+    preu.impost = impost;
+    preu.total = total;
+    preu.moneda = moneda;
+    return preu;
+}
+
 function getMascotes(){
     var mascotes = new Array ();
     var opt;
-    for (var i=0; i<document.getElementById("mascotes").length; i++) {
+    for (let i=0; i<document.getElementById("mascotes").length; i++) {
         opt = document.getElementById("mascotes")[i];
         if (opt.selected) {
           mascotes.push(opt.value);
         }
     }
     return mascotes;
+}
+
+//Funció genèrica per seleccionar selects multiples. 
+function setMascotes(nomInput, valorsSeleccionats) {
+    var multiSel = document.getElementById(nomInput);
+    for (opcio of multiSel.options) {
+        //indexOf per trobar un caracter dins un string. O un string dins una llista. returns -1 si no troba sa string
+        opcio.selected = valorsSeleccionats.indexOf(opcio.value) >= 0;
+    }
+}
+
+function controlMascotes() {
+    if (document.getElementById("animalAdmesos").checked == true) {                
+        document.getElementById("dvMascotes").style.display = "block";
+    } else {
+        document.getElementById("dvMascotes").style.display = "none";
+    }
+}
+
+function controlDietes(dieta,preu) {
+    if (document.getElementById(dieta).checked == true) {                
+        document.getElementById(preu).style.display = "block";
+    } else {
+        document.getElementById(preu).style.display = "none";
+    }
+}
+
+function asignarMoneda(id) {
+    let moneda = document.getElementsByName("monedes")[0];
+    getvalue.addEventListener('input',function(){
+        document.getElementById(id).innerHTML = this.value;
+    });    
+}
+
+function calcularTotal(base,impost,total) {
+    var base = document.getElementById(base).value;
+    var impost = 1+(document.getElementById(impost).value/100);
+    document.getElementById(total).value = base*impost;
 }
 
 //Afegirem un hotel. Controlarem si les dades són correctes i el ficarem a la llista i generarem el Json.
@@ -151,14 +217,6 @@ function afegirHotel() {
     }
 }
 
-function controlMascotes() {
-    if (document.getElementById("animalAdmesos").checked == true) {                
-        document.getElementById("dvMascotes").style.display = "block";
-    } else {
-        document.getElementById("dvMascotes").style.display = "none";
-    }
-}  
-
 //Modificació de les dades d'un hotel.
 function desarModificacioHotel() {
     var idLlista = document.getElementById("idHotel").value;
@@ -169,6 +227,8 @@ function desarModificacioHotel() {
         var jsonHotel = JSON.stringify(objHotel);
         document.getElementById("jsonHotel" + idLlista).value = jsonHotel;
         netejarCamps();
+    }else {
+        alert("Falten dades per completar:\n" + dadesCompletes);
     }
 }
 
@@ -179,6 +239,7 @@ function modificarHotel(idLi) {
     document.getElementById("idHotel").value = idLi;
     document.getElementById("nomHotel").value = objHotel.nom;
     document.getElementById("estrellesHotel").value = objHotel.estrelles;
+    document.getElementById("descHotel").value = objHotel.descripcio;
     document.getElementById("emailHotel").value = objHotel.email;
     document.getElementById("tlfHotel").value = objHotel.tel;
     document.getElementById("direccioHotel").value = objHotel.direccio;
@@ -187,7 +248,11 @@ function modificarHotel(idLi) {
     document.getElementById("parkingHotel").checked = objHotel.parking;
     document.getElementById("wifiHotel").checked = objHotel.wifi;
     document.getElementById("animalAdmesos").checked = objHotel.animals;
-    document.getElementById("mascotes").value = objHotel.llistaMascotes;
+
+    if (objHotel.llistaMascotes != null && objHotel.llistaMascotes.length > 0) {
+        setMascotes("mascotes", objHotel.llistaMascotes);
+    }
+
     document.getElementById("fotoHotel").value = objHotel.fotoPrinc;
     document.getElementById("puntuacioBooking").value = objHotel.puntuacioBooking;
     document.getElementById("textInputBooking").value = objHotel.puntuacioBookingText;

@@ -27,6 +27,10 @@
             <input type="number" id="estrellesHotel" min="1" max="5"/>
         </div>
         <div class="elementHotel">
+            <label>Descripció*:</label>
+            <textarea id="descHotel" rows="4" cols="50"></textarea>
+        </div>
+        <div class="elementHotel">
             <label>Email*:</label>
             <input type="email" id="emailHotel" placeholder="email@email.com"/>
         </div>
@@ -40,7 +44,7 @@
         </div>
         <div class="elementHotel">
             <label>Codi Postal*:</label>
-            <input type="number" id="codiPostalHotel" min=0 max=99999/><!--maximo 5 numeros-->
+            <input type="number" id="codiPostalHotel" min="0" max="99999"/><!--maximo 5 numeros-->
         </div>
         <div class="elementHotel">
             <label>Ciutat*:</label>
@@ -51,6 +55,70 @@
                 <option value="Palma">Palma</option>
                 <option value="Canarias">Canarias</option>
             </select>
+        </div>
+        <div class="elementHotel">
+            <label>Moneda*:</label>
+            <input list="monedes" name="monedes">
+            <datalist id="monedes"><!--el id debe ser el mismo que el list-->
+                <option value="Euro">
+                <option value="Dolar">
+                <option value="Lliura">
+            </datalist>
+        </div>
+        <div id="preus">
+            <h3>Marca les dietes ofertades i els preus:</h3>
+            <div>
+                <input type="checkbox" id="berenar" onclick="controlDietes('berenar','preusBerenar');asignarMoneda('monedaBerenar');"/><!--el envio de strings con onclick debe ser con comilla simple-->
+                <label>Berenar</label>
+                <div id="preusBerenar">
+                    <label>Preu</label>
+                    <input type="numer" id="preuBaseBerenar" onchange="calcularTotal('preuBaseBerenar','impostPreuBerenar','totalBerenar')"/>
+                    <label>Impost</label>
+                    <input type="number" id="impostPreuBerenar" placeholder="10" onchange="calcularTotal('preuBaseBerenar','impostPreuBerenar','totalBerenar')"/>
+                    <label>Import Total</label>
+                    <input type="number" id="totalBerenar" readonly/>
+                    <label>Moneda*:</label>
+                    <span id="monedaBerenar"></span>
+                </div>
+            </div>
+            <div>
+                <input type="checkbox" id="dinar" onclick="controlDietes('dinar','preusDinar');asignarMoneda('monedesDinar');"/>
+                <label>Dinar</label>
+                <div id="preusDinar">
+                    <label>Preu</label>
+                    <input type="number" id="preuBaseDinar" onchange="calcularTotal('preuBaseDinar','impostPreuDinar','totalDinar')"/>
+                    <label>Impost</label>
+                    <input type="numer" id="impostPreuDinar" placeholder="10" onchange="calcularTotal('preuBaseDinar','impostPreuDinar','totalDinar')"/>
+                    <label>Import Total</label>
+                    <input type="number" id="totalDinar" readonly/>
+                    <label>Moneda*:</label>
+                    <input list="monedesDinar" name="monedesDinar">
+                    <datalist id="monedesDinar"><!--el id debe ser el mismo que el input-->
+                        <option value="Euro">
+                        <option value="Dolar">
+                        <option value="Lliura">
+                    </datalist>
+                </div>
+            </div>
+            <div>
+                <input type="checkbox" id="sopar" onclick="controlDietes('sopar','preusSopar');asignarMoneda('monedesSopar');"/>
+                <label>Sopar</label>
+                <div id="preusSopar">
+                    <label>Preu</label>
+                    <input type="number" id="preuSopar" onchange="calcularTotal('preuBaseSopar','impostPreuSopar','totalSopar');"/>
+                    <label>Impost</label>
+                    <input type="number" id="impostPreuSopar" placeholder="10" onchange="calcularTotal('preuBaseSopar','impostPreuSopar','totalSopar')"/>
+                    <label>Import Total</label>
+                    <input type="number" id="totalSopar" readonly/>
+                    <label>Moneda*:</label>
+                    <input list="monedesSopar" name="monedesSopar">
+                    <datalist id="monedesSopar"><!--el id debe ser el mismo que el input-->
+                        <option value="Euro">
+                        <option value="Dolar">
+                        <option value="Lliura">
+                    </datalist>
+                </div>
+            </div>
         </div>
         <div>
             <h3>Marca els serveis inclosos:</h3>
@@ -63,7 +131,7 @@
                 <label>Te WiFi</label>
             </div>
             <div>
-                <input type="checkbox" id="animalAdmesos" onclick="controlMascotes()"/>
+                <input type="checkbox" id="animalAdmesos" onclick="controlMascotes();"/>
                 <label>Animals admesos</label>
                 <div id="dvMascotes">
                     <label>Marca el animals permesos del llistat.</label>
@@ -79,11 +147,11 @@
         </div>
         <div class="elementHotel" id="marginT">
             <label>Foto Principal:</label>
-            <input type="file" id="fotoHotel" />
+            <input type="url" id="fotoHotel" placeholder="https://www.exemple.com/image5"/>
         </div>
         <div class="elementHotel">
             <label>Puntuació a Booking.com (de 0 a 10):</label>
-            <input type="range" id="puntuacioBooking" min=0 max=10 value=0 list="puntuacions" onchange="rangeValues(this.value);">
+            <input type="range" id="puntuacioBooking" min="0" max="10" value="0" list="puntuacions" onchange="rangeValues(this.value);">
             <input type="text" id="textInputBooking" value="" placeholder="0">
             <!--Nota: Actualmente, ningún navegador soporta todas estas características. Firefox no soporta ni marcas ni etiquetas,
                 mientras que Chrome soporta las marcas pero no las etiquetas.-->
@@ -106,9 +174,9 @@
             <input type="url" id="advisorHotel" placeholder="https://www.exemple.com/"/>
         </div>
         <div>
-            <button id="afegir" onclick="afegirHotel()">Afegir</button>
-            <button id="modificar" onclick="desarModificacioHotel()">Desar</button>
-            <button id="generaJson" onclick="mostrarJSON();generarJsonHotels()">Generar Json</button>
+            <button id="afegir" onclick="afegirHotel();">Afegir</button>
+            <button id="modificar" onclick="desarModificacioHotel();">Desar</button>
+            <button id="generaJson" onclick="mostrarJSON();generarJsonHotels();">Generar Json</button>
         </div>
         <div>
             <textarea id="JsonText" rows="4" cols="50" style="display: none;"></textarea>

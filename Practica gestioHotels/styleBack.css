@@ -3,8 +3,9 @@ body{
 }
 
 header {
-    background: cornflowerblue;
     color: white;
+    background-image: url(https://www.mundukos.com/wp-content/uploads/2016/01/hoteles-sin-fondo.jpg);
+    background-size: cover;
 }
 
 aside {
@@ -21,17 +22,16 @@ main {
 
 footer {
     clear: left;
-    background:cornflowerblue;
-    color: white;
+    background-image: url(https://www.mundukos.com/wp-content/uploads/2016/01/hoteles-sin-fondo.jpg);
+    background-size: cover;
+    background-position-y: bottom;
+    padding-top: 50px;
+    padding-bottom: 50px;
 }
 
 h1,h2{
     text-transform: uppercase;
     text-align: center;
-}
-
-a {
-    color: burlywood;
 }
 
 .mandatory {
@@ -71,7 +71,7 @@ button {
     margin-top: 15px;
 }
 
-#dvMascotes{
+#dvMascotes, #preusSopar, #preusDinar,#preusBerenar{
     display:none;
 }
 
@@ -85,4 +85,12 @@ button {
     border: none;
     font-weight: 600;
     color: blue;
+}
+
+#fotoHotel,#advisorHotel{
+    width: 220px;
+}
+
+#preus input{
+    width: 60px;
 }
