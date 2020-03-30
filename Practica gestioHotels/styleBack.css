@@ -33,6 +33,13 @@ footer {
     padding-bottom: 50px;
 }
 
+footer div{
+    background-color: #ffffffa3;
+    width: fit-content;
+    margin: 0 auto;
+    padding: 20px;
+}
+
 h1,h2{
     text-transform: uppercase;
     text-align: center;
@@ -70,7 +77,7 @@ hr{
 
 button {
     border-radius: 10px;
-    background: cornflowerblue;
+    background: #78c6c6;
     color: white;
 }
 

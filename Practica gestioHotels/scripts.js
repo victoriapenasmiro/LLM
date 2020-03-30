@@ -121,6 +121,7 @@ function generarObjHotel(id) {
     hotel.wifi = document.getElementById("wifiHotel").checked;
     hotel.animals = document.getElementById("animalAdmesos").checked;
     hotel.dietes = getDietes();
+    hotel.moneda = document.getElementById("idMoneda").value;
     hotel.llistaMascotes = getMascotes();
     hotel.fotoPrinc = document.getElementById("fotoHotel").value;
     hotel.puntuacioBooking = document.getElementById("puntuacioBooking").value;
@@ -137,13 +138,13 @@ function getDietes() {
     let impost;
     let total;
     let moneda;
-    for (let i = 0; i < 3; i++){
-        if(document.getElementById(tipus[i]).checked){
-            nom = document.getElementById(tipus[i]).value;
-            base = document.getElementById("preuBase"+tipus[i]).value;
-            impost = document.getElementById("impostPreu"+tipus[i]).value;
-            total = document.getElementById("total"+tipus[i]).value;
-            moneda = document.getElementById("moneda"+tipus[i]).value;
+    for (auxTipus of tipus){
+        if(document.getElementById(auxTipus).checked){
+            nom = document.getElementById(auxTipus).value;
+            base = document.getElementById("preuBase"+auxTipus).value;
+            impost = document.getElementById("impostPreu"+auxTipus).value;
+            total = document.getElementById("total"+auxTipus).value;
+            moneda = document.getElementById("moneda"+auxTipus).value;
             dietes.push(generarObjDietes(nom,base,impost,total,moneda));
         }
     }
@@ -161,11 +162,14 @@ function generarObjDietes(nom,base,impost,total,moneda) {
     return preu;
 }
 
-//Funció genèrica per seleccionar selects multiples. 
-function setDietes(nomInput) {
-    var multiSel = document.getElementById(nomInput);
-    for (opcio of multiSel.options) {
-
+//estoy intentando marcar los checkbox de las dietas y no funciona
+function setDietes(dietes) {
+    let i;
+    let j;
+    for (i=0;i<dietes.length;i++){
+        for(j=0;j<dietes[i].length;j++){
+            document.getElementById(dietes[i][0]).checked = true;
+        }
     }
 }
 
@@ -281,9 +285,9 @@ function modificarHotel(idLi) {
     document.getElementById("ciutatHotel").value = objHotel.ciutat;
     
     if (objHotel.dietes != null && objHotel.dietes.length > 0) {
-        setDietes(objHotel.dietes);
+        setDietes(objHotel.dietes);//envio el array de objetos
     }
-
+    document.getElementById("idMoneda").value = objHotel.moneda;
     document.getElementById("parkingHotel").checked = objHotel.parking;
     document.getElementById("wifiHotel").checked = objHotel.wifi;
     document.getElementById("animalAdmesos").checked = objHotel.animals;
@@ -316,18 +320,18 @@ function netejarCamps() {
     document.getElementById("preuBaseBerenar").value = "";
     document.getElementById("impostPreuBerenar").value = "";
     document.getElementById("totalBerenar").value = "";
-    document.getElementById("monedaBerenar").value = "Euro";
+    document.getElementById("monedaBerenar").innerHTML = "Euro";
     document.getElementById("Dinar").checked = false;
     document.getElementById("preuBaseDinar").value = "";
     document.getElementById("impostPreuDinar").value = "";
     document.getElementById("totalDinar").value = "";
-    document.getElementById("monedaDinar").value = "Euro";
+    document.getElementById("monedaDinar").innerHTML = "Euro";
     document.getElementById("Sopar").checked = false;
     document.getElementById("preuBaseSopar").value = "";
     document.getElementById("impostPreuSopar").value = "";
     document.getElementById("totalSopar").value = "";
-    document.getElementById("monedaSopar").value = "Euro";
-    document.getElementsByTagName("monedes").innerHTML = ""; //no consigo vaciar el datalist
+    document.getElementById("monedaSopar").innerHTML = "Euro";
+    document.getElementById("idMoneda").value = "";; //no consigo vaciar el datalist
     document.getElementById("wifiHotel").checked = false;
     document.getElementById("animalAdmesos").checked = false;
     document.getElementById("mascotes").value = "";
