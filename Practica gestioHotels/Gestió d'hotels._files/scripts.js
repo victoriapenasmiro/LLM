@@ -86,13 +86,6 @@ function controlDeLesDades() {
         //El \n és un bot de linea.
         strErrors += "Ciutat no introduïda\n";
     }
-
-    if (document.getElementById("preuBaseBerenar").value < 0 || document.getElementById("impostPreuBerenar").value < 0 ||
-    document.getElementById("preuBaseDinar").value < 0 || document.getElementById("impostPreuDinar").value < 0 ||
-    document.getElementById("preuBaseSopar").value < 0 || document.getElementById("impostPreuSopar").value < 0) {
-        //El \n és un bot de linea.
-        strErrors += "Els preus indicats no són valids\n";
-    }
     
     if(document.getElementById("fotoHotel").value != "" && !validarURL(document.getElementById("fotoHotel").value)){
         strErrors += "L'enllaç de sa imatge no és correcte";
@@ -132,27 +125,24 @@ function generarObjHotel(id) {
 function getDietes() {
     let dietes = new Array();
     let tipus = ["Berenar","Dinar","Sopar"];
-    let nom;
     let base;
     let impost;
     let total;
     let moneda;
     for (let i = 0; i < 3; i++){
         if(document.getElementById(tipus[i]).checked){
-            nom = document.getElementById(tipus[i]).value;
             base = document.getElementById("preuBase"+tipus[i]).value;
-            impost = document.getElementById("impostPreu"+tipus[i]).value;
+            impost = document.getElementById("impostpreu"+tipus[i]).value;
             total = document.getElementById("total"+tipus[i]).value;
             moneda = document.getElementById("moneda"+tipus[i]).value;
-            dietes.push(generarObjDietes(nom,base,impost,total,moneda));
+            dietes.push(generarObjDietes(base,impost,total,moneda));
         }
     }
     return dietes;
 }
 
-function generarObjDietes(nom,base,impost,total,moneda) {
+function generarObjDietes(base,impost,total,moneda) {
     let preu = new Object();
-    preu.nom = nom;
     preu.base = base;
     preu.impost = impost;
     preu.total = total;
@@ -211,8 +201,8 @@ function calcularTotal(base,impost,total) {
     document.getElementById(total).value = base*impost;
 }
 
-function dosDecimals(dieta) {
-    document.getElementById(dieta).value = parseFloat(document.getElementById(dieta).value).toFixed(2);
+function setTwoNumberDecimal(event) {
+    this.value = parseFloat(this.value).toFixed(2);
 }
 
 //Afegirem un hotel. Controlarem si les dades són correctes i el ficarem a la llista i generarem el Json.
@@ -291,7 +281,6 @@ function modificarHotel(idLi) {
 function netejarCamps() {
     document.getElementById("nomHotel").value = "";
     document.getElementById("estrellesHotel").value = 0;
-    document.getElementById("descHotel").value = "";
     document.getElementById("idHotel").value = "";
     document.getElementById("emailHotel").value = "";
     document.getElementById("tlfHotel").value = "";
@@ -299,22 +288,6 @@ function netejarCamps() {
     document.getElementById("codiPostalHotel").value = "";
     document.getElementById("ciutatHotel").value = "";
     document.getElementById("parkingHotel").checked = false;
-    document.getElementById("Berenar").checked = false;
-    document.getElementById("preuBaseBerenar").value = "";
-    document.getElementById("impostPreuBerenar").value = "";
-    document.getElementById("totalBerenar").value = "";
-    document.getElementById("monedaBerenar").value = "Euro";
-    document.getElementById("Dinar").checked = false;
-    document.getElementById("preuBaseDinar").value = "";
-    document.getElementById("impostPreuDinar").value = "";
-    document.getElementById("totalDinar").value = "";
-    document.getElementById("monedaDinar").value = "Euro";
-    document.getElementById("Sopar").checked = false;
-    document.getElementById("preuBaseSopar").value = "";
-    document.getElementById("impostPreuSopar").value = "";
-    document.getElementById("totalSopar").value = "";
-    document.getElementById("monedaSopar").value = "Euro";
-    document.getElementsByTagName("monedes").innerHTML = ""; //no consigo vaciar el datalist
     document.getElementById("wifiHotel").checked = false;
     document.getElementById("animalAdmesos").checked = false;
     document.getElementById("mascotes").value = "";
