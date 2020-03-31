@@ -33,13 +33,6 @@ footer {
     padding-bottom: 50px;
 }
 
-footer div{
-    background-color: #ffffffa3;
-    width: fit-content;
-    margin: 0 auto;
-    padding: 20px;
-}
-
 h1,h2{
     text-transform: uppercase;
     text-align: center;
@@ -49,6 +42,19 @@ hr{
     color: #78c6c6;
     border: 1px solid;
     width: 50%;
+}
+
+ul {
+    list-style-type: square;
+    font-size: larger;
+    color: #78c6c6;
+}
+
+.liStyle {
+    text-transform: uppercase;
+    color: #78c6c6;
+    font-weight: 600;
+    font-size: 22px;
 }
 
 #logo{

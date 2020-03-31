@@ -1,0 +1,127 @@
+[
+    {
+        "id": 0,
+        "nom": "Hotel prueba 1",
+        "estrelles": "3",
+        "descripcio": "El Hotel está situado en Barcelona, a 650 metros de la playa de Bogatell, y dispone de restaurante,
+        aparcamiento privado, piscina al aire libre y bar. Simpatia do staff , piso superior",
+        "email": "prueba@gmail.com",
+        "tel": "+34 931234567",
+        "direccio": "Calle de Ferrer 7",
+        "codiPostal": "08009",
+        "ciutat": "Barcelona",
+        "parking": true,
+        "wifi": true,
+        "animals": true,
+        "dietes": [
+            {
+                "nom": "Berenar",
+                "base": "12",
+                "impost": "10",
+                "total": "13.20"
+            },
+            {
+                "nom": "Dinar",
+                "base": "25",
+                "impost": "10",
+                "total": "27.50"
+            },
+            {
+                "nom": "Sopar",
+                "base": "25",
+                "impost": "10",
+                "total": "27.50"
+            }
+        ],
+        "moneda": "Euro",
+        "llistaMascotes": [
+            "Cans",
+            "Moixos",
+            "Urons"
+        ],
+        "fotoPrinc": "https://www.lavanguardia.com/r/GODO/LV/p4/WebSite/2017/02/27/Recortada/img_mbigas_20170227-125811_imagenes_lv_terceros_belice1-k9qH-U42351300201d7E-992x558@LaVanguardia-Web.jpg",
+        "puntuacioBooking": "9",
+        "puntuacioBookingText": "9",
+        "advisorHotel": "https://www.tripadvisor.es/Hotel_Review-g304171-d580809-Reviews-Tropical_Suites_Hotel-Bocas_Town_Isla_Colon_Bocas_del_Toro_Province.html"
+    },
+    {
+        "id": 1,
+        "nom": "Hotel Prueba 2",
+        "estrelles": "5",
+        "descripcio": "El Hotel Prueba 2 - Adults Only goza de una buena ubicación en el centro de Madrid y ofrece
+        habitaciones con aire acondicionado, piscina al aire libre, WiFi gratuita y bar.",
+        "email": "prueba2hotel@hotelprueba.es",
+        "tel": "+34 987543567",
+        "direccio": "Calle de Albasanz 27",
+        "codiPostal": "28345",
+        "ciutat": "Madrid",
+        "parking": false,
+        "wifi": true,
+        "animals": true,
+        "dietes": [
+            {
+                "nom": "Berenar",
+                "base": "12",
+                "impost": "21",
+                "total": "14.52"
+            },
+            {
+                "nom": "Dinar",
+                "base": "33",
+                "impost": "10",
+                "total": "36.30"
+            },
+            {
+                "nom": "Sopar",
+                "base": "33",
+                "impost": "10",
+                "total": "36.30"
+            }
+        ],
+        "moneda": "Euro",
+        "llistaMascotes": [
+            "Urons",
+            "Hamster",
+            "Lloro"
+        ],
+        "fotoPrinc": "https://media-cdn.tripadvisor.com/media/photo-s/14/8a/d0/0b/exterior.jpg",
+        "puntuacioBooking": "4",
+        "puntuacioBookingText": "4",
+        "advisorHotel": "https://www.tripadvisor.es/Hotel_Review-g304171-d1785215-Reviews-Hotel_Palma_Royale-Bocas_Town_Isla_Colon_Bocas_del_Toro_Province.html"
+    },
+    {
+        "id": 3,
+        "nom": "Hotel Prova 3",
+        "estrelles": "0",
+        "descripcio": "El Hotel Prova 3 está situado en Palma de Mallorca, en la plaza de España, y ofrece terraza con piscina
+        y WiFi gratuita en todas las instalaciones. ",
+        "email": "prueba3@hotel3.eu",
+        "tel": "+34 971123455",
+        "direccio": "Calle Palma Tres 45",
+        "codiPostal": "12345",
+        "ciutat": "Palma",
+        "parking": true,
+        "wifi": true,
+        "animals": false,
+        "dietes": [
+            {
+                "nom": "Berenar",
+                "base": "20",
+                "impost": "12",
+                "total": "22.40"
+            },
+            {
+                "nom": "Dinar",
+                "base": "35",
+                "impost": "15",
+                "total": "40.25"
+            }
+        ],
+        "moneda": "Euro",
+        "llistaMascotes": [],
+        "fotoPrinc": "https://r-cf.bstatic.com/images/hotel/max1024x768/129/129133633.jpg",
+        "puntuacioBooking": "7",
+        "puntuacioBookingText": "7",
+        "advisorHotel": "https://www.tripadvisor.es/Hotel_Review-g304171-d308926-Reviews-Hotel_Bocas_del_Toro-Bocas_Town_Isla_Colon_Bocas_del_Toro_Province.html"
+    }
+]

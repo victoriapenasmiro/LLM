@@ -151,26 +151,39 @@ function getDietes() {
     return dietes;
 }
 
-function generarObjDietes(nom,base,impost,total,moneda) {
-    let preu = new Object();
-    preu.nom = nom;
-    preu.base = base;
-    preu.impost = impost;
-    preu.total = total;
-    preu.moneda = moneda;
-
-    return preu;
-}
-
-//estoy intentando marcar los checkbox de las dietas y no funciona
-function setDietes(dietes) {
-    let i;
-    let j;
-    for (i=0;i<dietes.length;i++){
-        for(j=0;j<dietes[i].length;j++){
-            document.getElementById(dietes[i][0]).checked = true;
+function getDietes() {
+    let dietes = new Array();
+    let tipus = ["Berenar", "Dinar", "Sopar"];
+    for (auxTipus of tipus){
+        if (document.getElementById(auxTipus).checked) {
+            let preu = new Object();
+            preu.nom = document.getElementById(auxTipus).value;
+            preu.base = document.getElementById("preuBase" + auxTipus).value;
+            preu.impost = document.getElementById("impostPreu" + auxTipus).value;
+            preu.total = document.getElementById("total" + auxTipus).value;
+            preu.moneda = document.getElementById("moneda" + auxTipus).value;
+            dietes.push(preu);
         }
     }
+    return dietes;
+}
+
+//és fer la inversa del getDietes.
+function setDietes(dietes) {        
+    //Per cada dieta. Ho faré amb un for amb i. Però lo seu seria for (auxDieta of dietes)
+    //Total no necessitam la i per res més que per iterar.
+    let i;
+    //En el cas de tenir un objecte és que aquest està seleccionat. Per tant l'hem de seleccionar.    
+    for (i = 0; i < dietes.length; i++) {
+        let preu = dietes[i] //es un objeto
+        let nomTipusSeleccionat = preu.nom; //accedo al atributo nom
+        document.getElementById(nomTipusSeleccionat).checked = true; //al get getDietes revisavem si era true, aquí l'assignam a true.
+        document.getElementById("preuBase" + nomTipusSeleccionat).value = preu.base; // Tots aquests camps són com get Dietes però l'assignació a l'inversa.
+        document.getElementById("impostPreu" + nomTipusSeleccionat).value = preu.impost;
+        document.getElementById("total" + nomTipusSeleccionat).value = preu.total;
+        document.getElementById("moneda" + nomTipusSeleccionat).value = preu.moneda;
+        document.getElementById("preus"+nomTipusSeleccionat).style.display = "inline";
+    }    
 }
 
 function getMascotes(){
@@ -204,7 +217,7 @@ function controlMascotes() {
 
 function controlDietes(dieta,preu) {
     if (document.getElementById(dieta).checked == true) {                
-        document.getElementById(preu).style.display = "block";
+        document.getElementById(preu).style.display = "inline";
     } else {
         document.getElementById(preu).style.display = "none";
     }
@@ -237,7 +250,7 @@ function afegirHotel() {
         //Crearem un element més a la llista d'hotels
         var strHtmlHotel = "<li id=\"liHotel" + idLlista + "\">";
         //Crearem un input hidden. Com un text, però no visible per guardar el Json de l'hotel
-        strHtmlHotel += "<label id=\"lblNomHot" + idLlista + "\">" + objHotel.nom + "</label>";
+        strHtmlHotel += "<label id=\"lblNomHot" + idLlista + "\" class=\"liStyle\" >" + objHotel.nom + "</label>";
         strHtmlHotel += "<input type=\"hidden\" class=\"jsonHotel\" id=\"jsonHotel" + idLlista + "\" value=\"\" />";
         //Crearem un botó per eliminar l'hotel
         strHtmlHotel += "<img src=\"https://image.flaticon.com/icons/png/512/16/16367.png\" height=\"20\" alt=\"logo papelera\" onclick=\"eliminarHotel(" + idLlista + ")\">";
@@ -262,6 +275,7 @@ function desarModificacioHotel() {
     if (dadesCompletes == "") {
         var objHotel = generarObjHotel(idLlista);
         document.getElementById("lblNomHot" + idLlista).value = objHotel.nom;
+        document.getElementById("lblNomHot" + idLlista).innerHTML = objHotel.nom;//actualizo el nombre del front, por si cambia
         var jsonHotel = JSON.stringify(objHotel);
         document.getElementById("jsonHotel" + idLlista).value = jsonHotel;
         netejarCamps();
@@ -293,6 +307,7 @@ function modificarHotel(idLi) {
     document.getElementById("animalAdmesos").checked = objHotel.animals;
 
     if (objHotel.llistaMascotes != null && objHotel.llistaMascotes.length > 0) {
+        document.getElementById("dvMascotes").style.display = "block";
         setMascotes("mascotes", objHotel.llistaMascotes);
     }
 
@@ -341,6 +356,10 @@ function netejarCamps() {
     document.getElementById("advisorHotel").value = "";
 
     //Deixam la visibilitat dels botons per defecte.
+    document.getElementById("dvMascotes").style.display = "none";
+    document.getElementById("preusBerenar").style.display = "none";
+    document.getElementById("preusDinar").style.display = "none";
+    document.getElementById("preusSopar").style.display = "none";
     document.getElementById("modificar").style.display = "none";
     document.getElementById("afegir").style.display = "inline";
 }
