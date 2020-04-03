@@ -33,6 +33,13 @@ footer {
     padding-bottom: 50px;
 }
 
+footer div {
+    background-color: #ffffffad;
+    padding: 30px;
+    width: 25%;
+    margin: 0 auto;
+}
+
 h1,h2{
     text-transform: uppercase;
     text-align: center;
@@ -44,10 +51,25 @@ hr{
     width: 50%;
 }
 
-ul {
-    list-style-type: square;
-    font-size: larger;
-    color: #78c6c6;
+table {
+    border-collapse: collapse;
+  }
+  
+table, th, td {
+    border: 1px solid black;
+    text-align: center;
+  }
+
+th{
+    height: 30px;
+    background-color: #78c6c6;
+    color: white;
+}
+
+button {
+    border-radius: 10px;
+    background: #78c6c6;
+    color: white;
 }
 
 .liStyle {
@@ -81,12 +103,6 @@ ul {
     clear: both;
 }
 
-button {
-    border-radius: 10px;
-    background: #78c6c6;
-    color: white;
-}
-
 #JsonText {
     margin: 10px;
 }
@@ -116,7 +132,8 @@ button {
 #textInputBooking{
     border: none;
     font-weight: 600;
-    color: blue;
+    color: #78c6c6;
+    font-size: 18px;
 }
 
 #fotoHotel,#advisorHotel{
@@ -129,4 +146,8 @@ button {
 
 #preusBerenar input,#preusDinar input, #preusSopar input{
     width: 60px;
+}
+
+#noHotels{
+    text-align: center;
 }

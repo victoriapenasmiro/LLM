@@ -36,70 +36,95 @@ function controlDeLesDades() {
     if (document.getElementById("nomHotel").value == "") {
         //El \n és un bot de linea.
         strErrors += "Nom no introduït\n";
+        document.getElementById("nomHotel").style.backgroundColor = "#ff000078";
     }
 
     if (document.getElementById("estrellesHotel").value == "") {
         //El \n és un bot de linea.
         strErrors += "Número d'estrelles no introduït\n";
+        document.getElementById("estrellesHotel").style.backgroundColor = "#ff000078";
     }
 
     if (document.getElementById("descHotel").value == "") {
         //El \n és un bot de linea.
         strErrors += "Descripció de s'hotel no introduïda\n";
+        document.getElementById("descHotel").style.backgroundColor = "#ff000078";
     }
 
     if (document.getElementById("emailHotel").value == "") {
         //El \n és un bot de linea.
         strErrors += "E-mail no introduït\n";
+        document.getElementById("emailHotel").style.backgroundColor = "#ff000078";
     }
     //controlo que la direccion de correo es correcta con expresiones regulares
     else if (!validar_email(document.getElementById("emailHotel").value)){
         strErrors += "La direcció d'email " + document.getElementById("emailHotel").value + " és incorrecta.";
+        document.getElementById("emailHotel").style.backgroundColor = "#ff000078";
     }
 
     if (document.getElementById("tlfHotel").value == "") {
         //El \n és un bot de linea.
         strErrors += "Telèfon no introduït\n";
+        document.getElementById("tlfHotel").style.backgroundColor = "#ff000078";
     }
     /*valido que el formato del telefono sea: Prefijo internacional (+ seguido de 2 o 3 cifras),
     espacio en blanco y 9 cifras consecutivas*/
     else if (!/^\+\d{2,3}\s\d{9}$/.test(document.getElementById("tlfHotel").value)){
         strErrors += "El telèfon introduït no està en el format requerit\n";
+        document.getElementById("tlfHotel").style.backgroundColor = "#ff000078";
     }
 
     if (document.getElementById("direccioHotel").value == "") {
         //El \n és un bot de linea.
         strErrors += "Direcció no introduida\n";
+        document.getElementById("direccioHotel").style.backgroundColor = "#ff000078";
     }
 
     if (document.getElementById("codiPostalHotel").value == "") {
         //El \n és un bot de linea.
         strErrors += "Codi postal no introduït\n";
+        document.getElementById("codiPostalHotel").style.backgroundColor = "#ff000078";
     }
 
     else if (document.getElementById("codiPostalHotel").value > 99999 ||
     document.getElementById("codiPostalHotel").value < 0){
         strErrors += "El codi postal introduït no existeix\n";
+        document.getElementById("codiPostalHotel").style.backgroundColor = "#ff000078";
     }
 
     if (document.getElementById("ciutatHotel").value == "") {
         //El \n és un bot de linea.
         strErrors += "Ciutat no introduïda\n";
+        document.getElementById("ciutatHotel").style.backgroundColor = "#ff000078";
     }
 
-    if (document.getElementById("preuBaseBerenar").value < 0 || document.getElementById("impostPreuBerenar").value < 0 ||
-    document.getElementById("preuBaseDinar").value < 0 || document.getElementById("impostPreuDinar").value < 0 ||
-    document.getElementById("preuBaseSopar").value < 0 || document.getElementById("impostPreuSopar").value < 0) {
+    if (document.getElementById("preuBaseBerenar").value < 0 || document.getElementById("impostPreuBerenar").value < 0) {
         //El \n és un bot de linea.
-        strErrors += "Els preus indicats no són valids\n";
+        strErrors += "Els preus indicats pel berenar no són valids\n";
+        document.getElementById("preuBaseBerenar").style.backgroundColor = "#ff000078";
+        document.getElementById("impostPreuBerenar").style.backgroundColor = "#ff000078";
+    }
+
+    if(document.getElementById("preuBaseDinar").value < 0 || document.getElementById("impostPreuDinar").value < 0){
+        strErrors += "Els preus indicats pel dinar no són valids\n";
+        document.getElementById("preuBaseDinar").style.backgroundColor = "#ff000078";
+        document.getElementById("impostPreuDinar").style.backgroundColor = "#ff000078";
+    }
+
+    if(document.getElementById("preuBaseSopar").value < 0 || document.getElementById("impostPreuSopar").value < 0){
+        strErrors += "Els preus indicats pel sopar no són valids\n";
+        document.getElementById("preuBaseSopar").style.backgroundColor = "#ff000078";
+        document.getElementById("impostPreuSopar").style.backgroundColor = "#ff000078";
     }
     
     if(document.getElementById("fotoHotel").value != "" && !validarURL(document.getElementById("fotoHotel").value)){
         strErrors += "L'enllaç de sa imatge no és correcte";
+        document.getElementById("fotoHotel").style.backgroundColor = "#ff000078";
     }
 
     if(document.getElementById("advisorHotel").value != "" && !validarURL(document.getElementById("advisorHotel").value)){
         strErrors += "L'enllaç de Tripadvisor indicat no és correcte.";
+        document.getElementById("advisorHotel").style.backgroundColor = "#ff000078";
     }
 
     return strErrors;
@@ -248,19 +273,20 @@ function afegirHotel() {
     if (dadesCompletes == "") {
         var objHotel = generarObjHotel(idLlista);
         //Crearem un element més a la llista d'hotels
-        var strHtmlHotel = "<li id=\"liHotel" + idLlista + "\">";
-        //Crearem un input hidden. Com un text, però no visible per guardar el Json de l'hotel
-        strHtmlHotel += "<label id=\"lblNomHot" + idLlista + "\" class=\"liStyle\" >" + objHotel.nom + "</label>";
-        strHtmlHotel += "<input type=\"hidden\" class=\"jsonHotel\" id=\"jsonHotel" + idLlista + "\" value=\"\" />";
+        var strHtmlHotel = "<tr id=\"liHotel" + idLlista + "\">";
+        //Crearem un input hidden. Com un text, però no visible per guardar el Json de l'hotel. Posam s'input hidden i sa label juntes, a sa mateixa celda
+        strHtmlHotel += "<td><label id=\"lblNomHot" + idLlista + "\" class=\"liStyle\" >" + objHotel.nom +
+        "</label><input type=\"hidden\" class=\"jsonHotel\" id=\"jsonHotel" + idLlista + "\" value=\"\" /></td>";
         //Crearem un botó per eliminar l'hotel
-        strHtmlHotel += "<img src=\"https://image.flaticon.com/icons/png/512/16/16367.png\" height=\"20\" alt=\"logo papelera\" onclick=\"eliminarHotel(" + idLlista + ")\">";
+        strHtmlHotel += "<td><img src=\"https://image.flaticon.com/icons/png/512/16/16367.png\" height=\"20\" alt=\"logo papelera\" onclick=\"eliminarHotel(" + idLlista + ")\"></td>";
         //Crearem un botó per modificar l'hotel
-        strHtmlHotel += "<img src=\"https://image.flaticon.com/icons/png/512/23/23187.png\" height=\"20\" alt=\"logo papelera\" onclick=\"modificarHotel(" + idLlista + ")\">";
-        strHtmlHotel += "</li>";
+        strHtmlHotel += "<td><img src=\"https://image.flaticon.com/icons/png/512/23/23187.png\" height=\"20\" alt=\"logo papelera\" onclick=\"modificarHotel(" + idLlista + ")\"></td>";
+        strHtmlHotel += "</tr>";
         var jsonHotel = JSON.stringify(objHotel);
         document.getElementById("llistaHotels").innerHTML += strHtmlHotel;
         //Asignam el json al input hidden del hotel. Ho faig aquí així no he de fer el parse de les ". Ja ho fa javascript automàtic.
         document.getElementById("jsonHotel" + idLlista).value = jsonHotel;
+        document.getElementById("noHotels").style.display = "none";
         netejarCamps();
         alert("Afegit correctament");
     } else {
@@ -321,15 +347,25 @@ function modificarHotel(idLi) {
 
 //Deixam tots els camps sense valors, per realitzar la pròxima operació.
 function netejarCamps() {
+    var inputs, index;
+    //recuper un array amb tots els inputs
+    inputs = document.getElementsByTagName("input");
+    for (index = 0; index < inputs.length; ++index) {
+        if(inputs[index].type != "checkbox"){
+            inputs[index].style.backgroundColor = "white";
+        }
+    }
     document.getElementById("nomHotel").value = "";
     document.getElementById("estrellesHotel").value = 0;
     document.getElementById("descHotel").value = "";
+    document.getElementById("descHotel").style.backgroundColor = "white";
     document.getElementById("idHotel").value = "";
     document.getElementById("emailHotel").value = "";
     document.getElementById("tlfHotel").value = "";
     document.getElementById("direccioHotel").value = "";
     document.getElementById("codiPostalHotel").value = "";
     document.getElementById("ciutatHotel").value = "";
+    document.getElementById("ciutatHotel").style.backgroundColor = "white";
     document.getElementById("parkingHotel").checked = false;
     document.getElementById("Berenar").checked = false;
     document.getElementById("preuBaseBerenar").value = "";
@@ -368,7 +404,7 @@ function netejarCamps() {
 function eliminarHotel(idLi) {
     let hotel = document.getElementById("liHotel"+idLi);
     if (!hotel) {
-        alert("L'hotel seleccioninat no existeix.");
+        alert("L'hotel seleccionat no existeix.");
     } else {
         if (confirm("Segur que vols eliminar l'hotel?")) {
             let nodePare = hotel.parentNode;
@@ -376,6 +412,10 @@ function eliminarHotel(idLi) {
             alert("Eliminat correctament.");
         }
     }
+    //si ens quedam sense hotel, informam que ni ha hotels registrats
+    if (document.getElementById("llistaHotels").rows.length<2){
+        document.getElementById("noHotels").style.display = "block";
+    };
 }
 //oculto el textarea mientras que no esté generado
 function mostrarJSON() {
