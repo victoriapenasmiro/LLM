@@ -150,7 +150,6 @@ function generarObjHotel(id) {
     hotel.llistaMascotes = getMascotes();
     hotel.fotoPrinc = document.getElementById("fotoHotel").value;
     hotel.puntuacioBooking = document.getElementById("puntuacioBooking").value;
-    hotel.puntuacioBookingText = document.getElementById("textInputBooking").value;
     hotel.advisorHotel = document.getElementById("advisorHotel").value;
     return hotel;
 }
@@ -339,7 +338,7 @@ function modificarHotel(idLi) {
 
     document.getElementById("fotoHotel").value = objHotel.fotoPrinc;
     document.getElementById("puntuacioBooking").value = objHotel.puntuacioBooking;
-    document.getElementById("textInputBooking").value = objHotel.puntuacioBookingText;
+    document.getElementById("textInputBooking").value = objHotel.puntuacioBooking;
     document.getElementById("advisorHotel").value = objHotel.advisorHotel;
     document.getElementById("modificar").style.display = "inline";
     document.getElementById("afegir").style.display = "none";
