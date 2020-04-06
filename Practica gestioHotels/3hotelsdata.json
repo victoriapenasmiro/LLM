@@ -35,19 +35,19 @@
                 {
                     "nom": "Berenar",
                     "base": 12,
-                    "impostPercentPercent": 10,
+                    "impostPercent": 10,
                     "total": 13.20
                 },
                 {
                     "nom": "Dinar",
                     "base": 25,
-                    "impostPercentPercent": 10,
+                    "impostPercent": 10,
                     "total": 27.50
                 },
                 {
                     "nom": "Sopar",
                     "base": 25,
-                    "impostPercentPercent": 10,
+                    "impostPercent": 10,
                     "total": 27.50
                 }
             ],
