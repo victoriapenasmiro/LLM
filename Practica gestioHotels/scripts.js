@@ -135,12 +135,12 @@ function generarObjHotel(id) {
     let hotel = new Object();
     hotel.id = id;
     hotel.nom = document.getElementById("nomHotel").value;
-    hotel.estrelles = document.getElementById("estrellesHotel").value;
+    hotel.estrelles = parseInt(document.getElementById("estrellesHotel").value);
     hotel.descripcio = document.getElementById("descHotel").value;
     hotel.email = document.getElementById("emailHotel").value;
     hotel.tel = document.getElementById("tlfHotel").value;
     hotel.direccio = document.getElementById("direccioHotel").value;
-    hotel.codiPostal = document.getElementById("codiPostalHotel").value;
+    hotel.codiPostal = parseInt(document.getElementById("codiPostalHotel").value);
     hotel.ciutat = document.getElementById("ciutatHotel").value;
     hotel.parking = document.getElementById("parkingHotel").checked;
     hotel.wifi = document.getElementById("wifiHotel").checked;
@@ -149,30 +149,9 @@ function generarObjHotel(id) {
     hotel.moneda = document.getElementById("idMoneda").value;
     hotel.llistaMascotes = getMascotes();
     hotel.fotoPrinc = document.getElementById("fotoHotel").value;
-    hotel.puntuacioBooking = document.getElementById("puntuacioBooking").value;
+    hotel.puntuacioBooking = parseInt(document.getElementById("puntuacioBooking").value);//hay que convertir a numero para que se conviera bien en el json, revisar todos los atributos afectados.
     hotel.advisorHotel = document.getElementById("advisorHotel").value;
     return hotel;
-}
-
-function getDietes() {
-    let dietes = new Array();
-    let tipus = ["Berenar","Dinar","Sopar"];
-    let nom;
-    let base;
-    let impost;
-    let total;
-    let moneda;
-    for (auxTipus of tipus){
-        if(document.getElementById(auxTipus).checked){
-            nom = document.getElementById(auxTipus).value;
-            base = document.getElementById("preuBase"+auxTipus).value;
-            impost = document.getElementById("impostPreu"+auxTipus).value;
-            total = document.getElementById("total"+auxTipus).value;
-            moneda = document.getElementById("moneda"+auxTipus).value;
-            dietes.push(generarObjDietes(nom,base,impost,total,moneda));
-        }
-    }
-    return dietes;
 }
 
 function getDietes() {
@@ -182,9 +161,9 @@ function getDietes() {
         if (document.getElementById(auxTipus).checked) {
             let preu = new Object();
             preu.nom = document.getElementById(auxTipus).value;
-            preu.base = document.getElementById("preuBase" + auxTipus).value;
-            preu.impost = document.getElementById("impostPreu" + auxTipus).value;
-            preu.total = document.getElementById("total" + auxTipus).value;
+            preu.base = parseFloat(document.getElementById("preuBase" + auxTipus).value);
+            preu.impost = parseFloat(document.getElementById("impostPreu" + auxTipus).value);
+            preu.total = parseFloat(document.getElementById("total" + auxTipus).value);
             preu.moneda = document.getElementById("moneda" + auxTipus).value;
             dietes.push(preu);
         }
