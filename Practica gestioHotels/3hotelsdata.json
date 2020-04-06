@@ -35,19 +35,19 @@
                 {
                     "nom": "Berenar",
                     "base": 12,
-                    "impost": 10,
+                    "impostPercentPercent": 10,
                     "total": 13.20
                 },
                 {
                     "nom": "Dinar",
                     "base": 25,
-                    "impost": 10,
+                    "impostPercentPercent": 10,
                     "total": 27.50
                 },
                 {
                     "nom": "Sopar",
                     "base": 25,
-                    "impost": 10,
+                    "impostPercentPercent": 10,
                     "total": 27.50
                 }
             ],
@@ -58,7 +58,7 @@
                 "Urons"
             ],
             "fotoPrinc": "https://www.lavanguardia.com/r/GODO/LV/p4/WebSite/2017/02/27/Recortada/img_mbigas_20170227-125811_imagenes_lv_terceros_belice1-k9qH-U42351300201d7E-992x558@LaVanguardia-Web.jpg",
-            "puntuacioBooking": "9",
+            "puntuacioBooking": 9,
             "advisorHotel": "https://www.tripadvisor.es/Hotel_Review-g304171-d580809-Reviews-Tropical_Suites_Hotel-Bocas_Town_Isla_Colon_Bocas_del_Toro_Province.html",
             "habitacions": [
                 {
@@ -66,7 +66,10 @@
                     "nom": "Daia",
                     "Descripcio": "Habitació d'ús individual amb bany compartit sense balcó.",
                     "tipus": "Individual",
-                    "tamanyHabitacio": 16, //metres cuadrats
+                    "tamanyHabitacio": {
+                        "valor": 16,
+                        "unitat": "m2"
+                    },
                     "permesFumar": false,
                     "equipament": [
                         "TV",
@@ -96,7 +99,7 @@
                                 "preu": { //objeto - desglose del precio
                                     "agregadorId": 1,
                                     "base": 55,
-                                    "impost": 21,
+                                    "impostPercent": 21,
                                     "comissio": 10,
                                     "total": 78.65
                                     //no indico la moneda, puesto que ya está indicada en el hotel y es general
@@ -106,7 +109,7 @@
                                 "preu": {
                                     "agregadorId": 2,
                                     "base": 40,
-                                    "impost": 21,
+                                    "impostPercent": 21,
                                     "comissio": 10,
                                     "total": 60.50
                                 }
@@ -115,7 +118,7 @@
                                 "preu": {
                                     "agregadorId": 3,
                                     "base": 42,
-                                    "impost": 21,
+                                    "impostPercent": 21,
                                     "comissio": 8,
                                     "total": 60.50
                                 }
@@ -126,7 +129,7 @@
                                 "preu": {
                                     "agregadorId": 1,
                                     "base": 45,
-                                    "impost": 21,
+                                    "impostPercent": 21,
                                     "comissio": 5,
                                     "total": 60.50
                                 }
@@ -135,7 +138,7 @@
                                 "preu": {
                                     "agregadorId": 2,
                                     "base": 30,
-                                    "impost": 21,
+                                    "impostPercent": 21,
                                     "comissio": 10,
                                     "total": 48.40
                                 }
@@ -144,7 +147,7 @@
                                 "preu": {
                                     "agregadorId": 3,
                                     "base": 40,
-                                    "impost": 21,
+                                    "impostPercent": 21,
                                     "comissio": 5,
                                     "total": 54.45
                                 }
@@ -157,7 +160,10 @@
                     "nom": "Gaga",
                     "Descripcio": "Habitació doble amb vistas a la ciutat, bany privat i llit de matrimoni",
                     "tipus": "Doble",
-                    "tamanyHabitacio": 25, //metres cuadrats
+                    "tamanyHabitacio": {
+                        "valor": 25,
+                        "unitat": "m2"
+                    },
                     "permesFumar": false,
                     "equipament": [
                         "TV",
@@ -190,7 +196,7 @@
                                 "preu": {
                                     "agregadorId": 1,
                                     "base": 75,
-                                    "impost": 21,
+                                    "impostPercent": 21,
                                     "comissio": 15,
                                     "total": 108.90
                                 }
@@ -199,7 +205,7 @@
                                 "preu": {
                                     "agregadorId": 2,
                                     "base": 60,
-                                    "impost": 21,
+                                    "impostPercent": 21,
                                     "comissio": 10,
                                     "total": 84.70
                                 }
@@ -208,7 +214,7 @@
                                 "preu": {
                                     "agregadorId": 3,
                                     "base": 55,
-                                    "impost": 21,
+                                    "impostPercent": 21,
                                     "comissio": 10,
                                     "total": 78.65
                                 }
@@ -219,7 +225,7 @@
                                 "preu": {
                                     "agregadorId": 1,
                                     "base": 55,
-                                    "impost": 21,
+                                    "impostPercent": 21,
                                     "comissio": 10,
                                     "total": 78.65
                                 }
@@ -228,7 +234,7 @@
                                 "preu": {
                                     "agregadorId": 2,
                                     "base": 50,
-                                    "impost": 21,
+                                    "impostPercent": 21,
                                     "comissio": 10,
                                     "total": 72.60
                                 }
@@ -237,7 +243,7 @@
                                 "preu": {
                                     "agregadorId": 3,
                                     "base": 50,
-                                    "impost": 21,
+                                    "impostPercent": 21,
                                     "comissio": 10,
                                     "total": 72.60
                                 }
@@ -250,7 +256,10 @@
                     "nom": "Princess",
                     "Descripcio": "Suite amb vistas a la mar, jacuzzi exterior, bany privat i llit de matrimoni",
                     "tipus": "Suite",
-                    "tamanyHabitacio": 40, //metres cuadrats
+                    "tamanyHabitacio": {
+                        "valor": 40,
+                        "unitat": "m2"
+                    },
                     "permesFumar": false,
                     "equipament": [
                         "TV",
@@ -290,7 +299,7 @@
                                 "preu": { //objeto - desglose del precio
                                     "agregadorId": 1,
                                     "base": 95,
-                                    "impost": 21,
+                                    "impostPercent": 21,
                                     "comissio": 10,
                                     "total": 127.05
                                 }
@@ -299,7 +308,7 @@
                                 "preu": {
                                     "agregadorId": 2,
                                     "base": 80,
-                                    "impost": 21,
+                                    "impostPercent": 21,
                                     "comissio": 10,
                                     "total": 108.90
                                 }
@@ -308,7 +317,7 @@
                                 "preu": {
                                     "agregadorId": 3,
                                     "base": 100,
-                                    "impost": 21,
+                                    "impostPercent": 21,
                                     "comissio": 5,
                                     "total": 127.05
                                 }
@@ -319,7 +328,7 @@
                                 "preu": {
                                     "agregadorId": 1,
                                     "base": 75,
-                                    "impost": 21,
+                                    "impostPercent": 21,
                                     "comissio": 5,
                                     "total": 96.80
                                 }
@@ -328,7 +337,7 @@
                                 "preu": {
                                     "agregadorId": 2,
                                     "base": 60,
-                                    "impost": 21,
+                                    "impostPercent": 21,
                                     "comissio": 15,
                                     "total": 90.75
                                 }
@@ -337,7 +346,7 @@
                                 "preu": {
                                     "agregadorId": 3,
                                     "base": 65,
-                                    "impost": 21,
+                                    "impostPercent": 21,
                                     "comissio": 10,
                                     "total": 90.75
                                 }
@@ -365,19 +374,19 @@
                 {
                     "nom": "Berenar",
                     "base": 12,
-                    "impost": 21,
+                    "impostPercent": 21,
                     "total": 14.52
                 },
                 {
                     "nom": "Dinar",
                     "base": 33,
-                    "impost": 10,
+                    "impostPercent": 10,
                     "total": 36.30
                 },
                 {
                     "nom": "Sopar",
                     "base": 33,
-                    "impost": 10,
+                    "impostPercent": 10,
                     "total": 36.30
                 }
             ],
@@ -396,7 +405,10 @@
                     "nom": "Basic",
                     "Descripcio": "Habitació d'ús individual amb bany compartit sense balcó.",
                     "tipus": "Individual",
-                    "tamanyHabitacio": 12, //metres cuadrats
+                    "tamanyHabitacio": {
+                        "valor": 34,
+                        "unitat": "m2"
+                    },
                     "permesFumar": false,
                     "equipament": [
                         "Aire acondicionat",
@@ -423,7 +435,7 @@
                                 "preu": {
                                     "agregadorId": 1,
                                     "base": 55,
-                                    "impost": 21,
+                                    "impostPercent": 21,
                                     "comissio": 10,
                                     "total": 78.65
                                 }
@@ -432,7 +444,7 @@
                                 "preu": {
                                     "agregadorId": 2,
                                     "base": 40,
-                                    "impost": 21,
+                                    "impostPercent": 21,
                                     "comissio": 10,
                                     "total": 60.50
                                 }
@@ -441,7 +453,7 @@
                                 "preu": {
                                     "agregadorId": 3,
                                     "base": 42,
-                                    "impost": 21,
+                                    "impostPercent": 21,
                                     "comissio": 8,
                                     "total": 60.50
                                 }
@@ -452,7 +464,7 @@
                                 "preu": {
                                     "agregadorId": 1,
                                     "base": 45,
-                                    "impost": 21,
+                                    "impostPercent": 21,
                                     "comissio": 5,
                                     "total": 60.50
                                 }
@@ -461,7 +473,7 @@
                                 "preu": {
                                     "agregadorId": 2,
                                     "base": 30,
-                                    "impost": 21,
+                                    "impostPercent": 21,
                                     "comissio": 10,
                                     "total": 48.40
                                 }
@@ -470,7 +482,7 @@
                                 "preu": {
                                     "agregadorId": 3,
                                     "base": 40,
-                                    "impost": 21,
+                                    "impostPercent": 21,
                                     "comissio": 5,
                                     "total": 54.45
                                 }
@@ -483,7 +495,10 @@
                     "nom": "Standard",
                     "Descripcio": "Habitació doble d'ús individual amb vistas al mar, bany privat i llit de matrimoni",
                     "tipus": "Doble",
-                    "tamanyHabitacio": 25, //metres cuadrats
+                    "tamanyHabitacio": {
+                        "valor": 40,
+                        "unitat": "m2"
+                    },
                     "permesFumar": false,
                     "equipament": [
                         "TV",
@@ -513,7 +528,7 @@
                                 "preu": {
                                     "agregadorId": 1,
                                     "base": 75,
-                                    "impost": 21,
+                                    "impostPercent": 21,
                                     "comissio": 15,
                                     "total": 108.90
                                 }
@@ -522,7 +537,7 @@
                                 "preu": {
                                     "agregadorId": 2,
                                     "base": 60,
-                                    "impost": 21,
+                                    "impostPercent": 21,
                                     "comissio": 10,
                                     "total": 84.70
                                 }
@@ -531,7 +546,7 @@
                                 "preu": {
                                     "agregadorId": 3,
                                     "base": 55,
-                                    "impost": 21,
+                                    "impostPercent": 21,
                                     "comissio": 10,
                                     "total": 78.65
                                 }
@@ -542,7 +557,7 @@
                                 "preu": {
                                     "agregadorId": 1,
                                     "base": 55,
-                                    "impost": 21,
+                                    "impostPercent": 21,
                                     "comissio": 10,
                                     "total": 78.65
                                 }
@@ -551,7 +566,7 @@
                                 "preu": {
                                     "agregadorId": 2,
                                     "base": 50,
-                                    "impost": 21,
+                                    "impostPercent": 21,
                                     "comissio": 10,
                                     "total": 72.60
                                 }
@@ -560,7 +575,7 @@
                                 "preu": {
                                     "agregadorId": 3,
                                     "base": 50,
-                                    "impost": 21,
+                                    "impostPercent": 21,
                                     "comissio": 10,
                                     "total": 72.60
                                 }
@@ -573,7 +588,10 @@
                     "nom": "Super",
                     "Descripcio": "Suite amb vistas a la mar, piscina privada, bany privat i llit de matrimoni",
                     "tipus": "Suite",
-                    "tamanyHabitacio": 50,
+                    "tamanyHabitacio": {
+                        "valor": 60,
+                        "unitat": "m2"
+                    },
                     "permesFumar": false,
                     "equipament": [
                         "TV",
@@ -613,7 +631,7 @@
                                 "preu": {
                                     "agregadorId": 1,
                                     "base": 95,
-                                    "impost": 21,
+                                    "impostPercent": 21,
                                     "comissio": 10,
                                     "total": 127.05
                                 }
@@ -622,7 +640,7 @@
                                 "preu": {
                                     "agregadorId": 2,
                                     "base": 80,
-                                    "impost": 21,
+                                    "impostPercent": 21,
                                     "comissio": 10,
                                     "total": 108.90
                                 }
@@ -631,7 +649,7 @@
                                 "preu": {
                                     "agregadorId": 3,
                                     "base": 100,
-                                    "impost": 21,
+                                    "impostPercent": 21,
                                     "comissio": 5,
                                     "total": 127.05
                                 }
@@ -642,7 +660,7 @@
                                 "preu": {
                                     "agregadorId": 1,
                                     "base": 75,
-                                    "impost": 21,
+                                    "impostPercent": 21,
                                     "comissio": 5,
                                     "total": 96.80
                                 }
@@ -651,7 +669,7 @@
                                 "preu": {
                                     "agregadorId": 2,
                                     "base": 60,
-                                    "impost": 21,
+                                    "impostPercent": 21,
                                     "comissio": 15,
                                     "total": 90.75
                                 }
@@ -660,7 +678,7 @@
                                 "preu": {
                                     "agregadorId": 3,
                                     "base": 65,
-                                    "impost": 21,
+                                    "impostPercent": 21,
                                     "comissio": 10,
                                     "total": 90.75
                                 }
@@ -688,13 +706,13 @@
                 {
                     "nom": "Berenar",
                     "base": 20,
-                    "impost": 12,
+                    "impostPercent": 12,
                     "total": 22.40
                 },
                 {
                     "nom": "Dinar",
                     "base": 35,
-                    "impost": 15,
+                    "impostPercent": 15,
                     "total": 40.25
                 }
             ],
@@ -709,7 +727,10 @@
                     "nom": "Garlic",
                     "Descripcio": "Habitació individual amb bany privat i balcó",
                     "tipus": "Individual",
-                    "tamanyHabitacio": 26, //metres cuadrats
+                    "tamanyHabitacio": {
+                        "valor": 26,
+                        "unitat": "m2"
+                    },
                     "permesFumar": false,
                     "equipament": [
                         "TV",
@@ -735,11 +756,12 @@
                         "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQsn12vmvMFdy0fw_je0dYmyuuLNsMcEjZAj1JsZvirid1FWivN&usqp=CAU"
                     ],
                     "tarifes": {
-                        "temporadaAlta": [{
+                        "temporadaAlta": [
+                            {
                                 "preu": {
                                     "agregadorId": 1,
                                     "base": 55,
-                                    "impost": 21,
+                                    "impostPercent": 21,
                                     "comissio": 10,
                                     "total": 78.65
                                 }
@@ -748,7 +770,7 @@
                                 "preu": {
                                     "agregadorId": 2,
                                     "base": 40,
-                                    "impost": 21,
+                                    "impostPercent": 21,
                                     "comissio": 10,
                                     "total": 60.50
                                 }
@@ -757,7 +779,7 @@
                                 "preu": {
                                     "agregadorId": 3,
                                     "base": 42,
-                                    "impost": 21,
+                                    "impostPercent": 21,
                                     "comissio": 8,
                                     "total": 60.50
                                 }
@@ -768,7 +790,7 @@
                                 "preu": {
                                     "agregadorId": 1,
                                     "base": 45,
-                                    "impost": 21,
+                                    "impostPercent": 21,
                                     "comissio": 5,
                                     "total": 60.50
                                 }
@@ -777,7 +799,7 @@
                                 "preu": {
                                     "agregadorId": 2,
                                     "base": 30,
-                                    "impost": 21,
+                                    "impostPercent": 21,
                                     "comissio": 10,
                                     "total": 48.40
                                 }
@@ -786,7 +808,7 @@
                                 "preu": {
                                     "agregadorId": 3,
                                     "base": 40,
-                                    "impost": 21,
+                                    "impostPercent": 21,
                                     "comissio": 5,
                                     "total": 54.45
                                 }
@@ -799,7 +821,10 @@
                     "nom": "Perla",
                     "Descripcio": "Habitació doble amb vistas a la ciutat, bany privat i llit de matrimoni",
                     "tipus": "Doble",
-                    "tamanyHabitacio": 30, //metres cuadrats
+                    "tamanyHabitacio": {
+                        "valor": 30,
+                        "unitat": "m2"
+                    },
                     "permesFumar": false,
                     "equipament": [
                         "TV",
@@ -828,7 +853,7 @@
                                 "preu": {
                                     "agregadorId": 1,
                                     "base": 75,
-                                    "impost": 21,
+                                    "impostPercent": 21,
                                     "comissio": 15,
                                     "total": 108.90
                                 }
@@ -837,7 +862,7 @@
                                 "preu": {
                                     "agregadorId": 2,
                                     "base": 60,
-                                    "impost": 21,
+                                    "impostPercent": 21,
                                     "comissio": 10,
                                     "total": 84.70
                                 }
@@ -846,7 +871,7 @@
                                 "preu": {
                                     "agregadorId": 3,
                                     "base": 55,
-                                    "impost": 21,
+                                    "impostPercent": 21,
                                     "comissio": 10,
                                     "total": 78.65
                                 }
@@ -857,7 +882,7 @@
                                 "preu": {
                                     "agregadorId": 1,
                                     "base": 55,
-                                    "impost": 21,
+                                    "impostPercent": 21,
                                     "comissio": 10,
                                     "total": 78.65
                                 }
@@ -866,7 +891,7 @@
                                 "preu": {
                                     "agregadorId": 2,
                                     "base": 50,
-                                    "impost": 21,
+                                    "impostPercent": 21,
                                     "comissio": 10,
                                     "total": 72.60
                                 }
@@ -875,7 +900,7 @@
                                 "preu": {
                                     "agregadorId": 3,
                                     "base": 50,
-                                    "impost": 21,
+                                    "impostPercent": 21,
                                     "comissio": 10,
                                     "total": 72.60
                                 }
@@ -888,7 +913,10 @@
                     "nom": "SuperPlus",
                     "Descripcio": "Suite amb vistas al centre històric, bany privat amb jacuzzi i llit de matrimoni",
                     "tipus": "Suite",
-                    "tamanyHabitacio": 40,//metres cuadrats
+                    "tamanyHabitacio": {
+                        "valor": 40,
+                        "unitat": "m2"
+                    },
                     "permesFumar": false,
                     "equipament": [
                         "TV",
@@ -926,7 +954,7 @@
                                 "preu": {
                                     "agregadorId": 1,
                                     "base": 200,
-                                    "impost": 21,
+                                    "impostPercent": 21,
                                     "comissio": 20,
                                     "total": 266.20
                                 }
@@ -935,7 +963,7 @@
                                 "preu": {
                                     "agregadorId": 2,
                                     "base": 280,
-                                    "impost": 21,
+                                    "impostPercent": 21,
                                     "comissio": 5,
                                     "total": 344.85
                                 }
@@ -944,7 +972,7 @@
                                 "preu": {
                                     "agregadorId": 3,
                                     "base": 250,
-                                    "impost": 21,
+                                    "impostPercent": 21,
                                     "comissio": 20,
                                     "total": 326.70
                                 }
@@ -955,7 +983,7 @@
                                 "preu": {
                                     "agregadorId": 1,
                                     "base": 120,
-                                    "impost": 21,
+                                    "impostPercent": 21,
                                     "comissio": 25,
                                     "total": 175.40
                                 }
@@ -964,7 +992,7 @@
                                 "preu": {
                                     "agregadorId": 2,
                                     "base": 120,
-                                    "impost": 21,
+                                    "impostPercent": 21,
                                     "comissio": 15,
                                     "total": 258.15
                                 }
@@ -973,7 +1001,7 @@
                                 "preu": {
                                     "agregadorId": 3,
                                     "base": 125,
-                                    "impost": 21,
+                                    "impostPercent": 21,
                                     "comissio": 5,
                                     "total": 157.30
                                 }

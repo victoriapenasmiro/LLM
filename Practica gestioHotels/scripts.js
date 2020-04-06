@@ -162,7 +162,7 @@ function getDietes() {
             let preu = new Object();
             preu.nom = document.getElementById(auxTipus).value;
             preu.base = parseFloat(document.getElementById("preuBase" + auxTipus).value);
-            preu.impost = parseFloat(document.getElementById("impostPreu" + auxTipus).value);
+            preu.impostPercent = parseFloat(document.getElementById("impostPreu" + auxTipus).value);
             preu.total = parseFloat(document.getElementById("total" + auxTipus).value);
             preu.moneda = document.getElementById("moneda" + auxTipus).value;
             dietes.push(preu);
@@ -182,7 +182,7 @@ function setDietes(dietes) {
         let nomTipusSeleccionat = preu.nom; //accedo al atributo nom
         document.getElementById(nomTipusSeleccionat).checked = true; //al get getDietes revisavem si era true, aquí l'assignam a true.
         document.getElementById("preuBase" + nomTipusSeleccionat).value = preu.base; // Tots aquests camps són com get Dietes però l'assignació a l'inversa.
-        document.getElementById("impostPreu" + nomTipusSeleccionat).value = preu.impost;
+        document.getElementById("impostPreu" + nomTipusSeleccionat).value = preu.impostPercent;
         document.getElementById("total" + nomTipusSeleccionat).value = preu.total;
         document.getElementById("moneda" + nomTipusSeleccionat).value = preu.moneda;
         document.getElementById("preus"+nomTipusSeleccionat).style.display = "inline";
