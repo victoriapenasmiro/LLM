@@ -24,3 +24,12 @@ input, textarea {
 li{
     margin-bottom:10px;
 }
+
+/*lo creo como clases para no meter el style directamente en los elementos*/
+.flotaD {
+    float: right;
+}
+
+.flotaI {
+    float: left;
+}

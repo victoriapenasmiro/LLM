@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>CIFP Hotels. Web made by Vitoria Peñas.</title>
+    <script src="scriptsFront.js"></script>
+    <!--hojas de estilos-->
+    <link rel="stylesheet" type="text/css" href="styleGeneral.css">
+    <link rel="stylesheet" type="text/css" href="styleFront.css">
+    <!--tipografias-->
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;600&family=Indie+Flower&display=swap');
+    </style>
+</head>
+
+<body onload="init();">
+    <!--¿porqué está lo primero es estrictamente necesario?-->
+    <form id="dispo" action="cotitzacio.html" method="get">
+        <input type="hidden" name="parJson" id="parJson" value="" />
+    </form>
+    <header id="head">
+        <!--**Aqui posar la imatge del vostre logo**-->
+        <div id="logoWeb">
+            <img src="images/logo-front-web.png" />
+        </div>
+        <div id="titolPrinc">
+            <h1>RESERVA LES TEVES VACACIONS</h1>
+        </div>
+        <div id="headerOptions">
+            <a href="">Login</a>
+            <a href="">Canviar idioma</a>
+        </div>
+    </header>
+    <nav id="navbar">
+        <a href="">Hotels</a><a href="">Vols</a><a href="">Creuers</a><a href="">Paquets vacacionals</a>
+    </nav>
+    <aside>
+        <h2>Filtres:</h2>
+        <ul id="llistaFiltres">
+            <li>
+                Serveis:
+                <ul>
+                    <!--pendiente modificarlos por los mios-->
+                    <li>
+                        Gym<input type="checkbox" class="filtre" id="filterGym" onclick="aplicarFiltres();" />
+                    </li>
+                    <li>
+                        Restaurant<input type="checkbox" class="filtre" id="filterRestaurant"
+                            onclick="aplicarFiltres();" />
+                    </li>
+                    <li>
+                        Spa<input type="checkbox" class="filtre" id="filterSpa" onclick="aplicarFiltres();" />
+                    </li>
+                </ul>
+            </li>
+            <li>
+                Menjars:
+                <ul>
+                    <li>
+                        Berenar<input type="checkbox" class="filtre" id="filterBerenar" onclick="aplicarFiltres();" />
+                    </li>
+                    <li>
+                        Dinar<input type="checkbox" class="filtre" id="filterDinar" onclick="aplicarFiltres();" />
+                    </li>
+                    <li>
+                        Sopar<input type="checkbox" class="filtre" id="filterSopar" onclick="aplicarFiltres();" />
+                    </li>
+                </ul>
+            </li>
+            <li>
+                Idioma:
+                <ul>
+                    <li>
+                        Català<input type="checkbox" class="filtre" id="filterCat" onclick="aplicarFiltres();" />
+                    </li>
+                    <li>
+                        Castellà<input type="checkbox" class="filtre" id="filterCas" onclick="aplicarFiltres();" />
+                    </li>
+                    <li>
+                        Euskera<input type="checkbox" class="filtre" id="filterEus" onclick="aplicarFiltres();" />
+                    </li>
+                </ul>
+            </li>
+        </ul>
+        <div id="alquilaCoche">
+            <p><a href="#">LLOGA UN COTXO</a></p>
+        </div>
+        <a href="#"><img src="images/seguro-viaje.jpg" alt="" width="300" height="300"></a>
+    </aside>
+    <main>
+        <fieldset id="cercador" class="fondoCaja">
+            <legend>CERCADOR HOTELS:</legend>
+            <div class="flotaI">
+                <label>Temporada:</label>
+                <label>Baixa</label><input type="radio" name="temporada" id="baixa" value="baixa" />
+                <label>Alta</label><input type="radio" name="temporada" id="alta" value="alta" checked />
+            </div>
+            <div class="flotaD">
+                <label>Habitacions:</label>
+                <label>Individuals:</label>
+                <input type="number" id="individual" />
+                <label>Dobles:</label>
+                <input type="number" id="doble" />
+            </div>
+            <div>
+                <button id="cerca" type="button" onclick="realitzarcerca();">Cerca</button>
+            </div>
+        </fieldset>
+        <div id="resultats">
+            <!--esto está en disponibilitatmostra, porqué aqui no ??
+            <div id="notrobat" class="habitacio" style="display:none">
+                <div>
+                    No hem trobat habitacions per la teva cerca
+                </div>
+            </div>-->
+            <!--crear funcio per tallar el text a les 60 paraules https://www.w3schools.com/jsref/tryit.asp?filename=tryjsref_slice-->
+            -
+        </div>
+        <div id="preu" class="fondoCaja flotaD">
+            <h3>Resum de sa reserva:</h3><br>
+            <label><strong>PREU TOTAL: </strong></label><label id="preuValor"><strong>0</strong> </label><label id="preuMoneda"></label>
+            <p>Seleccio:</p>
+            <label id="numHabitacions">0</label><label> habitacions.</label><br>
+            <button id="continuar" type="button" onclick="continuar();">Continuar</button>
+        </div>
+    </main>
+    <footer id="peu">
+        <div class="flotaI">
+            <p>LLENGUATGE DE MARQUES - 1er DAW - Una mostra realitzada per Victoria Peñas, Copyright © 2020</p>
+        </div>
+        <div class="flotaD">
+            <p>Síguenos en:</p>
+            <a href="https://www.facebook.com/" target="_blank"><img src="images/facebook.png" alt="logo facebook"></a>
+            <a href="https://www.instagram.com/?hl=es" target="_blank"><img src="images/instagram.png" alt="logo instagram"></a>
+        </div>
+    </footer>
+    <script>
+        /*function menu sticky when scroll*/
+        window.onscroll = function() {doScroll()};
+        
+        var navbar = document.getElementById("navbar");
+        var sticky = navbar.offsetTop;
+        
+        function doScroll() {
+          if (window.pageYOffset >= sticky) {
+            navbar.classList.add("sticky")
+          } else {
+            navbar.classList.remove("sticky");
+          }
+        }
+    </script>
+</body>
+
+</html>

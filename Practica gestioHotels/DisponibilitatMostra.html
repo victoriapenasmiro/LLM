@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>CIFP Hotels. Web made by Vitoria Peñas.</title>
+    <link rel="stylesheet" type="text/css" href="styleGeneral.css">
+    <link rel="stylesheet" type="text/css" href="styleFront.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;600&family=Indie+Flower&display=swap');
+    </style>
+</head>
+
+<body>
+    <form id="dispo" action="cotitzacio.html" method="get">
+        <header id="head">
+            <!--**Aqui posar la imatge del vostre logo**-->
+            <div id="logoWeb">
+                <img src="images/logo-front-web.png" />
+            </div>
+            <div id="titolPrinc">
+                <h1>RESERVA LES TEVES VACACIONS</h1>
+            </div>
+            <div id="headerOptions">
+                <a href="">Login</a>
+                <a href="">Canviar idioma</a>
+            </div>
+        </header>
+        <nav id="navbar">
+            <a href="">Hotels</a><a href="">Vols</a><a href="">Creuers</a><a href="">Paquets vacacionals</a>
+        </nav>
+        <aside>
+            <h2>FILTRES ADICIONALS</h2>
+            <ul id="llistaFiltres">
+                <li>
+                    Serveis:
+                    <ul>
+                        <li>
+                            Gym<input type="checkbox" class="filtre" id="filterGym" onclick="aplicarFiltres();" />
+                        </li>
+                        <li>
+                            Restaurant<input type="checkbox" class="filtre" id="filterRestaurant"
+                                onclick="aplicarFiltres();" />
+                        </li>
+                        <li>
+                            Spa<input type="checkbox" class="filtre" id="filterSpa" onclick="aplicarFiltres();" />
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    Menjars:
+                    <ul>
+                        <li>
+                            Berenar<input type="checkbox" class="filtre" id="filterBerenar"
+                                onclick="aplicarFiltres();" />
+                        </li>
+                        <li>
+                            Dinar<input type="checkbox" class="filtre" id="filterDinar" onclick="aplicarFiltres();" />
+                        </li>
+                        <li>
+                            Sopar<input type="checkbox" class="filtre" id="filterSopar" onclick="aplicarFiltres();" />
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    Idioma:
+                    <ul>
+                        <li>
+                            Català<input type="checkbox" class="filtre" id="filterCat" onclick="aplicarFiltres();" />
+                        </li>
+                        <li>
+                            Castellà<input type="checkbox" class="filtre" id="filterCas" onclick="aplicarFiltres();" />
+                        </li>
+                        <li>
+                            Euskera<input type="checkbox" class="filtre" id="filterEus" onclick="aplicarFiltres();" />
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+            <div id="alquilaCoche">
+                <p><a href="#">LLOGA UN COTXO</a></p>
+            </div>
+            <a href="#"><img src="images/seguro-viaje.jpg" alt="" width="300" height="300"></a>
+        </aside>
+        <main>
+            <fieldset id="cercador" class="fondoCaja">
+                <legend>CERCADOR HOTELS:</legend>
+                <div class="flotaI">
+                    <label>Temporada:</label>
+                    <label>Baixa</label><input type="radio" name="temporada" id="baixa" value="baixa" />
+                    <label>Alta</label><input type="radio" name="temporada" id="alta" value="alta" checked />
+                </div>
+                <div class="flotaD">
+                    <label>Habitacions:</label>
+                    <label>Individuals:</label>
+                    <input type="number" id="individual" />
+                    <label>Dobles:</label>
+                    <input type="number" id="doble" />
+                </div>
+                <div>
+                    <button type="button" id="cerca" onclick="realitzarcerca();">Cerca</button>
+                </div>
+            </fieldset>
+            <div id="resultats">
+                <div id="notrobat" class="habitacio" style="display:none">
+                    <div>
+                        No hem trobat habitacions per la teva cerca
+                    </div>
+                </div>
+                <div class="habitacio">
+                    <div class="imatgeHab">
+                        <img class="imgMiniHab"
+                            src="https://raw.githubusercontent.com/TomeuC/ProvaPerJon/master/1489763093510.jpg" />
+                    </div>
+                    <div class="infoHab">
+                        <h3 class="titolHotel">Hotel Borja Moll</h3>
+                        <label class="estrelles">* Estrelles</label>
+                        <div class="hotelDescripcio">
+                            <!--crear funcio per tallar el text a les 60 paraules https://www.w3schools.com/jsref/tryit.asp?filename=tryjsref_slice-->
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum condimentum convallis
+                            nisl, ut cursus dui congue a. Aliquam aliquet dolor quis suscipit eleifend. Etiam et
+                            vehicula ipsum. Nulla facilisi. Vivamus aliquam condimentum magna, lacinia gravida orci
+                            tincidunt eget. Duis at ultrices est. Praesent aliquam, turpis vitae vestibulum dignissim,
+                            eros justo tempus felis, in interdum quam risus sed quam. In sit amet sodales neque. Cras
+                            leo velit, feugiat vehicula leo id, molestie molestie magna
+                        </div>
+                    </div>
+                    <div class="preuHab">
+                        <p>Preu 20€</p>
+                        <p>Impostos 21% </p>
+                        <p>Preu Total 24,2 </p>
+                        <p class="informacioExtesa" onclick="mostrarElement(this)">Més informació</p>
+                    </div>
+                    <div class="mesInfo">Mostrariem més informació</div>
+                    <!--<div class="informacioExtesa">
+                        <p onclick="mostrarElement(this)">Més informació</p>
+                        <div class="mesInfo">Mostrariem més informació</div>
+                    </div>-->
+                    <div class="seleccionar">
+                        <label>Quantitat:</label>
+                        <input type="number" />
+                        <button type="button" onclick="seleccionarHabitacio()">Seleccionar</button>
+                    </div>
+                </div>
+                <div class="habitacio">
+                    <div class="imatgeHab">
+                        <img class="imgMiniHab"
+                            src="https://raw.githubusercontent.com/TomeuC/ProvaPerJon/master/1489763093510.jpg" />
+                    </div>
+                    <div class="infoHab">
+                        <h3 class="titolHotel">Hotel Borja Moll</h3>
+                        <div class="estrelles">* Estrelles</div>
+                        <div class="hotelDescripcio">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum condimentum convallis
+                            nisl, ut cursus dui congue a. Aliquam aliquet dolor quis suscipit eleifend. Etiam et
+                            vehicula ipsum. Nulla facilisi. Vivamus aliquam condimentum magna, lacinia gravida orci
+                            tincidunt eget. Duis at ultrices est. Praesent aliquam, turpis vitae vestibulum dignissim,
+                            eros justo tempus felis, in interdum quam risus sed quam. In sit amet sodales neque. Cras
+                            leo velit, feugiat vehicula leo id, molestie molestie magna
+                        </div>
+                    </div>
+                    <div class="preuHab">
+                        <p>Preu 20€</p>
+                        <p>Impostos 21% </p>
+                        <p>Preu Total 24,2 </p>
+                        <p class="informacioExtesa" onclick="mostrarElement(this)">Més informació</p>
+                    </div>
+                    <div class="mesInfo">Mostrariem més informació</div>
+                    <!--<div class="informacioExtesa">
+                        <p onclick="mostrarElement(this)">Més informació</p>
+                        <div class="mesInfo">Mostrariem més informació</div>
+                    </div>-->
+                    <div class="seleccionar">
+                        <label>Quantitat:</label>
+                        <input type="number" />
+                        <button type="button" onclick="seleccionarHabitacio()">Seleccionar. </button>
+                    </div>
+                </div>
+                <div class="habitacio">
+                    <div class="imatgeHab">
+                        <img class="imgMiniHab"
+                            src="https://raw.githubusercontent.com/TomeuC/ProvaPerJon/master/1489763093510.jpg" />
+                    </div>
+                    <div class="infoHab">
+                        <h3 class="titolHotel">Hotel Borja Moll</h3>
+                        <div class="estrelles">* Estrelles</div>
+                        <div class="hotelDescripcio">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum condimentum convallis
+                            nisl, ut cursus dui congue a. Aliquam aliquet dolor quis suscipit eleifend. Etiam et
+                            vehicula ipsum. Nulla facilisi. Vivamus aliquam condimentum magna, lacinia gravida orci
+                            tincidunt eget. Duis at ultrices est. Praesent aliquam, turpis vitae vestibulum dignissim,
+                            eros justo tempus felis, in interdum quam risus sed quam. In sit amet sodales neque. Cras
+                            leo velit, feugiat vehicula leo id, molestie molestie magna
+                        </div>
+                    </div>
+                    <div class="preuHab">
+                        <p>Preu 20€</p>
+                        <p>Impostos 21% </p>
+                        <p>Preu Total 24,2 </p>
+                        <p class="informacioExtesa" onclick="mostrarElement(this)">Més informació</p>
+                    </div>
+                    <div class="mesInfo">Mostrariem més informació</div>
+                    <!--<div class="informacioExtesa">
+                        <p onclick="mostrarElement(this)">Més informació</p>
+                        <div class="mesInfo">Mostrariem més informació</div>
+                    </div>-->
+                    <div class="seleccionar">
+                        <label>Quantitat:</label>
+                        <input type="number" />
+                        <button type="button" onclick="seleccionarHabitacio()">Seleccionar</button>
+                    </div>
+                </div>
+            </div>
+            <div id="preu" class="fondoCaja flotaD">
+                <h3>Resum de sa reserva:</h3>
+                <p>Preu Total: 100€</p>
+                <p>Selecció: 3 habitacions</p>
+                <button type="button" id="btnCesta">Continuar</button>
+            </div>
+        </main>
+        <footer id="peu">
+            <!--Els peus a intranets no són molt necessàris. Podeu possar-hi El nom de l'empresa + versió de la pàgina -->
+            <div class="flotaI">
+                <p>LLENGUATGE DE MARQUES - 1er DAW - Una mostra realitzada per Victoria Peñas, Copyright © 2020</p>
+            </div>
+            <div class="flotaD">
+                <p>Síguenos en:</p>
+                <a href="https://www.facebook.com/" target="_blank"><img src="images/facebook.png" alt="logo facebook"></a>
+                <a href="https://www.instagram.com/?hl=es" target="_blank"><img src="images/instagram.png" alt="logo instagram"></a>
+            </div>
+        </footer>
+    </form>
+    <script>
+        /*function menu sticky when scroll*/
+        window.onscroll = function() {doScroll()};
+        
+        var navbar = document.getElementById("navbar");
+        var sticky = navbar.offsetTop;
+        
+        function doScroll() {
+          if (window.pageYOffset >= sticky) {
+            navbar.classList.add("sticky")
+          } else {
+            navbar.classList.remove("sticky");
+          }
+        }
+    </script>
+</body>
+</html>

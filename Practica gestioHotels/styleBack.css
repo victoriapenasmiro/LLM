@@ -6,9 +6,9 @@ header {
     color: white;
     background-image: url(https://www.mundukos.com/wp-content/uploads/2016/01/hoteles-sin-fondo.jpg);
     background-size: cover;
-    display: flex;
     justify-content: center;
     align-items: center;
+    display: flex;
     padding: 15px;
 }
 

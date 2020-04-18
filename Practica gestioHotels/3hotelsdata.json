@@ -64,7 +64,7 @@
                 {
                     "id": 0,
                     "nom": "Daia",
-                    "Descripcio": "Habitació d'ús individual amb bany compartit sense balcó.",
+                    "descripcio": "Habitació d'ús individual amb bany compartit sense balcó.",
                     "tipus": "Individual",
                     "tamanyHabitacio": {
                         "valor": 16,
@@ -158,7 +158,7 @@
                 {
                     "id": 1,
                     "nom": "Gaga",
-                    "Descripcio": "Habitació doble amb vistas a la ciutat, bany privat i llit de matrimoni",
+                    "descripcio": "Habitació doble amb vistas a la ciutat, bany privat i llit de matrimoni",
                     "tipus": "Doble",
                     "tamanyHabitacio": {
                         "valor": 25,
@@ -254,7 +254,7 @@
                 {
                     "id": 2,
                     "nom": "Princess",
-                    "Descripcio": "Suite amb vistas a la mar, jacuzzi exterior, bany privat i llit de matrimoni",
+                    "descripcio": "Suite amb vistas a la mar, jacuzzi exterior, bany privat i llit de matrimoni",
                     "tipus": "Suite",
                     "tamanyHabitacio": {
                         "valor": 40,
@@ -403,7 +403,7 @@
                 {
                     "id": 10,
                     "nom": "Basic",
-                    "Descripcio": "Habitació d'ús individual amb bany compartit sense balcó.",
+                    "descripcio": "Habitació d'ús individual amb bany compartit sense balcó.",
                     "tipus": "Individual",
                     "tamanyHabitacio": {
                         "valor": 34,
@@ -493,7 +493,7 @@
                 {
                     "id": 20,
                     "nom": "Standard",
-                    "Descripcio": "Habitació doble d'ús individual amb vistas al mar, bany privat i llit de matrimoni",
+                    "descripcio": "Habitació doble d'ús individual amb vistas al mar, bany privat i llit de matrimoni",
                     "tipus": "Doble",
                     "tamanyHabitacio": {
                         "valor": 40,
@@ -586,7 +586,7 @@
                 {
                     "id": 30,
                     "nom": "Super",
-                    "Descripcio": "Suite amb vistas a la mar, piscina privada, bany privat i llit de matrimoni",
+                    "descripcio": "Suite amb vistas a la mar, piscina privada, bany privat i llit de matrimoni",
                     "tipus": "Suite",
                     "tamanyHabitacio": {
                         "valor": 60,
@@ -725,7 +725,7 @@
                 {
                     "id": 1,
                     "nom": "Garlic",
-                    "Descripcio": "Habitació individual amb bany privat i balcó",
+                    "descripcio": "Habitació individual amb bany privat i balcó",
                     "tipus": "Individual",
                     "tamanyHabitacio": {
                         "valor": 26,
@@ -819,7 +819,7 @@
                 {
                     "id": 2,
                     "nom": "Perla",
-                    "Descripcio": "Habitació doble amb vistas a la ciutat, bany privat i llit de matrimoni",
+                    "descripcio": "Habitació doble amb vistas a la ciutat, bany privat i llit de matrimoni",
                     "tipus": "Doble",
                     "tamanyHabitacio": {
                         "valor": 30,
@@ -911,7 +911,7 @@
                 {
                     "id": 3,
                     "nom": "SuperPlus",
-                    "Descripcio": "Suite amb vistas al centre històric, bany privat amb jacuzzi i llit de matrimoni",
+                    "descripcio": "Suite amb vistas al centre històric, bany privat amb jacuzzi i llit de matrimoni",
                     "tipus": "Suite",
                     "tamanyHabitacio": {
                         "valor": 40,

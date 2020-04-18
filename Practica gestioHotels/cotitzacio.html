@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Cotització. CIFP Hotels. La web més cutre de reserves d'hotels.</title>
+    <script>
+
+        //Funció per obtenir el parametre que hem enviat pel mètode GET.(strJSon).
+        function obtenirParametreJSON() {
+            //Recupera els parametres de la URL
+            var queryString = window.location.search;
+            //Ho convertim a un objecte que ens ajudarà a cercar els diferents parametres dins la URL
+            var urlParams = new URLSearchParams(queryString);
+
+            //Obtenim el paràmetre strJson de la llista.
+            var strJsonEncodedURL = urlParams.get("parJson")
+            //Decodificam els paramtres, que si mirau com està codificat l'anterior string veureu que no es pot llegir.
+            var strJson = decodeURIComponent(strJsonEncodedURL)
+
+            //Tornam el valor
+            return strJson;
+        }
+
+
+        function init() {
+            var strParametreJson = obtenirParametreJSON();
+            document.getElementById("json").innerHTML = strParametreJson;
+        }
+
+
+    </script>
+    <style></style>
+</head>
+<body onload="init();">
+    <div id="json"></div>
+</body>
+</html>
