@@ -95,13 +95,14 @@ function realitzarcerca() {
                     var objCerca = new Object();
                     objCerca.hotel = objHotel;
                     objCerca.hab = objHab;
-                    objCerca.preu = objPreu;
+                    objCerca.tarifa = objPreu;
                     objCerca.temporadaAlta = temporadaAlta;
 
                     //Guardarem dins una llista les dades bàsiques per identificar l'hotel, habitació i preu.
                     llistatHotelsSeleccionats.push(objCerca);
-                    var index = llistatHotelsSeleccionats.length;
-                    pintarInformacioHotelHabPreu(objCerca, index);
+                    var index = llistatHotelsSeleccionats.length; //para que lo necesito? para identificar en qué posicion de la lista está ?
+                    pintarInformacioHotelHabPreu(objCerca, index); //la function solo espera un parámetro y le estamos enviado dos
+                    //pintarInformacioHotelHabPreu(objCerca);
                 }
             }
 
@@ -111,7 +112,7 @@ function realitzarcerca() {
                     var objCerca = new Object();
                     objCerca.hotel = objHotel;
                     objCerca.hab = objHab;
-                    objCerca.preu = objPreu;
+                    objCerca.tarifa = objPreu;
                     objCerca.temporadaAlta = temporadaAlta;
 
                     //Guardarem dins una llista les dades bàsiques per identificar l'hotel, habitació i preu.
@@ -209,23 +210,22 @@ function pintarInformacioHotelHabPreu(objInformacioElement) {
     /*hem d'agar es link de sa imatge de s'objecte - actualitzar json per agafar les pujades a github*/
     StrHtml += "<img class=\"imgMiniHab\" src=\"" + objInformacioElement.hotel.fotoPrinc + "\" />";
     StrHtml += "</div>";
-    StrHtml += "<div class=\"infoHab\">";
-    StrHtml += "<h3 class=\"titolHotel\">" + objInformacioElement.hotel.nom + "</h3><label class=\"estrelles\">" + objInformacioElement.hotel.estrelles + "Estrelles" + "</label>";
-    StrHtml += "<div class=\"hotelDescripcio\">";
-    StrHtml += objInformacioElement.hotel.descripcio;
+    StrHtml += "<div class=\"infoHab\">";//donde cierra?
+    StrHtml += "<h3 class=\"titolHotel\">" + objInformacioElement.hotel.nom + "</h3><label class=\"estrelles\">" + objInformacioElement.hotel.estrelles + " Estrelles" + "</label>";
+    StrHtml += "<div class=\"hotelDescripcio\">" + objInformacioElement.hotel.descripcio + "</div>";
+    StrHtml += "<p class=\"informacioExtesa\" onclick=\"mostrarElement(this)\">Més informació</p>";
     StrHtml += "</div>";
     StrHtml += "<div class=\"preuHab\">";
-    //en mi caso la moneda está a nivel de hotel
-    StrHtml += "<p>Preu " + (objInformacioElement.preu.base + objInformacioElement.preu.comissio) + " " + objInformacioElement.hotel.moneda + "</p>";
-    StrHtml += "<p>Impostos " + objInformacioElement.preu.impostPercent + "% </p>";
-    StrHtml += "<p>Preu Total " + objInformacioElement.preu.total + " </p>";
-    StrHtml += "<p class=\"informacioExtesa\ onclick=\"mostrarElement(this)\">Més informació</p>";
+    StrHtml += "<p class=\"informacioExtesa\">Hab. " + objInformacioElement.hab.tipus + "</p>";
+    StrHtml += "<p>Preu " + objInformacioElement.tarifa.preu.base + " " + objInformacioElement.hotel.moneda + "</p>";
+    StrHtml += "<p>Impostos " + objInformacioElement.tarifa.preu.impostPercent + "% </p>";
+    StrHtml += "<p>Total: " + objInformacioElement.tarifa.preu.total + " " + objInformacioElement.hotel.moneda + "</p>";
     StrHtml += "</div>";
     StrHtml += "<div class=\"mesInfo\">Mostrariem més informació</div>";
     StrHtml += "<div class=\"seleccionar\">";
-    StrHtml += "<label>Quantitat:</label>";
-    StrHtml += "<input type=\"number\" id=\"" + objInformacioElement.hotel.id + "_" + objInformacioElement.hab.id + "_" + objInformacioElement.temporadaAlta + "_" + objInformacioElement.preu.agregadorId + "\" />";
-    StrHtml += "<button type=\"button\" onclick=\"seleccionarHabitacio(" + objInformacioElement.hotel.id + "," + objInformacioElement.hab.id + "," + objInformacioElement.temporadaAlta + ",'" + objInformacioElement.preu.agregadorId + "'," + objInformacioElement.preu.total + ")\" >Seleccionar. </button>";
+    StrHtml += "<label>Quantitat: </label>";
+    StrHtml += "<input type=\"number\" id=\"" + objInformacioElement.hotel.id + "_" + objInformacioElement.hab.id + "_" + objInformacioElement.temporadaAlta + "_" + objInformacioElement.tarifa.preu.agregadorId + "\" />";
+    StrHtml += "<button type=\"button\" onclick=\"seleccionarHabitacio(" + objInformacioElement.hotel.id + "," + objInformacioElement.hab.id + "," + objInformacioElement.temporadaAlta + ",'" + objInformacioElement.tarifa.preu.agregadorId + "'," + objInformacioElement.tarifa.preu.total + ")\" >Seleccionar. </button>";
     StrHtml += "</div>";
     StrHtml += "</div>";
     StrHtml += "";
