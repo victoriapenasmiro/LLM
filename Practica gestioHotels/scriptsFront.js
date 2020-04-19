@@ -66,6 +66,7 @@ function realitzarcerca() {
     var temporadaAlta = false;
     var numIndividual = 0;
     var numDoble = 0;
+    var llistaPreus;
     //la var temporadAlta es un boolean, si lo que está en el parentesis se cumple se pondrá a true
     temporadaAlta = (getValorRadio("temporada") == "alta");
     numIndividual = document.getElementById("individual").value;
@@ -74,57 +75,54 @@ function realitzarcerca() {
     //Quan feim una nova cerca, desmarcam tots els filtres seleccionats del lateral.
     desmarcarTotsElsFiltresDelLateral();
 
+
     llistatHotelsSeleccionats = new Array();
     //Per cada hotel que tenim a la llista
     for (objHotel of llistatHotels) {
         for (objHab of objHotel.habitacions) {
             //Comprovarem els filtres de llits. Si concorden els llits de l'habitació cercarem pels altres filtres.
+            if (temporadaAlta) {
+                //segons la temporada, mostrarem uns preus o uns altres
+                llistaPreus = objHab.tarifes.temporadaAlta;
+            }
+            else{
+                llistaPreus = objHab.tarifes.temporadaBaixa;
+            }
+
             if (numIndividual > 0 && objHab.tipus == "Individual"){
-                
+                for (objPreu of llistaPreus){
+                    //accedo a los precios de esa temporada
+                    var objCerca = new Object();
+                    objCerca.hotel = objHotel;
+                    objCerca.hab = objHab;
+                    objCerca.preu = objPreu;
+                    objCerca.temporadaAlta = temporadaAlta;
+
+                    //Guardarem dins una llista les dades bàsiques per identificar l'hotel, habitació i preu.
+                    llistatHotelsSeleccionats.push(objCerca);
+                    var index = llistatHotelsSeleccionats.length;
+                    pintarInformacioHotelHabPreu(objCerca, index);
+                }
             }
 
             if (numDoble > 0 && (objHab.tipus == "Doble" || objHab.tipus == "Suite")){//no pongo else if porqué podría enseñar el mismo hotel, su hab individual y su doble
-                for (objTarifa of objHab.tarifes){//recorro las tarifas
-                    if (temporadaAlta) { //si el usuario ha seleccionado temporada alta, recorreré los precios de temporada alta
-                        for (objPreu of objTarifa.temporadaAlta){
-                            //accedo a los precios de esa temporada
-                            var objCerca = new Object();
-                            objCerca.hotel = objHotel;
-                            objCerca.hab = objHab;
-                            objCerca.preu = objPreu;
-                            objCerca.temporadaAlta = true;
-                        }
+                for (objPreu of llistaPreus){
+                    //accedo a los precios de esa temporada
+                    var objCerca = new Object();
+                    objCerca.hotel = objHotel;
+                    objCerca.hab = objHab;
+                    objCerca.preu = objPreu;
+                    objCerca.temporadaAlta = temporadaAlta;
 
-                    else{
-                        for (objTemporada of objTarifa.temporadaBaixa){
-
-                        }
-                    }
-                }
-                
-            }
-
-            if ((objHab.llitIndiv == numIndividual) && (objHab.llitDoble == numDoble)) {
-                for (objTarifa of objHab.tarifes) {
-                    //Comparam pel valor de temporada alta. Si també coincideix. Mostrarem el resultat.
-                    if (objTarifa.temporadaAlta == temporadaAlta) {
-                        var objCerca = new Object();
-                        objCerca.hotel = objHotel;
-                        objCerca.hab = objHab;
-                        objCerca.preu = objPreu;
-                        objCerca.temporadaAlta = temporadaAlta;
-                        
-                        //Guardarem dins una llista les dades bàsiques per identificar l'hotel, habitació i preu.
-                        llistatHotelsSeleccionats.push(objCerca);
-                        var index = llistatHotelsSeleccionats.length;
-                        pintarInformacioHotelHabPreu(objCerca, index);
-                    }
+                    //Guardarem dins una llista les dades bàsiques per identificar l'hotel, habitació i preu.
+                    llistatHotelsSeleccionats.push(objCerca);
+                    var index = llistatHotelsSeleccionats.length;
+                    pintarInformacioHotelHabPreu(objCerca, index);
                 }
             }
         }
     }
 }
-
 
 function aplicarFiltres() {
     /*
