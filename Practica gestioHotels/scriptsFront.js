@@ -25,7 +25,8 @@ function loadJSON(callback) {
 function init() {
     loadJSON(function (response) {
         // Parse JSON string into object
-        llistatHotels = JSON.parse(response);
+        objJson = JSON.parse(response);
+        llistatHotels = objJson.hotels;
     });
 }
 
@@ -65,6 +66,7 @@ function realitzarcerca() {
     var temporadaAlta = false;
     var numIndividual = 0;
     var numDoble = 0;
+    //la var temporadAlta es un boolean, si lo que está en el parentesis se cumple se pondrá a true
     temporadaAlta = (getValorRadio("temporada") == "alta");
     numIndividual = document.getElementById("individual").value;
     numDoble = document.getElementById("doble").value;
@@ -76,15 +78,42 @@ function realitzarcerca() {
     //Per cada hotel que tenim a la llista
     for (objHotel of llistatHotels) {
         for (objHab of objHotel.habitacions) {
-            //Comprovarem el filtre de llits. Si concorden els llits de l'habitació cercarem pels altres filtres.
+            //Comprovarem els filtres de llits. Si concorden els llits de l'habitació cercarem pels altres filtres.
+            if (numIndividual > 0 && objHab.tipus == "Individual"){
+                
+            }
+
+            if (numDoble > 0 && (objHab.tipus == "Doble" || objHab.tipus == "Suite")){//no pongo else if porqué podría enseñar el mismo hotel, su hab individual y su doble
+                for (objTarifa of objHab.tarifes){//recorro las tarifas
+                    if (temporadaAlta) { //si el usuario ha seleccionado temporada alta, recorreré los precios de temporada alta
+                        for (objPreu of objTarifa.temporadaAlta){
+                            //accedo a los precios de esa temporada
+                            var objCerca = new Object();
+                            objCerca.hotel = objHotel;
+                            objCerca.hab = objHab;
+                            objCerca.preu = objPreu;
+                            objCerca.temporadaAlta = true;
+                        }
+
+                    else{
+                        for (objTemporada of objTarifa.temporadaBaixa){
+
+                        }
+                    }
+                }
+                
+            }
+
             if ((objHab.llitIndiv == numIndividual) && (objHab.llitDoble == numDoble)) {
-                for (objPreu of objHab.preu) {
+                for (objTarifa of objHab.tarifes) {
                     //Comparam pel valor de temporada alta. Si també coincideix. Mostrarem el resultat.
-                    if (objPreu.tempAlta == temporadaAlta) {
+                    if (objTarifa.temporadaAlta == temporadaAlta) {
                         var objCerca = new Object();
                         objCerca.hotel = objHotel;
                         objCerca.hab = objHab;
                         objCerca.preu = objPreu;
+                        objCerca.temporadaAlta = temporadaAlta;
+                        
                         //Guardarem dins una llista les dades bàsiques per identificar l'hotel, habitació i preu.
                         llistatHotelsSeleccionats.push(objCerca);
                         var index = llistatHotelsSeleccionats.length;
@@ -175,6 +204,8 @@ function pintarInformacioHotelHabPreu(objInformacioElement) {
     objCerca.hab = objHab;
     objCerca.preu = objPreu;
     */
+    var tempAlta = false;
+
     var StrHtml = "<div class=\"habitacio\">";
     StrHtml += "<div class=\"imatgeHab\">";
     /*hem d'agar es link de sa imatge de s'objecte - actualitzar json per agafar les pujades a github*/
@@ -195,8 +226,8 @@ function pintarInformacioHotelHabPreu(objInformacioElement) {
     StrHtml += "<div class=\"mesInfo\">Mostrariem més informació</div>";
     StrHtml += "<div class=\"seleccionar\">";
     StrHtml += "<label>Quantitat:</label>";
-    StrHtml += "<input type=\"number\" id=\"" + objInformacioElement.hotel.id + "_" + objInformacioElement.hab.id + "_" + objInformacioElement.preu.temporadaAlta + "_" + objInformacioElement.preu.prov + "\" />";
-    StrHtml += "<button type=\"button\" onclick=\"seleccionarHabitacio(" + objInformacioElement.hotel.id + "," + objInformacioElement.hab.id + "," + objInformacioElement.preu.temporadaAlta + ",'" + objInformacioElement.preu.prov + "'," + objInformacioElement.preu.total + ")\" >Seleccionar. </button>";
+    StrHtml += "<input type=\"number\" id=\"" + objInformacioElement.hotel.id + "_" + objInformacioElement.hab.id + "_" + objInformacioElement.temporadaAlta + "_" + objInformacioElement.preu.agregadorId + "\" />";
+    StrHtml += "<button type=\"button\" onclick=\"seleccionarHabitacio(" + objInformacioElement.hotel.id + "," + objInformacioElement.hab.id + "," + objInformacioElement.temporadaAlta + ",'" + objInformacioElement.preu.agregadorId + "'," + objInformacioElement.preu.total + ")\" >Seleccionar. </button>";
     StrHtml += "</div>";
     StrHtml += "</div>";
     StrHtml += "";
