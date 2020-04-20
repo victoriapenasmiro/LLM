@@ -269,7 +269,7 @@ function pintarInformacioHotelHabPreu(objInformacioElement) {
     StrHtml += "<div class=\"infoHab\">";
     StrHtml += "<h3 class=\"titolHotel\">" + objInformacioElement.hotel.nom + "</h3><label class=\"estrelles\">" + objInformacioElement.hotel.estrelles + " Estrelles" + "</label>";
     StrHtml += "<div class=\"hotelDescripcio\">" + objInformacioElement.hotel.descripcio + "</div>";
-    StrHtml += "<p class=\"informacioExtesa\" onclick=\"mostrarElement(\"hotel_id_" + objInformacioElement.hotel.id + "_hab_id_" + objInformacioElement.hab.id + "\");\">Més informació</p>";
+    StrHtml += "<p class=\"informacioExtesa\" onclick=\"mostrarElement('hotel_id_" + objInformacioElement.hotel.id + "_hab_id_" + objInformacioElement.hab.id + "');\">Més informació</p>";
     StrHtml += "</div>";
     StrHtml += "<div class=\"preuHab\">";
     StrHtml += "<p class=\"informacioExtesa\">Hab. " + objInformacioElement.hab.tipus + "</p>";
@@ -285,7 +285,7 @@ function pintarInformacioHotelHabPreu(objInformacioElement) {
     StrHtml += "<h4>Serveis inclosos</h4><hr>";
     StrHtml += serveisInclosos;
     StrHtml += "</div>";
-    StrHtml += "<div>";
+    StrHtml += "<div id=\"fotosHab\">";
     StrHtml += "<h3 style=\"text-align: center;\">Més fotos de s'habitació</h3>";
     StrHtml += imatgesHab;
     StrHtml += "</div>";
@@ -303,7 +303,7 @@ function pintarInformacioHotelHabPreu(objInformacioElement) {
 
 function recuperarFotosHab(habitacio){
     var imatgesHab;
-    imatgesHab += "<div id=\"fotosHab\">";
+    imatgesHab += "<div>";
     for (foto of habitacio.fotosHabitacio){
         imatgesHab += "<img class=\"imgMiniHab\" src=\"" + foto + "\">";
     }
