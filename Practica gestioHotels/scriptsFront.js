@@ -45,13 +45,11 @@ function desmarcarTotsElsFiltresDelLateral() {
 }
 
 //Per mostrar el div de més info.
-function mostrarElement(objInformacioElement) {
+function mostrarElement(id) {
     /*
-    <p class=\"informacioExtesa\" onclick=\"mostrarElement;\">Més informació</p>";
+    <p class=\"informacioExtesa\" onclick=\"mostrarElement(id);\">Més informació</p>";
     */
-    var id = "hotel_id_" + objInformacioElement.hotel.id + "_hab_id_" + objInformacioElement.hab.id;
     document.getElementById(id).style.display = "block";
-
 }
 
 //Per ocultar l'element
@@ -271,7 +269,7 @@ function pintarInformacioHotelHabPreu(objInformacioElement) {
     StrHtml += "<div class=\"infoHab\">";
     StrHtml += "<h3 class=\"titolHotel\">" + objInformacioElement.hotel.nom + "</h3><label class=\"estrelles\">" + objInformacioElement.hotel.estrelles + " Estrelles" + "</label>";
     StrHtml += "<div class=\"hotelDescripcio\">" + objInformacioElement.hotel.descripcio + "</div>";
-    StrHtml += "<p class=\"informacioExtesa\" onclick=\"mostrarElement(objInformacioElement);\">Més informació</p>";
+    StrHtml += "<p class=\"informacioExtesa\" onclick=\"mostrarElement(\"hotel_id_" + objInformacioElement.hotel.id + "_hab_id_" + objInformacioElement.hab.id + "\");\">Més informació</p>";
     StrHtml += "</div>";
     StrHtml += "<div class=\"preuHab\">";
     StrHtml += "<p class=\"informacioExtesa\">Hab. " + objInformacioElement.hab.tipus + "</p>";
@@ -305,7 +303,7 @@ function pintarInformacioHotelHabPreu(objInformacioElement) {
 
 function recuperarFotosHab(habitacio){
     var imatgesHab;
-    imatgesHab += "<div>";
+    imatgesHab += "<div id=\"fotosHab\">";
     for (foto of habitacio.fotosHabitacio){
         imatgesHab += "<img class=\"imgMiniHab\" src=\"" + foto + "\">";
     }
