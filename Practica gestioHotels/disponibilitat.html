@@ -97,21 +97,21 @@
             <div class="flotaD">
                 <label>Habitacions:</label>
                 <label>Individuals:</label>
-                <input type="number" id="individual" />
+                <input type="number" id="individual" onclick="resetStyle(this);"/>
                 <label>Dobles:</label>
-                <input type="number" id="doble" />
+                <input type="number" id="doble" onclick="resetStyle(this);"/>
             </div>
             <div>
                 <button id="cerca" type="button" onclick="realitzarcerca();">Cerca</button>
             </div>
         </fieldset>
         <div id="resultats">
-            <!--esto está en disponibilitatmostra, porqué aqui no ??
+            <!--crear function para que se muestre si no hay resultados-->
             <div id="notrobat" class="habitacio" style="display:none">
-                <div>
-                    No hem trobat habitacions per la teva cerca
-                </div>
-            </div>-->
+                <p>
+                    No hem trobat habitacions per la teva cerca.
+                </p>
+            </div>
             <!--crear funcio per tallar el text a les 60 paraules https://www.w3schools.com/jsref/tryit.asp?filename=tryjsref_slice-->
             -
         </div>

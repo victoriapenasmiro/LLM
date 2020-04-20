@@ -62,6 +62,12 @@ function mostrarElement(elementActual) {
 function realitzarcerca() {
     //Si ja hem fet alguna cerca, ocultam els resultats anteriors.
     borrarResultatsAnteriors();
+    //salta aviso si no han indicado un valor en las habitaciones
+    if (document.getElementById("individual").value == "" || document.getElementById("doble").value == ""){
+        alert("Per favor, indica la quantitat d'habitacions a cercar");
+        document.getElementById("individual").style.border = "2px solid red";
+        document.getElementById("doble").style.border = "2px solid red";
+    }
     //Camps de la cerca
     var temporadaAlta = false;
     var numIndividual = 0;
@@ -81,45 +87,32 @@ function realitzarcerca() {
     for (objHotel of llistatHotels) {
         for (objHab of objHotel.habitacions) {
             //Comprovarem els filtres de llits. Si concorden els llits de l'habitació cercarem pels altres filtres.
+            //segons la temporada, mostrarem uns preus o uns altres
             if (temporadaAlta) {
-                //segons la temporada, mostrarem uns preus o uns altres
                 llistaPreus = objHab.tarifes.temporadaAlta;
             }
             else{
                 llistaPreus = objHab.tarifes.temporadaBaixa;
             }
 
-            if (numIndividual > 0 && objHab.tipus == "Individual"){
+            if ((numDoble > 0 && (objHab.tipus == "Doble" || objHab.tipus == "Suite")) || numIndividual > 0 && objHab.tipus == "Individual"){
+                var auxPreu;
                 for (objPreu of llistaPreus){
                     //accedo a los precios de esa temporada
-                    var objCerca = new Object();
-                    objCerca.hotel = objHotel;
-                    objCerca.hab = objHab;
-                    objCerca.tarifa = objPreu;
-                    objCerca.temporadaAlta = temporadaAlta;
-
-                    //Guardarem dins una llista les dades bàsiques per identificar l'hotel, habitació i preu.
-                    llistatHotelsSeleccionats.push(objCerca);
-                    var index = llistatHotelsSeleccionats.length; //para que lo necesito? para identificar en qué posicion de la lista está ?
-                    pintarInformacioHotelHabPreu(objCerca, index); //la function solo espera un parámetro y le estamos enviado dos
-                    //pintarInformacioHotelHabPreu(objCerca);
+                    if (auxPreu == null || auxPreu.preu.total < objPreu.preu.total){
+                        auxPreu = objPreu;
+                    }
                 }
-            }
+                var objCerca = new Object();
+                objCerca.hotel = objHotel;
+                objCerca.hab = objHab;
+                objCerca.tarifa = objPreu;
+                objCerca.temporadaAlta = temporadaAlta;
 
-            if (numDoble > 0 && (objHab.tipus == "Doble" || objHab.tipus == "Suite")){//no pongo else if porqué podría enseñar el mismo hotel, su hab individual y su doble
-                for (objPreu of llistaPreus){
-                    //accedo a los precios de esa temporada
-                    var objCerca = new Object();
-                    objCerca.hotel = objHotel;
-                    objCerca.hab = objHab;
-                    objCerca.tarifa = objPreu;
-                    objCerca.temporadaAlta = temporadaAlta;
-
-                    //Guardarem dins una llista les dades bàsiques per identificar l'hotel, habitació i preu.
-                    llistatHotelsSeleccionats.push(objCerca);
-                    var index = llistatHotelsSeleccionats.length;
-                    pintarInformacioHotelHabPreu(objCerca, index);
-                }
+                //Guardarem dins una llista les dades bàsiques per identificar l'hotel, habitació i preu.
+                llistatHotelsSeleccionats.push(objCerca);
+                var index = llistatHotelsSeleccionats.length;
+                pintarInformacioHotelHabPreu(objCerca, index);
             }
         }
     }
@@ -204,6 +197,8 @@ function pintarInformacioHotelHabPreu(objInformacioElement) {
     objCerca.preu = objPreu;
     */
     var tempAlta = false;
+    //mostraré preu total sense iva
+    var preuNet = objInformacioElement.tarifa.preu.base + objInformacioElement.tarifa.preu.comissio;
 
     var StrHtml = "<div class=\"habitacio\">";
     StrHtml += "<div class=\"imatgeHab\">";
@@ -217,7 +212,7 @@ function pintarInformacioHotelHabPreu(objInformacioElement) {
     StrHtml += "</div>";
     StrHtml += "<div class=\"preuHab\">";
     StrHtml += "<p class=\"informacioExtesa\">Hab. " + objInformacioElement.hab.tipus + "</p>";
-    StrHtml += "<p>Preu " + objInformacioElement.tarifa.preu.base + " " + objInformacioElement.hotel.moneda + "</p>";
+    StrHtml += "<p>Preu " + preuNet + " " + objInformacioElement.hotel.moneda + "</p>";
     StrHtml += "<p>Impostos " + objInformacioElement.tarifa.preu.impostPercent + "% </p>";
     StrHtml += "<p>Total: " + objInformacioElement.tarifa.preu.total + " " + objInformacioElement.hotel.moneda + "</p>";
     StrHtml += "</div>";
@@ -289,4 +284,9 @@ function continuar() {
         document.getElementById("parJson").value = jsonString;
         document.getElementById("dispo").submit();
     }
+}
+
+//funcio general per resetejar styles
+function resetStyle(element){
+    element.style.border = "none";
 }
