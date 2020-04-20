@@ -263,7 +263,7 @@ function pintarInformacioHotelHabPreu(objInformacioElement) {
     var StrHtml = "<div class=\"habitacio\">";
     StrHtml += "<div class=\"imatgeHab\">";
     /*hem d'agar es link de sa imatge de s'objecte - actualitzar json per agafar les pujades a github*/
-    StrHtml += "<img class=\"imgMiniHab\" src=\"" + objInformacioElement.hotel.fotoPrinc + "\" />";
+    StrHtml += "<img class=\"imgMiniHab\" src=\"" + objInformacioElement.hab.fotosHabitacio[0] + "\" />";
     StrHtml += "</div>";
     StrHtml += "<div class=\"infoHab\">";//donde cierra?
     StrHtml += "<h3 class=\"titolHotel\">" + objInformacioElement.hotel.nom + "</h3><label class=\"estrelles\">" + objInformacioElement.hotel.estrelles + " Estrelles" + "</label>";
@@ -280,7 +280,7 @@ function pintarInformacioHotelHabPreu(objInformacioElement) {
     StrHtml += "<div class=\"seleccionar\">";
     StrHtml += "<label>Quantitat: </label>";
     StrHtml += "<input type=\"number\" id=\"" + objInformacioElement.hotel.id + "_" + objInformacioElement.hab.id + "_" + objInformacioElement.temporadaAlta + "_" + objInformacioElement.tarifa.preu.agregadorId + "\" />";
-    StrHtml += "<button type=\"button\" onclick=\"seleccionarHabitacio(" + objInformacioElement.hotel.id + "," + objInformacioElement.hab.id + "," + objInformacioElement.temporadaAlta + ",'" + objInformacioElement.tarifa.preu.agregadorId + "'," + objInformacioElement.tarifa.preu.total + ")\" >Seleccionar. </button>";
+    StrHtml += "<button type=\"button\" onclick=\"seleccionarHabitacio(" + objInformacioElement.hotel.id + "," + objInformacioElement.hab.id + "," + objInformacioElement.temporadaAlta + ",'" + objInformacioElement.tarifa.preu.agregadorId + "'," + objInformacioElement.tarifa.preu.total + ")\" >Seleccionar</button>";
     StrHtml += "</div>";
     StrHtml += "</div>";
     StrHtml += "";
@@ -289,12 +289,12 @@ function pintarInformacioHotelHabPreu(objInformacioElement) {
 }
 
 function recuperarMoneda(objInformacioElement){
-    if (objInformacioElement.hotel.moneda = "Euro"){
+    if (objInformacioElement.hotel.moneda == "Euro"){
         simboloCurrency = "€";
-    } else if(objInformacioElement.hotel.moneda = "Dolar"){
+    } else if(objInformacioElement.hotel.moneda == "Dolar"){
         simboloCurrency = "$";
     }
-    else if(objInformacioElement.hotel.moneda = "Lliura"){
+    else if(objInformacioElement.hotel.moneda == "Lliura"){
         simboloCurrency = "£";
     }
     return simboloCurrency;

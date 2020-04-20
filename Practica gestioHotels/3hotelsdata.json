@@ -514,9 +514,8 @@
                         ]
                     },
                     "fotosHabitacio": [
-                        "https://raw.githubusercontent.com/victoriapenasmiro/LLM/master/Practica%20gestioHotels/images/hab1.jpg",
-                        "https://raw.githubusercontent.com/victoriapenasmiro/LLM/master/Practica%20gestioHotels/images/hab2.jpg",
-                        "https://raw.githubusercontent.com/victoriapenasmiro/LLM/master/Practica%20gestioHotels/images/hab3.jpeg"
+                        "https://raw.githubusercontent.com/victoriapenasmiro/LLM/master/Practica%20gestioHotels/images/habDoble1.jpg",
+                        "https://raw.githubusercontent.com/victoriapenasmiro/LLM/master/Practica%20gestioHotels/images/habDoble1.jpg"
                     ],
                     "tarifes": {
                         "temporadaAlta": [
@@ -617,9 +616,8 @@
                         ]
                     },
                     "fotosHabitacio": [
-                        "https://raw.githubusercontent.com/victoriapenasmiro/LLM/master/Practica%20gestioHotels/images/hab1.jpg",
-                        "https://raw.githubusercontent.com/victoriapenasmiro/LLM/master/Practica%20gestioHotels/images/hab2.jpg",
-                        "https://raw.githubusercontent.com/victoriapenasmiro/LLM/master/Practica%20gestioHotels/images/hab3.jpeg"
+                        "https://raw.githubusercontent.com/victoriapenasmiro/LLM/master/Practica%20gestioHotels/images/habDoble2.jpg",
+                        "https://raw.githubusercontent.com/victoriapenasmiro/LLM/master/Practica%20gestioHotels/images/habDoble2.jpg"
                     ],
                     "tarifes": {
                         "temporadaAlta": [
@@ -747,8 +745,7 @@
                     },
                     "fotosHabitacio": [
                         "https://raw.githubusercontent.com/victoriapenasmiro/LLM/master/Practica%20gestioHotels/images/hab1.jpg",
-                        "https://raw.githubusercontent.com/victoriapenasmiro/LLM/master/Practica%20gestioHotels/images/hab2.jpg",
-                        "https://raw.githubusercontent.com/victoriapenasmiro/LLM/master/Practica%20gestioHotels/images/hab3.jpeg"
+                        "https://raw.githubusercontent.com/victoriapenasmiro/LLM/master/Practica%20gestioHotels/images/hab2.jpg"
                     ],
                     "tarifes": {
                         "temporadaAlta": [
@@ -838,10 +835,8 @@
                         ]
                     },
                     "fotosHabitacio": [
-                        "https://raw.githubusercontent.com/victoriapenasmiro/LLM/master/Practica%20gestioHotels/images/hab1.jpg",
-                        "https://raw.githubusercontent.com/victoriapenasmiro/LLM/master/Practica%20gestioHotels/images/hab2.jpg",
-                        "https://raw.githubusercontent.com/victoriapenasmiro/LLM/master/Practica%20gestioHotels/images/hab3.jpeg"
-                    ],
+                        "https://raw.githubusercontent.com/victoriapenasmiro/LLM/master/Practica%20gestioHotels/images/habDoble3.jpg",
+                        "https://raw.githubusercontent.com/victoriapenasmiro/LLM/master/Practica%20gestioHotels/images/habDoble3.jpg"                    ],
                     "tarifes": {
                         "temporadaAlta": [
                             {
@@ -939,9 +934,8 @@
                         ]
                     },
                     "fotosHabitacio": [
-                        "https://raw.githubusercontent.com/victoriapenasmiro/LLM/master/Practica%20gestioHotels/images/hab1.jpg",
-                        "https://raw.githubusercontent.com/victoriapenasmiro/LLM/master/Practica%20gestioHotels/images/hab2.jpg",
-                        "https://raw.githubusercontent.com/victoriapenasmiro/LLM/master/Practica%20gestioHotels/images/hab3.jpeg"
+                        "https://raw.githubusercontent.com/victoriapenasmiro/LLM/master/Practica%20gestioHotels/images/habDoble3.jpg",
+                        "https://raw.githubusercontent.com/victoriapenasmiro/LLM/master/Practica%20gestioHotels/images/habDoble3.jpeg"
                     ],
                     "tarifes": {
                         "temporadaAlta": [
