@@ -27,7 +27,7 @@
             "direccio": "Calle de Ferrer 7",
             "codiPostal": 8009,
             "ciutat": "Barcelona",
-            "parking": true,
+            "parking": false,
             "wifi": true,
             "animals": true,
             "dietes": [

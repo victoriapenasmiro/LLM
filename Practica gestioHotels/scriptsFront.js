@@ -278,15 +278,15 @@ function pintarInformacioHotelHabPreu(objInformacioElement) {
     StrHtml += "<p>Total: " + objInformacioElement.tarifa.preu.total + " " + simboloCurrency + "</p>";
     StrHtml += "</div>";
     StrHtml += "<div class=\"mesInfo\" id=\"hotel_id_" + objInformacioElement.hotel.id + "_hab_id_" + objInformacioElement.hab.id + "\">";
-    StrHtml += "<h3 id=\"titolPrincmesInfo\">Foto Principal del Hotel</h3><label style=\"float: right;\" onclick=\"tancarElement(this);\">X</label>";
+    StrHtml += "<h3 id=\"titolPrincmesInfo\">Foto Principal del Hotel</h3><label style=\"float: right;\" onclick=\"tancarElement(this);\">Tanca X</label>";
     StrHtml += "<img class=\"imgMiniHab\" style=\"clear: both;\"src=\"" + objInformacioElement.hotel.fotoPrinc + "\">";
     StrHtml += "<div id=\"mesInfoDesc\">";
     StrHtml += "<p>" + objInformacioElement.hab.descripcio + "</p>";
-    StrHtml += "<h4>Serveis inclosos</h4><hr>";
+    StrHtml += "<h4>Serveis inclosos:</h4><hr>";
     StrHtml += serveisInclosos;
     StrHtml += "</div>";
     StrHtml += "<div id=\"fotosHab\">";
-    StrHtml += "<h3 style=\"text-align: center;\">Més fotos de s'habitació</h3>";
+    StrHtml += "<h3 style=\"text-align: center;\">Més fotos de s'habitació:</h3>";
     StrHtml += imatgesHab;
     StrHtml += "</div>";
     StrHtml += "</div>";
@@ -302,7 +302,7 @@ function pintarInformacioHotelHabPreu(objInformacioElement) {
 }
 
 function recuperarFotosHab(habitacio){
-    var imatgesHab;
+    var imatgesHab = "";
     imatgesHab += "<div>";
     for (foto of habitacio.fotosHabitacio){
         imatgesHab += "<img class=\"imgMiniHab\" src=\"" + foto + "\">";
@@ -312,23 +312,24 @@ function recuperarFotosHab(habitacio){
 }
 
 function recuperarServeis(hotel){
-    var serveisInclosos;
+    var serveisInclosos = "<ul>";
     if (hotel.parking){
-        serveisInclosos += "<p>Parking</p>";
+        serveisInclosos += "<li>Parking</li>";
     }
     if (hotel.wifi){
-        serveisInclosos += "<p>Wifi</p>";
+        serveisInclosos += "<li>Wifi</li>";
     }
     if (hotel.animals){
-        serveisInclosos += "<p>S'admeten el següents animals:";
-        for (var i=0; i<hotel.llistaMascotes;i++){
+        serveisInclosos += "<li>S'admeten el següents animals: ";
+        for (var i=0; i<hotel.llistaMascotes.length;i++){
             serveisInclosos += hotel.llistaMascotes[i];
             if (i != hotel.llistaMascotes.length-1){
                 serveisInclosos += ", ";
             }
         }
-        serveisInclosos += "</p>";
+        serveisInclosos += "</li>";
     }
+    serveisInclosos += "</ul>";
     return serveisInclosos;
 }
 
