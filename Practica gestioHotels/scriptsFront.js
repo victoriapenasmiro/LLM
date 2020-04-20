@@ -263,7 +263,7 @@ function pintarInformacioHotelHabPreu(objInformacioElement) {
     //recupero las fotos de la habitacion
     var imatgesHab = recuperarFotosHab(objInformacioElement.hab);
 
-    var tempAlta = false;
+    var tempAlta = false;//no la uso
 
     //mostraré preu total sense iva, amb comissio inclosa
     var preuNet = objInformacioElement.tarifa.preu.base + objInformacioElement.tarifa.preu.comissio;
@@ -292,7 +292,7 @@ function pintarInformacioHotelHabPreu(objInformacioElement) {
     StrHtml += serveisInclosos;
     StrHtml += "</div>";
     StrHtml += "<div>";
-    StrHtml += "<h3 style=\"text-align: center;\">Més fotos de s'habitació</h3>\"";
+    StrHtml += "<h3 style=\"text-align: center;\">Més fotos de s'habitació</h3>";
     StrHtml += imatgesHab;
     StrHtml += "</div>";
     StrHtml += "</div>";
@@ -327,7 +327,7 @@ function recuperarServeis(hotel){
     }
     if (hotel.animals){
         serveisInclosos += "<p>S'admeten el següents animals:";
-        for (int i=0; i<hotel.llistaMascotes;i++){
+        for (var i=0; i<hotel.llistaMascotes;i++){
             serveisInclosos += hotel.llistaMascotes[i];
             if (i != hotel.llistaMascotes.length-1){
                 serveisInclosos += ", ";
