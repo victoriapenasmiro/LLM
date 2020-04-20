@@ -45,20 +45,18 @@ function desmarcarTotsElsFiltresDelLateral() {
 }
 
 //Per mostrar el div de més info.
-function mostrarElement() {
+function mostrarElement(objInformacioElement) {
     /*
     <p class=\"informacioExtesa\" onclick=\"mostrarElement;\">Més informació</p>";
     */
-   //quan recuperam per class, sa de fer un for, no es put modificar tots el elements amb aquesta classe al mateix temps
-    var elems = document.getElementsByClassName('mesInfo');
-    for (var i=0;i<elems.length;i+=1){
-        elems[i].style.display = 'block';
-    }
+    var id = "hotel_id_" + objInformacioElement.hotel.id + "_hab_id_" + objInformacioElement.hab.id;
+    document.getElementById(id).style.display = "block";
+
 }
 
 //Per ocultar l'element
-function tancarElement(this){
-    //to do
+function tancarElement(element){
+    element.parentElement.style.display = "none";
 }
 
 //Quan cliquen al botó de cercam. Executam aquesta funció.
@@ -263,8 +261,6 @@ function pintarInformacioHotelHabPreu(objInformacioElement) {
     //recupero las fotos de la habitacion
     var imatgesHab = recuperarFotosHab(objInformacioElement.hab);
 
-    var tempAlta = false;//no la uso
-
     //mostraré preu total sense iva, amb comissio inclosa
     var preuNet = objInformacioElement.tarifa.preu.base + objInformacioElement.tarifa.preu.comissio;
 
@@ -275,7 +271,7 @@ function pintarInformacioHotelHabPreu(objInformacioElement) {
     StrHtml += "<div class=\"infoHab\">";
     StrHtml += "<h3 class=\"titolHotel\">" + objInformacioElement.hotel.nom + "</h3><label class=\"estrelles\">" + objInformacioElement.hotel.estrelles + " Estrelles" + "</label>";
     StrHtml += "<div class=\"hotelDescripcio\">" + objInformacioElement.hotel.descripcio + "</div>";
-    StrHtml += "<p class=\"informacioExtesa\" onclick=\"mostrarElement();\">Més informació</p>";
+    StrHtml += "<p class=\"informacioExtesa\" onclick=\"mostrarElement(objInformacioElement);\">Més informació</p>";
     StrHtml += "</div>";
     StrHtml += "<div class=\"preuHab\">";
     StrHtml += "<p class=\"informacioExtesa\">Hab. " + objInformacioElement.hab.tipus + "</p>";
@@ -283,7 +279,7 @@ function pintarInformacioHotelHabPreu(objInformacioElement) {
     StrHtml += "<p>Impostos " + objInformacioElement.tarifa.preu.impostPercent + "% </p>";
     StrHtml += "<p>Total: " + objInformacioElement.tarifa.preu.total + " " + simboloCurrency + "</p>";
     StrHtml += "</div>";
-    StrHtml += "<div class=\"mesInfo\">";
+    StrHtml += "<div class=\"mesInfo\" id=\"hotel_id_" + objInformacioElement.hotel.id + "_hab_id_" + objInformacioElement.hab.id + "\">";
     StrHtml += "<h3 id=\"titolPrincmesInfo\">Foto Principal del Hotel</h3><label style=\"float: right;\" onclick=\"tancarElement(this);\">X</label>";
     StrHtml += "<img class=\"imgMiniHab\" style=\"clear: both;\"src=\"" + objInformacioElement.hotel.fotoPrinc + "\">";
     StrHtml += "<div id=\"mesInfoDesc\">";
