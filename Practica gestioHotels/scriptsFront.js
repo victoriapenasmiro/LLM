@@ -117,6 +117,9 @@ function realitzarcerca() {
             }
         }
     }
+    if (llistatHotelsSeleccionats = null){
+        document.getElementById("notrobat").style.display = "block";
+    }
 }
 
 function aplicarFiltres() {
@@ -269,6 +272,7 @@ function pintarInformacioHotelHabPreu(objInformacioElement) {
     StrHtml += "<div class=\"infoHab\">";
     StrHtml += "<h3 class=\"titolHotel\">" + objInformacioElement.hotel.nom + "</h3><label class=\"estrelles\">" + objInformacioElement.hotel.estrelles + " Estrelles" + "</label>";
     StrHtml += "<div class=\"hotelDescripcio\">" + objInformacioElement.hotel.descripcio + "</div>";
+    //cuando enviamos un parametro cuyo nombre es una concatenación, el parametro debe ir entre comilla simple
     StrHtml += "<p class=\"informacioExtesa\" onclick=\"mostrarElement('hotel_id_" + objInformacioElement.hotel.id + "_hab_id_" + objInformacioElement.hab.id + "');\">Més informació</p>";
     StrHtml += "</div>";
     StrHtml += "<div class=\"preuHab\">";

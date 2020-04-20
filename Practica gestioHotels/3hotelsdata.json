@@ -64,7 +64,7 @@
                     "id": 0,
                     "nom": "Daia",
                     "descripcio": "Habitació d'ús individual amb bany compartit sense balcó.",
-                    "tipus": "Individual",
+                    "tipus": "Doble",
                     "tamanyHabitacio": {
                         "valor": 16,
                         "unitat": "m2"
