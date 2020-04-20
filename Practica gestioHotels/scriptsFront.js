@@ -63,10 +63,13 @@ function realitzarcerca() {
     //Si ja hem fet alguna cerca, ocultam els resultats anteriors.
     borrarResultatsAnteriors();
     //salta aviso si no han indicado un valor en las habitaciones
-    if (document.getElementById("individual").value == "" || document.getElementById("doble").value == ""){
+    if ((document.getElementById("individual").value == "" && document.getElementById("doble").value == "") ||
+    (document.getElementById("individual").value == 0 && document.getElementById("doble").value == 0)){
         alert("Per favor, indica la quantitat d'habitacions a cercar");
         document.getElementById("individual").style.border = "2px solid red";
         document.getElementById("doble").style.border = "2px solid red";
+        //oculto este elemento por si se ha hecho una búsqueda anterior
+        document.getElementById("preu").style.display = "none";
     }
     //Camps de la cerca
     var temporadaAlta = false;
@@ -120,7 +123,7 @@ function realitzarcerca() {
 
 function aplicarFiltres() {
     /*
-     var objCerca = new Object();
+    var objCerca = new Object();
     objCerca.hotel = objHotel;
     objCerca.hab = objHab;
     objCerca.preu = objPreu;
@@ -135,45 +138,90 @@ function aplicarFiltres() {
             //Revisarem els que estan marcats.
             if (oFiltre.checked) {
                 switch (oFiltre.id) {
-                    case "filterGym":
-                        //Com a l'exemple no tenc gym he fet un filtre damunt el nom. Per treure l'hotel Prova 3. Això només és per mostrar-vos un exemple.
+                    case "filterParking":
+                        //mayor que cero porqué sino hay hoteles no hay filtros que aplicar
                         if (llistatHotelsSeleccionatsFiltrats.length > 0) {
                             llistaAuxiliar = new Array();
                             for (hotelSeleccionat of llistatHotelsSeleccionatsFiltrats) {
-                                if (hotelSeleccionat.hotel.nom == "Prova 3") {
+                                if (hotelSeleccionat.hotel.parking) {
                                     llistaAuxiliar.push(hotelSeleccionat);
                                 }
                             }
                             llistatHotelsSeleccionatsFiltrats = llistaAuxiliar;
                         }
-
                         break;
-                    case "habitacioMinibar":
-                        /* if (llistatHotelsSeleccionatsFiltrats.length > 0) {
-                             llistaAuxiliar = new Array();
-                             for (hotelSeleccionat of llistatHotelsSeleccionatsFiltrats) {
-                                 if (hotelSeleccionat.hab.minibar == true) {
-                                     llistaAuxiliar.push(hotelSeleccionat);
-                                 }
-                             }
-                             llistatHotelsSeleccionatsFiltrats = llistaAuxiliar;
-                         }*/
-                        break;
-                    case "servei":
-                        /*if (llistatHotelsSeleccionatsFiltrats.length > 0) {
+                    case "filterWifi":
+                        if (llistatHotelsSeleccionatsFiltrats.length > 0) {
                             llistaAuxiliar = new Array();
                             for (hotelSeleccionat of llistatHotelsSeleccionatsFiltrats) {
-                                for (servei of hotelSeleccionat.hotel.serveis) {
-                                    if (servei.valorDelServei == true) {
+                                if (hotelSeleccionat.hotel.wifi) {
+                                    llistaAuxiliar.push(hotelSeleccionat);
+                                }
+                            }
+                            llistatHotelsSeleccionatsFiltrats = llistaAuxiliar;
+                         }
+                        break;
+                    case "filterAnimals":
+                        if (llistatHotelsSeleccionatsFiltrats.length > 0) {
+                            llistaAuxiliar = new Array();
+                            for (hotelSeleccionat of llistatHotelsSeleccionatsFiltrats) {
+                                if (hotelSeleccionat.hotel.animals) {
+                                    llistaAuxiliar.push(hotelSeleccionat);
+                                }
+                            }
+                            llistatHotelsSeleccionatsFiltrats = llistaAuxiliar;
+                        }
+                        break;
+                    case "filterCat":
+                        alert("Idioma canviat a català.");
+                        break;
+                    case "filterCas":
+                        alert("Idioma cambiado a castellano.");
+                        break;
+                    case "filterEus":
+                        alert("hizkuntza aldatu zen euskarara.");
+                        break;
+                    case "filterBerenar":
+                        if (llistatHotelsSeleccionatsFiltrats.length > 0) {
+                            llistaAuxiliar = new Array();
+                            for (hotelSeleccionat of llistatHotelsSeleccionatsFiltrats) {
+                                for (dieta of hotelSeleccionat.hotel.dietes){
+                                    if (dieta.nom == "Berenar") {
                                         llistaAuxiliar.push(hotelSeleccionat);
                                     }
                                 }
                             }
                             llistatHotelsSeleccionatsFiltrats = llistaAuxiliar;
-                        }*/
+                        }
+                        break;
+                    case "filterDinar":
+                        if (llistatHotelsSeleccionatsFiltrats.length > 0) {
+                            llistaAuxiliar = new Array();
+                            for (hotelSeleccionat of llistatHotelsSeleccionatsFiltrats) {
+                                for (dieta of hotelSeleccionat.hotel.dietes){
+                                    if (dieta.nom == "Dinar") {
+                                        llistaAuxiliar.push(hotelSeleccionat);
+                                    }
+                                }
+                            }
+                            llistatHotelsSeleccionatsFiltrats = llistaAuxiliar;
+                        }
+                        break;
+                    case "filterSopar":
+                        if (llistatHotelsSeleccionatsFiltrats.length > 0) {
+                            llistaAuxiliar = new Array();
+                            for (hotelSeleccionat of llistatHotelsSeleccionatsFiltrats) {
+                                for (dieta of hotelSeleccionat.hotel.dietes){
+                                    if (dieta.nom == "Sopar") {
+                                        llistaAuxiliar.push(hotelSeleccionat);
+                                    }
+                                }
+                            }
+                            llistatHotelsSeleccionatsFiltrats = llistaAuxiliar;
+                        }
                         break;
                     default:
-
+                    //no tomar accion
                 }
             }
         }
@@ -196,8 +244,20 @@ function pintarInformacioHotelHabPreu(objInformacioElement) {
     objCerca.hab = objHab;
     objCerca.preu = objPreu;
     */
+
+    //mostraré la cesta de compra
+    document.getElementById("preu").style.display = "block";
+
+    //me aseguro que los inputs no tienen border en rojo por aviso
+    document.getElementById("individual").style.border = "none";
+    document.getElementById("doble").style.border = "none";
+
+    //sustituimos nombre moneda por simbolo
+    var simboloCurrency = recuperarMoneda(objInformacioElement);
+
     var tempAlta = false;
-    //mostraré preu total sense iva
+
+    //mostraré preu total sense iva, amb comissio inclosa
     var preuNet = objInformacioElement.tarifa.preu.base + objInformacioElement.tarifa.preu.comissio;
 
     var StrHtml = "<div class=\"habitacio\">";
@@ -212,9 +272,9 @@ function pintarInformacioHotelHabPreu(objInformacioElement) {
     StrHtml += "</div>";
     StrHtml += "<div class=\"preuHab\">";
     StrHtml += "<p class=\"informacioExtesa\">Hab. " + objInformacioElement.hab.tipus + "</p>";
-    StrHtml += "<p>Preu " + preuNet + " " + objInformacioElement.hotel.moneda + "</p>";
+    StrHtml += "<p>Preu: " + preuNet + " " + simboloCurrency + "</p>";
     StrHtml += "<p>Impostos " + objInformacioElement.tarifa.preu.impostPercent + "% </p>";
-    StrHtml += "<p>Total: " + objInformacioElement.tarifa.preu.total + " " + objInformacioElement.hotel.moneda + "</p>";
+    StrHtml += "<p>Total: " + objInformacioElement.tarifa.preu.total + " " + simboloCurrency + "</p>";
     StrHtml += "</div>";
     StrHtml += "<div class=\"mesInfo\">Mostrariem més informació</div>";
     StrHtml += "<div class=\"seleccionar\">";
@@ -226,6 +286,18 @@ function pintarInformacioHotelHabPreu(objInformacioElement) {
     StrHtml += "";
 
     document.getElementById("resultats").innerHTML += StrHtml;
+}
+
+function recuperarMoneda(objInformacioElement){
+    if (objInformacioElement.hotel.moneda = "Euro"){
+        simboloCurrency = "€";
+    } else if(objInformacioElement.hotel.moneda = "Dolar"){
+        simboloCurrency = "$";
+    }
+    else if(objInformacioElement.hotel.moneda = "Lliura"){
+        simboloCurrency = "£";
+    }
+    return simboloCurrency;
 }
 
 function seleccionarHabitacio(hotelId, habId, tempAlta, preuProv, preuValor) {

@@ -4,8 +4,8 @@ header {
     overflow: hidden;
     background-image: url("https://raw.githubusercontent.com/victoriapenasmiro/LLM/master/Practica%20gestioHotels/images/cabecera-foto.jpg");
     background-size: cover;
-    background-position-y: center;
-    height: 600px;
+    background-position-y: 60%;
+    height: 200px;
 }
 
 body {
@@ -14,7 +14,7 @@ body {
 
 h1 {
     text-align: center;
-    color: white;
+    color: black;
     font-size: 50px;
     font-family: 'Indie Flower', cursive;
     text-transform: uppercase;
@@ -183,6 +183,7 @@ nav a {
 #navbar a:hover {
     background-color: rgb(217, 210, 198);
     font-weight: 600;
+    padding:30px;
 }
 
 #navbar {
@@ -288,7 +289,7 @@ nav a {
 
 #preu {
     overflow: hidden;
-    display: block;
+    display: none;
     clear: both;
     margin-right: 6%;
 }
