@@ -243,20 +243,31 @@ nav a {
     background-color: #dca42a;
     font-family: 'Indie Flower', cursive;
     clear: both;
-    overflow: auto;
+    overflow: hidden;
     padding: 2%;
 }
 
 #fotosHab h3{
-    margin-top: 0px;;
+    margin-top: 0px;
+}
+
+#fotosHab div{
+    width: 650px;
+    margin: 0 auto;
 }
 
 #fotosHab img{
     margin-right: 2%;
 }
+
 .imgMiniHab {
     width: 250px;
     height: 207px;
+}
+
+#notrobat{
+    display: none;
+    text-align: center;
 }
 
 #alquilaCoche {

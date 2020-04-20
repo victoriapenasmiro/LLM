@@ -117,8 +117,13 @@ function realitzarcerca() {
             }
         }
     }
-    if (llistatHotelsSeleccionats = null){
+    //si no hi ha hotels, activam el div de notrobat
+    if (llistatHotelsSeleccionats == null || llistatHotelsSeleccionats.length == 0){
         document.getElementById("notrobat").style.display = "block";
+    }
+    //amb aquest else ho tornam a ocultar si tornam a fer una cerca amb resultats
+    else{
+        document.getElementById("notrobat").style.display = "none";
     }
 }
 
@@ -225,6 +230,14 @@ function aplicarFiltres() {
                     //no tomar accion
                 }
             }
+        }
+
+        if (llistatHotelsFiltrats == null || llistatHotelsSeleccionats.length == 0){
+            document.getElementById("notrobat").style.display = "block";
+        }
+        //amb aquest else ho tornam a ocultar si tornam a fer una cerca amb resultats
+        else{
+            document.getElementById("notrobat").style.display = "none";
         }
 
         borrarResultatsAnteriors();

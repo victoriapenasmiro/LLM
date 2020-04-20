@@ -64,7 +64,7 @@
                     "id": 0,
                     "nom": "Daia",
                     "descripcio": "Habitació d'ús individual amb bany compartit sense balcó.",
-                    "tipus": "Doble",
+                    "tipus": "Individual",
                     "tamanyHabitacio": {
                         "valor": 16,
                         "unitat": "m2"
@@ -399,7 +399,7 @@
                     "id": 10,
                     "nom": "Basic",
                     "descripcio": "Habitació d'ús individual amb bany compartit sense balcó.",
-                    "tipus": "Doble",
+                    "tipus": "Individual",
                     "tamanyHabitacio": {
                         "valor": 34,
                         "unitat": "m2"
@@ -718,7 +718,7 @@
                     "id": 1,
                     "nom": "Garlic",
                     "descripcio": "Habitació individual amb bany privat i balcó",
-                    "tipus": "Doble",
+                    "tipus": "Individual",
                     "tamanyHabitacio": {
                         "valor": 26,
                         "unitat": "m2"
