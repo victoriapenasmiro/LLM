@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>CIFP Hotels. Web made by Vitoria Peñas.</title>
     <script src="scriptsFront.js"></script>
@@ -13,14 +14,13 @@
 </head>
 
 <body onload="init();">
-    <!--¿porqué está lo primero es estrictamente necesario?-->
     <form id="dispo" action="cotitzacio.html" method="get">
         <input type="hidden" name="parJson" id="parJson" value="" />
     </form>
     <header id="head">
-        <!--**Aqui posar la imatge del vostre logo**-->
         <div id="logoWeb">
-            <img src="https://raw.githubusercontent.com/victoriapenasmiro/LLM/master/Practica%20gestioHotels/images/logo-front-web.png" />
+            <img
+                src="https://raw.githubusercontent.com/victoriapenasmiro/LLM/master/Practica%20gestioHotels/images/logo-front-web.png" />
         </div>
         <div id="titolPrinc">
             <h1>RESERVA LES TEVES VACACIONS</h1>
@@ -40,13 +40,15 @@
                 Serveis:
                 <ul>
                     <li>
-                        Aparcament<input type="checkbox" class="filtre" id="filterParking" onclick="aplicarFiltres();" />
+                        Aparcament<input type="checkbox" class="filtre" id="filterParking"
+                            onclick="aplicarFiltres();" />
                     </li>
                     <li>
                         Wifi<input type="checkbox" class="filtre" id="filterWifi" onclick="aplicarFiltres();" />
                     </li>
                     <li>
-                        Animals admesos<input type="checkbox" class="filtre" id="filterAnimals" onclick="aplicarFiltres();" />
+                        Animals admesos<input type="checkbox" class="filtre" id="filterAnimals"
+                            onclick="aplicarFiltres();" />
                     </li>
                 </ul>
             </li>
@@ -82,7 +84,9 @@
         <div id="alquilaCoche">
             <p><a href="#">LLOGA UN COTXO</a></p>
         </div>
-        <a href="#"><img src="https://raw.githubusercontent.com/victoriapenasmiro/LLM/master/Practica%20gestioHotels/images/seguro-viaje.jpg" alt="" width="300" height="300"></a>
+        <a href="#"><img
+                src="https://raw.githubusercontent.com/victoriapenasmiro/LLM/master/Practica%20gestioHotels/images/seguro-viaje.jpg"
+                alt="" width="300" height="300"></a>
     </aside>
     <main>
         <fieldset id="cercador" class="fondoCaja">
@@ -95,9 +99,9 @@
             <div class="flotaD">
                 <label>Habitacions:</label>
                 <label>Individuals:</label>
-                <input type="number" id="individual" min=0 value=0 onclick="resetStyle(this);"/>
+                <input type="number" id="individual" min=0 value=0 onclick="resetStyle(this);" />
                 <label>Dobles:</label>
-                <input type="number" id="doble" min=0 value=0 onclick="resetStyle(this);"/>
+                <input type="number" id="doble" min=0 value=0 onclick="resetStyle(this);" />
             </div>
             <div>
                 <button id="cerca" type="button" onclick="realitzarcerca();">Cerca</button>
@@ -115,7 +119,8 @@
         </div>
         <div id="preu" class="fondoCaja flotaD">
             <h3>Resum de sa reserva:</h3><br>
-            <label><strong>PREU TOTAL: </strong></label><label id="preuValor"><strong>0</strong> </label><label id="preuMoneda"></label>
+            <label><strong>PREU TOTAL: </strong></label><label id="preuValor"><strong>0</strong> </label><label
+                id="preuMoneda"></label>
             <p>Seleccio:</p>
             <label id="numHabitacions">0</label><label> habitacions.</label><br>
             <button id="continuar" type="button" onclick="continuar();">Continuar</button>
@@ -127,23 +132,27 @@
         </div>
         <div class="flotaD">
             <p>Síguenos en:</p>
-            <a href="https://www.facebook.com/" target="_blank"><img src="https://raw.githubusercontent.com/victoriapenasmiro/LLM/master/Practica%20gestioHotels/images/facebook.png" alt="logo facebook"></a>
-            <a href="https://www.instagram.com/?hl=es" target="_blank"><img src="https://raw.githubusercontent.com/victoriapenasmiro/LLM/master/Practica%20gestioHotels/images/instagram.png" alt="logo instagram"></a>
+            <a href="https://www.facebook.com/" target="_blank"><img
+                    src="https://raw.githubusercontent.com/victoriapenasmiro/LLM/master/Practica%20gestioHotels/images/facebook.png"
+                    alt="logo facebook"></a>
+            <a href="https://www.instagram.com/?hl=es" target="_blank"><img
+                    src="https://raw.githubusercontent.com/victoriapenasmiro/LLM/master/Practica%20gestioHotels/images/instagram.png"
+                    alt="logo instagram"></a>
         </div>
     </footer>
     <script>
         /*function menu sticky when scroll*/
-        window.onscroll = function() {doScroll()};
-        
+        window.onscroll = function () { doScroll() };
+
         var navbar = document.getElementById("navbar");
         var sticky = navbar.offsetTop;
-        
+
         function doScroll() {
-          if (window.pageYOffset >= sticky) {
-            navbar.classList.add("sticky")
-          } else {
-            navbar.classList.remove("sticky");
-          }
+            if (window.pageYOffset >= sticky) {
+                navbar.classList.add("sticky")
+            } else {
+                navbar.classList.remove("sticky");
+            }
         }
     </script>
 </body>

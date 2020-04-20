@@ -204,6 +204,32 @@ nav a {
 
 .mesInfo {
     display: none;
+    clear: both;
+    padding: 30px;
+    background: #f0edeb;
+    border: 1px solid #d9d2c6;
+    width: 882px;
+    overflow: auto;
+}
+
+#mesInfoDesc{
+    width: 600px;
+    padding-left: 3%;
+    float: left;
+}
+
+#mesInfoDesc hr{
+    width: 70px;
+    margin:0px;
+}
+
+.mesInfo .imgMiniHab {
+    float: left;
+}
+
+#titolPrincmesInfo{
+    margin-top: 0px;
+    float: left;
 }
 
 .informacioExtesa{
@@ -213,6 +239,21 @@ nav a {
     margin-top: 0px;
 }
 
+#fotosHab{
+    background-color: #dca42a;
+    font-family: 'Indie Flower', cursive;
+    clear: both;
+    overflow: auto;
+    padding: 2%;
+}
+
+#fotosHab h3{
+    margin-top: 0px;;
+}
+
+#fotosHab img{
+    margin-right: 2%;
+}
 .imgMiniHab {
     width: 250px;
     height: 207px;
