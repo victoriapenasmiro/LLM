@@ -114,6 +114,10 @@ function realitzarcerca() {
                 //Guardarem dins una llista les dades bàsiques per identificar l'hotel, habitació i preu.
                 llistatHotelsSeleccionats.push(objCerca);
                 pintarInformacioHotelHabPreu(objCerca);
+
+                //ocultamos el buscador y muestro un boton para hacer una nueva búsqueda
+                document.getElementById("cercador").style.display = "none";
+                document.getElementById("opcionesEncontradas").style.display = "block";
             }
         }
     }
@@ -125,6 +129,19 @@ function realitzarcerca() {
     else{
         document.getElementById("notrobat").style.display = "none";
     }
+}
+
+function resetBusqueda(){
+    //borramos búsqueda anterior
+    borrarResultatsAnteriors();
+    //desmarcam filtres laterals
+    desmarcarTotsElsFiltresDelLateral();
+    //mostramos el buscador
+    document.getElementById("cercador").style.display = "block";
+    //oculto cabecera resultados
+    document.getElementById("opcionesEncontradas").style.display = "none";
+    //oculto cesta de compra
+    document.getElementById("preu").style.display = "none";
 }
 
 function aplicarFiltres() {
@@ -309,8 +326,8 @@ function pintarInformacioHotelHabPreu(objInformacioElement) {
     StrHtml += "</div>";
     StrHtml += "<div class=\"seleccionar\">";
     StrHtml += "<label>Quantitat: </label>";
-    StrHtml += "<input type=\"number\" id=\"" + objInformacioElement.hotel.id + "_" + objInformacioElement.hab.id + "_" + objInformacioElement.temporadaAlta + "_" + objInformacioElement.tarifa.preu.agregadorId + "\" />";
-    StrHtml += "<button type=\"button\" onclick=\"seleccionarHabitacio(" + objInformacioElement.hotel.id + "," + objInformacioElement.hab.id + "," + objInformacioElement.temporadaAlta + ",'" + objInformacioElement.tarifa.preu.agregadorId + "'," + objInformacioElement.tarifa.preu.total + ")\" >Seleccionar</button>";
+    StrHtml += "<input type=\"number\" id=\"" + objInformacioElement.hotel.id + "_" + objInformacioElement.hab.id + "_" + objInformacioElement.temporadaAlta + "_" + objInformacioElement.tarifa.preu.agregadorId + "\" min=0 value=0 />";
+    StrHtml += "<button type=\"button\" onclick=\"seleccionarHabitacio(" + objInformacioElement.hotel.id + "," + objInformacioElement.hab.id + "," + objInformacioElement.temporadaAlta + ",'" + objInformacioElement.tarifa.preu.agregadorId + "'," + objInformacioElement.tarifa.preu.total +  ",'" + objInformacioElement.hotel.moneda + "')\" >Seleccionar</button>";
     StrHtml += "</div>";
     StrHtml += "</div>";
     StrHtml += "";
@@ -362,7 +379,7 @@ function recuperarMoneda(objInformacioElement){
     return simboloCurrency;
 }
 
-function seleccionarHabitacio(hotelId, habId, tempAlta, preuProv, preuValor) {
+function seleccionarHabitacio(hotelId, habId, tempAlta, preuProv, preuValor, moneda) {
 
     //Si la llista no esta inicialitzada la inicialitzam;
     if (llistaHabitacionsSeleccionades == null) {
@@ -377,6 +394,7 @@ function seleccionarHabitacio(hotelId, habId, tempAlta, preuProv, preuValor) {
     if (numHabSeleccionades > 0) {
         document.getElementById("numHabitacions").innerText = numHabActual + numHabSeleccionades;
         document.getElementById("preuValor").innerText = valorActual + (preuValor * numHabSeleccionades);
+        document.getElementById("preuMoneda").innerText = moneda;
 
         var habitacioSeleccionada = new Object();
         habitacioSeleccionada.hotelId = hotelId;

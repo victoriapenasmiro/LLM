@@ -351,3 +351,8 @@ nav a {
     margin-bottom: 20px;
     margin-left: 6%;
 }
+
+#opcionesEncontradas{
+    display: none;
+    text-align: center;
+}
