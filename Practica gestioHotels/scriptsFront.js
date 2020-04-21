@@ -28,6 +28,45 @@ function init() {
         objJson = JSON.parse(response);
         llistatHotels = objJson.hotels;
     });
+
+    pintarHotelsDestacats();
+}
+
+//pintar hotelesDestacados
+function pintarHotelsDestacats(){
+    var destacados = recuperarHotelsDestacats();
+    var minPrecio;
+    var simboloCurrency;
+    for (objHotel of destacados){
+        minPrecio = obtenerPreciomin(this);
+        simboloCurrency = recuperarMoneda(this);
+        var StrHtml = "<div class=\"destacats\">";
+        StrHtml += "<img src=\""+ objHotel.fotoPrinc + "\" alt=" + objHotel.nom + "\">";
+        StrHtml += "<p>" + objHotel.nom + "</p>";
+        StrHtml += "<p>" + objHotel.descripcio + "</p>";
+        StrHtml += "<p class=\"precioDestacado\">DESDE: " + minPrecio + " " + objHotel.moneda + "</p>";
+        StrHtml += "</div>";    
+    }
+}
+
+function recuperarHotelsDestacats(){
+    var destacats = new Array();
+    for (objHotel of llistatHotels){
+        if (objHotel.destacar){
+            destacats.push(objhotel);
+        }
+    }
+    return destacats;
+}
+
+function obtenerPreciomin(hotel){
+    var minPreu;
+    for (tarifa of hotel.tarifes.temporadaBaixa){
+        if (minPreu == null || minPreu < tarifa){
+            minPreu = tarifa;
+        }
+    }
+    return minPreu;
 }
 
 //Borram tots els resultats d'una cerca anterior.
@@ -83,7 +122,6 @@ function realitzarcerca() {
     //Quan feim una nova cerca, desmarcam tots els filtres seleccionats del lateral.
     desmarcarTotsElsFiltresDelLateral();
 
-
     llistatHotelsSeleccionats = new Array();
     //Per cada hotel que tenim a la llista
     for (objHotel of llistatHotels) {
@@ -128,6 +166,7 @@ function realitzarcerca() {
     //amb aquest else ho tornam a ocultar si tornam a fer una cerca amb resultats
     else{
         document.getElementById("notrobat").style.display = "none";
+        document.getElementById("opcionesEncontradas").children[0].innerHTML += llistatHotelsSeleccionats.length + " hotels amb els criteris de cerca."
     }
 }
 
@@ -249,8 +288,9 @@ function aplicarFiltres() {
             }
         }
 
-        if (llistatHotelsFiltrats == null || llistatHotelsSeleccionats.length == 0){
+        if (llistatHotelsSeleccionatsFiltrats == null || llistatHotelsSeleccionatsFiltrats.length == 0){
             document.getElementById("notrobat").style.display = "block";
+            document.getElementById("preu").style.display = "none";
         }
         //amb aquest else ho tornam a ocultar si tornam a fer una cerca amb resultats
         else{
