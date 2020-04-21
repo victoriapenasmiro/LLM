@@ -34,18 +34,20 @@ function init() {
 
 //pintar hotelesDestacados
 function pintarHotelsDestacats(){
-    var destacados = recuperarHotelsDestacats();
+    var destacats = recuperarHotelsDestacats();
     var minPrecio;
     var simboloCurrency;
-    for (objHotel of destacados){
+    for (objHotel of destacats){
         minPrecio = obtenerPreciomin(this);
         simboloCurrency = recuperarMoneda(this);
         var StrHtml = "<div class=\"destacats\">";
-        StrHtml += "<img src=\""+ objHotel.fotoPrinc + "\" alt=" + objHotel.nom + "\">";
+        StrHtml += "<img src=\"" + objHotel.fotoPrinc + "\" alt=" + objHotel.nom + "\">";
         StrHtml += "<p>" + objHotel.nom + "</p>";
         StrHtml += "<p>" + objHotel.descripcio + "</p>";
         StrHtml += "<p class=\"precioDestacado\">DESDE: " + minPrecio + " " + objHotel.moneda + "</p>";
-        StrHtml += "</div>";    
+        StrHtml += "</div>";
+
+        document.getElementById("resultats").innerHTML += StrHtml;
     }
 }
 
@@ -53,7 +55,7 @@ function recuperarHotelsDestacats(){
     var destacats = new Array();
     for (objHotel of llistatHotels){
         if (objHotel.destacar){
-            destacats.push(objhotel);
+            destacats.push(objHotel);
         }
     }
     return destacats;
