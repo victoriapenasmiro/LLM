@@ -44,15 +44,21 @@ function pintarHotelsDestacats(){
         estrelles = recuperarEstrelles(objCerca.hotel.estrelles);
         minPrecio = obtenerPreciomin(objCerca.hab);
         simboloCurrency = recuperarMoneda(objCerca);
-        var StrHtml = "<div class=\"destacats\">";
+        var StrHtml = "<div class=\"destacats\" id=\"" + objHotel.id + "\">";
         StrHtml += "<img src=\"" + objHotel.fotoPrinc + "\" alt=" + objHotel.nom + "\">";
         StrHtml += "<h3>" + objHotel.nom + " " + estrelles + "</h3>";
         StrHtml += "<p>" + objHotel.descripcio + "</p>";
         StrHtml += "<p class=\"precioDestacado\">DESDE: " + minPrecio + " " + simboloCurrency + "</p>";
+        StrHtml += "<button type=\"button\" onclick=\"escriureNomHotel('" + objHotel.nom + "');\">RESERVAR</button>";//pdte meter ancla, pasado a tomeu
         StrHtml += "</div>";
 
         document.getElementById("resultats").innerHTML += StrHtml;
     }
+}
+
+function escriureNomHotel(nomHotel){
+    document.getElementById("nomHotel").value = nomHotel;
+    alert("Per favor, indica el tipus d'habitació que t'interesa.")
 }
 
 function recuperarHotelsDestacats(){
@@ -125,7 +131,8 @@ function realitzarcerca() {
     var numDoble = 0;
     var llistaPreus;
     //per si cerque per nom de s'hotel
-    var nomHotel = document.getElementById("nomHotel").value;
+    var auxnomHotel = document.getElementById("nomHotel").value;
+    var nomHotel = auxnomHotel.toLowerCase();
     //la var temporadAlta es un boolean, si lo que está en el parentesis se cumple se pondrá a true
     temporadaAlta = (getValorRadio("temporada") == "alta");
     numIndividual = document.getElementById("individual").value;
@@ -137,7 +144,10 @@ function realitzarcerca() {
     llistatHotelsSeleccionats = new Array();
     //Per cada hotel que tenim a la llista
     for (objHotel of llistatHotels) {
-        if ((nomHotel == "" || nomHotel == null) || (nomHotel =! "" && nomHotel == objHotel.nom)){
+        //convierto el nombre del hotel a minuculas para comparar
+        var auxNom = objHotel.nom;
+        var nomMin = auxNom.toLowerCase();
+        if ((nomHotel == "" || nomHotel == null) || (nomHotel != "" && nomHotel == nomMin)){
             for (objHab of objHotel.habitacions) {
                 //Comprovarem els filtres de llits. Si concorden els llits de l'habitació cercarem pels altres filtres.
                 //segons la temporada, mostrarem uns preus o uns altres
@@ -173,7 +183,7 @@ function realitzarcerca() {
             }
         }
     }
-    
+
     //si no hi ha hotels, activam el div de notrobat
     if (llistatHotelsSeleccionats == null || llistatHotelsSeleccionats.length == 0){
         document.getElementById("notrobat").style.display = "block";
@@ -459,6 +469,12 @@ function seleccionarHabitacio(hotelId, habId, tempAlta, preuProv, preuValor, mon
     var numHabSeleccionades = parseInt(document.getElementById(hotelId + "_" + habId + "_" + tempAlta + "_" + preuProv).value);
 
     if (numHabSeleccionades > 0) {
+        var habTrobada = comprobarhabSeleccionada(hotelId, habId);
+
+        if (!habTrobada){
+            document.getElementsByClassName("detallsHotel").innerHTML += habTrobada;
+        }
+
         document.getElementById("numHabitacions").innerText = numHabActual + numHabSeleccionades;
         document.getElementById("preuValor").innerText = valorActual + (preuValor * numHabSeleccionades);
         document.getElementById("preuMoneda").innerText = moneda;
@@ -473,6 +489,22 @@ function seleccionarHabitacio(hotelId, habId, tempAlta, preuProv, preuValor, mon
 
     } else {
         alert("Selecciona alguna habitació");
+    }
+}
+
+function comprobarhabSeleccionada(hotelId, habId){
+    var seleccioActual = document.getElementsByClassName("detallsHotel");
+    auxStr = '';
+    aux = 0;
+    while (auxStr != (hotelId + "_" + habId) && aux<seleccioActual.length){
+        if(document.getElementsByClassName("detallsHotel")[aux] != (hotelId + "_" + habId)){
+            aux++;
+            return false;
+        }
+        else{
+            auxStr = (hotelId + "_" + habId);
+            return true;
+        }
     }
 }
 
