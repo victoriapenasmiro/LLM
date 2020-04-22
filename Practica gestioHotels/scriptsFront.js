@@ -27,9 +27,8 @@ function init() {
         // Parse JSON string into object
         objJson = JSON.parse(response);
         llistatHotels = objJson.hotels;
+        pintarHotelsDestacats();
     });
-
-    pintarHotelsDestacats();
 }
 
 //pintar hotelesDestacados
@@ -38,8 +37,8 @@ function pintarHotelsDestacats(){
     var minPrecio;
     var simboloCurrency;
     for (objHotel of destacats){
-        minPrecio = obtenerPreciomin(this);
-        simboloCurrency = recuperarMoneda(this);
+        minPrecio = obtenerPreciomin(objHotel);
+        simboloCurrency = recuperarMoneda(objHotel);
         var StrHtml = "<div class=\"destacats\">";
         StrHtml += "<img src=\"" + objHotel.fotoPrinc + "\" alt=" + objHotel.nom + "\">";
         StrHtml += "<p>" + objHotel.nom + "</p>";
@@ -63,9 +62,12 @@ function recuperarHotelsDestacats(){
 
 function obtenerPreciomin(hotel){
     var minPreu;
-    for (tarifa of hotel.tarifes.temporadaBaixa){
-        if (minPreu == null || minPreu < tarifa){
-            minPreu = tarifa;
+    var habitacions = hotel.habitacions;
+    for (hab of habitacions){
+        for (tarifa of hab.tarifes.temporadaBaixa){
+            if (minPreu == null || minPreu < tarifa){
+                minPreu = tarifa;
+            }
         }
     }
     return minPreu;
