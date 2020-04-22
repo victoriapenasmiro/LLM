@@ -103,34 +103,20 @@
                 <label>Dobles:</label>
                 <input type="number" id="doble" min=0 value=0 onclick="resetStyle(this);" />
             </div>
+            <div id="cercarNom">
+                <label>Nom Hotel:</label>
+                <input type="text" id="nomHotel" />
+            </div>
             <div>
                 <button id="cerca" type="button" onclick="realitzarcerca();">Cerca</button>
             </div>
         </fieldset>
         <div id="opcionesEncontradas">
             <h2>S'han trobat </h2>
-            <button type="button" onclick="resetBusqueda();">Cambiar búsqueda</button>
+            <button type="button" onclick="resetBusqueda();">Canviar Cerca</button>
         </div>
         <div id="resultats">
             <h2 id="destacatsh2">HOTELS DESTACATS</h2>
-            <div class="destacats">
-                <img src="https://raw.githubusercontent.com/victoriapenasmiro/LLM/master/Practica%20gestioHotels/images/hotel1.jpg" alt="nombrehotel">
-                <p>NOMBRE HOTEL</p>
-                <p>descricion hotelxxxx descricion hotelxxxx descricion hotelxxxx descricion hotelxxxx descricion hotelxxxx descricion hotelxxxx descricion hotelxxxx descricion hotelxxxx descricion hotelxxxx</p>
-                <p class="precioDestacado">DESDE: </p><!--precio más barato y moneda-->
-            </div>
-            <div class="destacats">
-                <img src="https://raw.githubusercontent.com/victoriapenasmiro/LLM/master/Practica%20gestioHotels/images/hotel1.jpg" alt="nombrehotel">
-                <p>NOMBRE HOTEL</p>
-                <p>descricion hotelxxxx descricion hotelxxxx descricion hotelxxxx descricion hotelxxxx descricion hotelxxxx descricion hotelxxxx descricion hotelxxxx descricion hotelxxxx descricion hotelxxxx</p>
-                <p class="precioDestacado">DESDE: </p><!--precio más barato y moneda-->
-            </div>
-            <div class="destacats">
-                <img src="https://raw.githubusercontent.com/victoriapenasmiro/LLM/master/Practica%20gestioHotels/images/hotel1.jpg" alt="nombrehotel">
-                <p>NOMBRE HOTEL</p>
-                <p>descricion hotelxxxx descricion hotelxxxx descricion hotelxxxx descricion hotelxxxx descricion hotelxxxx descricion hotelxxxx descricion hotelxxxx descricion hotelxxxx descricion hotelxxxx</p>
-                <p class="precioDestacado">DESDE: </p><!--precio más barato y moneda-->
-            </div>
         </div>
         <div id="notrobat" class="habitacio">
             <p>

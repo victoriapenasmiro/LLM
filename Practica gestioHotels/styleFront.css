@@ -198,10 +198,6 @@ nav a {
     color: white;
 }
 
-#cercador div {
-    display: contents;
-}
-
 .mesInfo {
     display: none;
     clear: both;
@@ -368,6 +364,11 @@ nav a {
     height: 210px;
 }
 
+.destacats p{
+    padding-left: 5%;
+    padding-right: 5%;
+}
+
 #destacatsh2{
     font-family: 'Indie Flower', cursive;
     font-size: 40px;
@@ -380,4 +381,14 @@ nav a {
     width: fit-content;
     font-weight: 600;
     margin: 0 auto;
+}
+
+#cercarNom{
+    clear: both;
+    display: block;
+    margin-top: 35px;
+}
+
+#nomHotel{
+    width: 175px;
 }
