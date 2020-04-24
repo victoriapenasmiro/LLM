@@ -475,8 +475,8 @@ function seleccionarHabitacio(hotelNom,hotelId, habId, habTipus, tempAlta, preuP
         var habTrobada = comprobarhabSeleccionada(hotelId, habId);
 
         if (habTrobada == false){
-            document.getElementById("detallsHotel").innerHTML += "<p id=\"hotelid_" + hotelId + "_habId_" + habId + "\"><strong>" + hotelNom + "</strong></p>";
-            document.getElementById("detallsHotel").innerHTML += "<label id=\"numHabitacions" + hotelId + "_habId_" + habId + "\">0</label><label id=\"seleccioHotelid_" + hotelId + "_habId_" + habId + "\"> x habitacio/ns tipus </label><i class=\"fa fa-camera-retro fa-2x\"></i></br></br>";
+            document.getElementById("detallsHotel").innerHTML += "<div id=\"hotelConfirmat_" + hotelId + "habId_" + habId + "\"><p id=\"hotelid_" + hotelId + "_habId_" + habId + "\"><strong>" + hotelNom + "</strong></p>";
+            document.getElementById("detallsHotel").innerHTML += "<label id=\"numHabitacions" + hotelId + "_habId_" + habId + "\">0</label><label id=\"seleccioHotelid_" + hotelId + "_habId_" + habId + "\"> x habitacio/ns tipus </label><a href=\"#\" onclick=\"removeHab('hotelConfirmat_" + hotelId + "habId_" + habId + "');\"><img onclick=\"removeHab('hotelConfirmat_" + hotelId + "habId_" + habId + "');\" src=\"https://cdn3.iconfinder.com/data/icons/basicolor-arrows-checks/24/150_check_no_delete_error_remove-512.png\" width=\"20\"></a></div>";
             var quantitat = document.getElementById(hotelId + "_" + habId + "_" + tempAlta + "_" + preuProv).value;
             document.getElementById("numHabitacions" + hotelId + "_habId_" + habId + "").innerText = quantitat;
             document.getElementById("seleccioHotelid_" + hotelId + "_habId_" + habId).innerHTML += habTipus;
@@ -502,6 +502,10 @@ function seleccionarHabitacio(hotelNom,hotelId, habId, habTipus, tempAlta, preuP
     } else {
         alert("Selecciona alguna habitació");
     }
+}
+
+function removeHab(idSeleccio){
+    document.getElementById(idSeleccio).innerText = "";
 }
 
 function comprobarhabSeleccionada(hotelId, habId){
