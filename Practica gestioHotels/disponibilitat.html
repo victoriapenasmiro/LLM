@@ -3,10 +3,14 @@
 
 <head>
     <title>CIFP Hotels. Web made by Vitoria Peñas.</title>
+    <!--scripts-->
     <script src="scriptsFront.js"></script>
     <!--hojas de estilos-->
     <link rel="stylesheet" type="text/css" href="styleGeneral.css">
     <link rel="stylesheet" type="text/css" href="styleFront.css">
+    <!--Fontawesome-->
+    <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="//use.fontawesome.com/releases/v5.0.7/css/all.css">
     <!--tipografias-->
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;600&family=Indie+Flower&display=swap');
@@ -125,12 +129,11 @@
         </div>
         <div id="preu" class="fondoCaja flotaD">
             <h3>Resum de sa reserva:</h3><br>
+            <div id="detallsHotel">
+            </div>
+            <!--<label id="numHabitacions">0</label><label id="tipusHab"> x habitacio/ns </label><label> Eliminar</label><br>-->
             <label><strong>PREU TOTAL: </strong></label><label id="preuValor"><strong>0</strong> </label><label
                 id="preuMoneda"></label>
-            <div class="detallsHotel">
-                <p>Nom Hotel</p>
-            </div>
-            <label id="numHabitacions">0</label><label> habitacion/s tipus.</label><label> Eliminar</label><br>
             <button id="continuar" type="button" onclick="continuar();">Continuar</button>
         </div>
     </main>

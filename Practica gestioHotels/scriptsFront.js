@@ -49,7 +49,7 @@ function pintarHotelsDestacats(){
         StrHtml += "<h3>" + objHotel.nom + " " + estrelles + "</h3>";
         StrHtml += "<p>" + objHotel.descripcio + "</p>";
         StrHtml += "<p class=\"precioDestacado\">DESDE: " + minPrecio + " " + simboloCurrency + "</p>";
-        StrHtml += "<button type=\"button\" onclick=\"escriureNomHotel('" + objHotel.nom + "');\">RESERVAR</button>";//pdte meter ancla, pasado a tomeu
+        StrHtml += "<button type=\"button\" onclick=\"escriureNomHotel('" + objHotel.nom + "'); window.location.href='#titolPrinc';\">RESERVAR</button>";//pdte meter ancla, pasado a tomeu
         StrHtml += "</div>";
 
         document.getElementById("resultats").innerHTML += StrHtml;
@@ -204,6 +204,10 @@ function resetBusqueda(){
     document.getElementById("cercador").style.display = "block";
     //oculto cabecera resultados
     document.getElementById("opcionesEncontradas").style.display = "none";
+    //reseteo valores de la cesta
+    document.getElementById("preuValor").innerText = 0;
+    //document.getElementById("numHabitacions").innerText = 0; --> tendria que poner numHabitacions+loque sea borrar
+    document.getElementById("preuMoneda").innerText = "";
     //oculto cesta de compra
     document.getElementById("preu").style.display = "none";
 }
@@ -394,8 +398,8 @@ function pintarInformacioHotelHabPreu(objInformacioElement) {
     StrHtml += "</div>";
     StrHtml += "<div class=\"seleccionar\">";
     StrHtml += "<label>Quantitat: </label>";
-    StrHtml += "<input type=\"number\" id=\"" + objInformacioElement.hotel.id + "_" + objInformacioElement.hab.id + "_" + objInformacioElement.temporadaAlta + "_" + objInformacioElement.tarifa.preu.agregadorId + "\" min=0 value=0 />";
-    StrHtml += "<button type=\"button\" onclick=\"seleccionarHabitacio(" + objInformacioElement.hotel.id + "," + objInformacioElement.hab.id + "," + objInformacioElement.temporadaAlta + ",'" + objInformacioElement.tarifa.preu.agregadorId + "'," + objInformacioElement.tarifa.preu.total +  ",'" + simboloCurrency + "')\" >Seleccionar</button>";
+    StrHtml += "<input type=\"number\" id=\"" + objInformacioElement.hotel.id + "_" + objInformacioElement.hab.id + "_" + objInformacioElement.temporadaAlta + "_" + objInformacioElement.tarifa.preu.agregadorId + "\" min=0 />";
+    StrHtml += "<button type=\"button\" onclick=\"seleccionarHabitacio('" + objInformacioElement.hotel.nom + "'," + objInformacioElement.hotel.id + "," + objInformacioElement.hab.id + ",'" + objInformacioElement.hab.tipus + "'," + objInformacioElement.temporadaAlta + ",'" + objInformacioElement.tarifa.preu.agregadorId + "'," + objInformacioElement.tarifa.preu.total +  ",'" + simboloCurrency + "')\" >Seleccionar</button>";
     StrHtml += "</div>";
     StrHtml += "</div>";
     StrHtml += "";
@@ -456,7 +460,7 @@ function recuperarMoneda(objInformacioElement){
     return simboloCurrency;
 }
 
-function seleccionarHabitacio(hotelId, habId, tempAlta, preuProv, preuValor, moneda) {
+function seleccionarHabitacio(hotelNom,hotelId, habId, habTipus, tempAlta, preuProv, preuValor, moneda) {
 
     //Si la llista no esta inicialitzada la inicialitzam;
     if (llistaHabitacionsSeleccionades == null) {
@@ -464,18 +468,26 @@ function seleccionarHabitacio(hotelId, habId, tempAlta, preuProv, preuValor, mon
     }
 
     var valorActual = parseFloat(document.getElementById("preuValor").innerText);
-    var numHabActual = parseInt(document.getElementById("numHabitacions").innerText);
 
     var numHabSeleccionades = parseInt(document.getElementById(hotelId + "_" + habId + "_" + tempAlta + "_" + preuProv).value);
 
     if (numHabSeleccionades > 0) {
         var habTrobada = comprobarhabSeleccionada(hotelId, habId);
 
-        if (!habTrobada){
-            document.getElementsByClassName("detallsHotel").innerHTML += habTrobada;
+        if (habTrobada == false){
+            document.getElementById("detallsHotel").innerHTML += "<p id=\"hotelid_" + hotelId + "_habId_" + habId + "\"><strong>" + hotelNom + "</strong></p>";
+            document.getElementById("detallsHotel").innerHTML += "<label id=\"numHabitacions" + hotelId + "_habId_" + habId + "\">0</label><label id=\"seleccioHotelid_" + hotelId + "_habId_" + habId + "\"> x habitacio/ns tipus </label><i class=\"fa fa-camera-retro fa-2x\"></i></br></br>";
+            var quantitat = document.getElementById(hotelId + "_" + habId + "_" + tempAlta + "_" + preuProv).value;
+            document.getElementById("numHabitacions" + hotelId + "_habId_" + habId + "").innerText = quantitat;
+            document.getElementById("seleccioHotelid_" + hotelId + "_habId_" + habId).innerHTML += habTipus;
+        }
+        else{
+            //recupero el numero de hab indicadas en el input quantitat y se lo pinto en el numero de hab seleccionadas en ese hotel
+            var quantitat = document.getElementById(hotelId + "_" + habId + "_" + tempAlta + "_" + preuProv).value;
+            document.getElementById("numHabitacions" + hotelId + "_habId_" + habId + "").innerText = quantitat;
+            //pdte seguir construyendo
         }
 
-        document.getElementById("numHabitacions").innerText = numHabActual + numHabSeleccionades;
         document.getElementById("preuValor").innerText = valorActual + (preuValor * numHabSeleccionades);
         document.getElementById("preuMoneda").innerText = moneda;
 
@@ -493,18 +505,12 @@ function seleccionarHabitacio(hotelId, habId, tempAlta, preuProv, preuValor, mon
 }
 
 function comprobarhabSeleccionada(hotelId, habId){
-    var seleccioActual = document.getElementsByClassName("detallsHotel");
-    auxStr = '';
-    aux = 0;
-    while (auxStr != (hotelId + "_" + habId) && aux<seleccioActual.length){
-        if(document.getElementsByClassName("detallsHotel")[aux] != (hotelId + "_" + habId)){
-            aux++;
-            return false;
-        }
-        else{
-            auxStr = (hotelId + "_" + habId);
-            return true;
-        }
+    //compruevo si el elemento existe o no
+    if(document.getElementById("hotelid_" + hotelId + "_habId_" + habId + "")){
+        return true;
+    }
+    else{
+        return false;
     }
 }
 
