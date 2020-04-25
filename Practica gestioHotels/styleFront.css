@@ -39,9 +39,11 @@ h3 {
 }
 
 .fondoCaja h3 {
-    background: #dbb354;
+    background: #dca42a;
     padding: 20px;
     margin: 0;
+    color: white;
+    font-weight: 600;
 }
 
 fieldset {
@@ -110,7 +112,7 @@ button:hover {
 /*botón cesta de compra*/
 #continuar {
     float: right;
-    margin-top: 35px;
+    margin-top: 25px;
 }
 
 #cerca {
@@ -411,4 +413,22 @@ nav a {
 
 #nomHotel{
     width: 175px;
+}
+
+.fa-trash-alt{
+    margin-left:2%;
+    color:red;
+}
+
+.fa-parking, .fa-wifi, .fa-paw{
+    color: black;
+    margin-right: 2%;
+}
+
+#total{
+    padding: 5%;
+    margin-top: 10px;
+    border: 1px solid #dca42a;
+    font-weight: 600;
+    width: fit-content;
 }

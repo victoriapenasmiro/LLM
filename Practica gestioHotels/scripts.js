@@ -420,4 +420,4 @@ function validarURL(str) {
 //funció per veure es valor de sa puntuació a booking.com
 function rangeValues(val) {
     document.getElementById('textInputBooking').value=val; 
-  }
+}

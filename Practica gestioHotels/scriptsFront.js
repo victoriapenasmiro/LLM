@@ -117,20 +117,28 @@ function realitzarcerca() {
     //Si ja hem fet alguna cerca, ocultam els resultats anteriors.
     borrarResultatsAnteriors();
     //salta aviso si no han indicado un valor en las habitaciones
-    if ((document.getElementById("individual").value == "" && document.getElementById("doble").value == "") ||
+    /*if ((document.getElementById("individual").value == "" && document.getElementById("doble").value == "") ||
     (document.getElementById("individual").value == 0 && document.getElementById("doble").value == 0)){
         alert("Per favor, indica la quantitat d'habitacions a cercar");
         document.getElementById("individual").style.border = "2px solid red";
         document.getElementById("doble").style.border = "2px solid red";
         //oculto este elemento por si se ha hecho una búsqueda anterior
         document.getElementById("preu").style.display = "none";
+    }*/
+
+    //pdte optimizar, hay que incorporar num de noches
+    if (document.getElementById("individual1").checked == false && document.getElementById("doble1").checked == false){
+        alert("Per favor, indica el tipus d'habitació.");
+        //oculto este elemento por si se ha hecho una búsqueda anterior
+        document.getElementById("preu").style.display = "none";
     }
+
     //Camps de la cerca
     var temporadaAlta = false;
     var numIndividual = 0;
     var numDoble = 0;
     var llistaPreus;
-    //per si cerque per nom de s'hotel
+    //per si es cerca per nom de s'hotel
     var auxnomHotel = document.getElementById("nomHotel").value;
     var nomHotel = auxnomHotel.toLowerCase();
     //la var temporadAlta es un boolean, si lo que está en el parentesis se cumple se pondrá a true
@@ -429,13 +437,13 @@ function recuperarFotosHab(habitacio){
 function recuperarServeis(hotel){
     var serveisInclosos = "<ul>";
     if (hotel.parking){
-        serveisInclosos += "<li>Parking</li>";
+        serveisInclosos += "<li><i class=\"fas fa-parking\"></i>Parking</li>";
     }
     if (hotel.wifi){
-        serveisInclosos += "<li>Wifi</li>";
+        serveisInclosos += "<li><i class=\"fas fa-wifi\"></i>Wifi</li>";
     }
     if (hotel.animals){
-        serveisInclosos += "<li>S'admeten el següents animals: ";
+        serveisInclosos += "<li><i class=\"fas fa-paw\"></i>S'admeten el següents animals: ";
         for (var i=0; i<hotel.llistaMascotes.length;i++){
             serveisInclosos += hotel.llistaMascotes[i];
             if (i != hotel.llistaMascotes.length-1){
@@ -460,52 +468,87 @@ function recuperarMoneda(objInformacioElement){
     return simboloCurrency;
 }
 
-function seleccionarHabitacio(hotelNom,hotelId, habId, habTipus, tempAlta, preuProv, preuValor, moneda) {
-
+function seleccionarHabitacio(hotelNom,hotelId, habId, habTipus, tempAlta, provId, preu, moneda) {
     //Si la llista no esta inicialitzada la inicialitzam;
     if (llistaHabitacionsSeleccionades == null) {
         llistaHabitacionsSeleccionades = new Array();
     }
-
-    var valorActual = parseFloat(document.getElementById("preuValor").innerText);
-
-    var numHabSeleccionades = parseInt(document.getElementById(hotelId + "_" + habId + "_" + tempAlta + "_" + preuProv).value);
-
+    var numHabSeleccionades = parseInt(document.getElementById(hotelId + "_" + habId + "_" + tempAlta + "_" + provId).value);
     if (numHabSeleccionades > 0) {
         var habTrobada = comprobarhabSeleccionada(hotelId, habId);
-
         if (habTrobada == false){
-            document.getElementById("detallsHotel").innerHTML += "<div id=\"hotelConfirmat_" + hotelId + "habId_" + habId + "\"><p id=\"hotelid_" + hotelId + "_habId_" + habId + "\"><strong>" + hotelNom + "</strong></p>";
-            document.getElementById("detallsHotel").innerHTML += "<label id=\"numHabitacions" + hotelId + "_habId_" + habId + "\">0</label><label id=\"seleccioHotelid_" + hotelId + "_habId_" + habId + "\"> x habitacio/ns tipus </label><a href=\"#\" onclick=\"removeHab('hotelConfirmat_" + hotelId + "habId_" + habId + "');\"><img onclick=\"removeHab('hotelConfirmat_" + hotelId + "habId_" + habId + "');\" src=\"https://cdn3.iconfinder.com/data/icons/basicolor-arrows-checks/24/150_check_no_delete_error_remove-512.png\" width=\"20\"></a></div>";
-            var quantitat = document.getElementById(hotelId + "_" + habId + "_" + tempAlta + "_" + preuProv).value;
+            //si la hab no ha sido seleccionada todavia, la creo como objeto
+            var habitacioSeleccionada = new Object();
+            habitacioSeleccionada.hotelId = hotelId;
+            habitacioSeleccionada.habId = habId;
+            habitacioSeleccionada.tempAlta = tempAlta;
+            habitacioSeleccionada.agregadorId = provId;
+            habitacioSeleccionada.preu = preu;
+            habitacioSeleccionada.numHabSeleccionades = numHabSeleccionades;
+            llistaHabitacionsSeleccionades.push(habitacioSeleccionada);
+            var index = llistaHabitacionsSeleccionades.length-1; //posicion del objeto dentro de la lista
+
+            var StrHtml = "<div id=\"hotelConfirmat_" + hotelId + "habId_" + habId + tempAlta + index + "\"><p id=\"hotelid_" + hotelId + "_habId_" + habId + "\"><strong>" + hotelNom + "</strong></p>";
+            //en el a de a continuación pongo un #! para que no haga un scrollup al hacer el onclick
+            StrHtml += "<label id=\"numHabitacions" + hotelId + "_habId_" + habId + "\">0</label><label id=\"seleccioHotelid_" + hotelId + "_habId_" + habId + "\"> x habitacio/ns tipus </label><a href=\"#!\" onclick=\"removeHab(" + hotelId + "," + habId + "," + tempAlta + "," + index + "," + preu + ");\"><i class=\"fas fa-trash-alt\"></i></a></div>";
+            document.getElementById("detallsHotel").innerHTML += StrHtml;
+            var quantitat = document.getElementById(hotelId + "_" + habId + "_" + tempAlta + "_" + provId).value;
             document.getElementById("numHabitacions" + hotelId + "_habId_" + habId + "").innerText = quantitat;
             document.getElementById("seleccioHotelid_" + hotelId + "_habId_" + habId).innerHTML += habTipus;
         }
         else{
             //recupero el numero de hab indicadas en el input quantitat y se lo pinto en el numero de hab seleccionadas en ese hotel
-            var quantitat = document.getElementById(hotelId + "_" + habId + "_" + tempAlta + "_" + preuProv).value;
-            document.getElementById("numHabitacions" + hotelId + "_habId_" + habId + "").innerText = quantitat;
-            //pdte seguir construyendo
+            var quantitat = parseInt(document.getElementById(hotelId + "_" + habId + "_" + tempAlta + "_" + provId).value);
+            var habActuals = parseInt(document.getElementById("numHabitacions" + hotelId + "_habId_" + habId).innerText);
+            var total = quantitat + habActuals;
+            document.getElementById("numHabitacions" + hotelId + "_habId_" + habId + "").innerText = total;
+            //si la hab ya ha sido seleccionada, recupero el objeto e incremento la cantidad de habitaciones
+            incrementNumHab(hotelId, habId, tempAlta, provId, preu, quantitat);
         }
 
-        document.getElementById("preuValor").innerText = valorActual + (preuValor * numHabSeleccionades);
+        calcularPreuTotal();
         document.getElementById("preuMoneda").innerText = moneda;
-
-        var habitacioSeleccionada = new Object();
-        habitacioSeleccionada.hotelId = hotelId;
-        habitacioSeleccionada.habId = habId;
-        habitacioSeleccionada.tempAlta = tempAlta;
-        habitacioSeleccionada.preuProv = preuProv;
-        habitacioSeleccionada.numHabSeleccionades = numHabSeleccionades;
-        llistaHabitacionsSeleccionades.push(habitacioSeleccionada);
+        //deix buit s'input de quantitat de s'opcio seleccionada
+        document.getElementById(hotelId + "_" + habId + "_" + tempAlta + "_" + provId).value = "";
 
     } else {
         alert("Selecciona alguna habitació");
     }
 }
 
-function removeHab(idSeleccio){
-    document.getElementById(idSeleccio).innerText = "";
+function calcularPreuTotal(){
+    var suma = 0;
+    for(hab of llistaHabitacionsSeleccionades){
+        suma+= (hab.preu * hab.numHabSeleccionades);
+    }
+    document.getElementById("preuValor").innerText = suma;
+}
+
+//funcio per incrementar el numero d'habitacions a un hotels ja seleccionat anteriorment
+function incrementNumHab(hotelId, habId, tempAlta, provId, preu, quantitat){
+    for (seleccio of llistaHabitacionsSeleccionades){
+        if(seleccio.hotelId == hotelId && seleccio.habId == habId && seleccio.tempAlta == tempAlta && seleccio.agregadorId == provId && seleccio.preu == preu){
+            seleccio.numHabSeleccionades += quantitat;
+        }
+    }
+}
+
+function removeHab(hotelId,habId,tempAlta,index,preu){
+    //recupero el precio total
+    var valorActual = parseFloat(document.getElementById("preuValor").innerText);
+    //recupero el num. de habitaciones a restar
+    var numHab = parseInt(document.getElementById("numHabitacions" + hotelId + "_habId_" + habId).innerText);
+    //elimino la hab. seleccionada
+    document.getElementById("hotelConfirmat_" + hotelId + "habId_" + habId + tempAlta + index).innerText = "";
+    //vacio la cantidad seleccionada en los inputs de las hab
+
+    //to do
+
+    //resto precio actual del precio total
+    document.getElementById("preuValor").innerText = valorActual - (preu * numHab);
+    //elimino la seleccion de la lista de hab seleccionadas
+    llistaHabitacionsSeleccionades.splice(index,index+1);
+
 }
 
 function comprobarhabSeleccionada(hotelId, habId){

@@ -9,7 +9,7 @@
     <link rel="stylesheet" type="text/css" href="styleGeneral.css">
     <link rel="stylesheet" type="text/css" href="styleFront.css">
     <!--Fontawesome-->
-    <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
     <!--tipografias-->
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;600&family=Indie+Flower&display=swap');
@@ -43,15 +43,13 @@
                 Serveis:
                 <ul>
                     <li>
-                        Aparcament<input type="checkbox" class="filtre" id="filterParking"
-                            onclick="aplicarFiltres();" />
+                        Aparcament<input type="checkbox" class="filtre" id="filterParking" onclick="aplicarFiltres();" />
                     </li>
                     <li>
                         Wifi<input type="checkbox" class="filtre" id="filterWifi" onclick="aplicarFiltres();" />
                     </li>
                     <li>
-                        Animals admesos<input type="checkbox" class="filtre" id="filterAnimals"
-                            onclick="aplicarFiltres();" />
+                        Animals admesos<input type="checkbox" class="filtre" id="filterAnimals" onclick="aplicarFiltres();" />
                     </li>
                 </ul>
             </li>
@@ -102,8 +100,10 @@
             <div class="flotaD">
                 <label>Habitacions:</label>
                 <label>Individuals:</label>
+                <input type="radio" id="individual1" name="tipoHabitacio"/>
                 <input type="number" id="individual" min=0 value=0 onclick="resetStyle(this);" />
                 <label>Dobles:</label>
+                <input type="radio" id="doble1" name="tipoHabitacio"/>
                 <input type="number" id="doble" min=0 value=0 onclick="resetStyle(this);" />
             </div>
             <div id="cercarNom">
@@ -127,11 +127,12 @@
             </p>
         </div>
         <div id="preu" class="fondoCaja flotaD">
-            <h3>Resum de sa reserva:</h3><br>
+            <h3>RESUM DE LA RESERVA:</h3><br>
             <div id="detallsHotel">
             </div>
-            <label><strong>PREU TOTAL: </strong></label><label id="preuValor"><strong>0</strong> </label><label
-                id="preuMoneda"></label>
+            <div id="total">
+                <label><strong>PREU TOTAL: </strong></label><label id="preuValor"><strong>0</strong></label><label id="preuMoneda"></label>
+            </div>
             <button id="continuar" type="button" onclick="continuar();">Continuar</button>
         </div>
     </main>
