@@ -30,31 +30,6 @@ h3 {
     font-weight: 400;
 }
 
-.fondoCaja {
-    border: 1px solid #ddd8cd;
-    background: linear-gradient(90deg, rgba(255, 255, 255, 1) 0%, rgba(179, 167, 143, 1) 100%);
-    width: fit-content;
-    padding: 2%;
-    margin: 0 auto;
-}
-
-.fondoCaja h3 {
-    background: #dca42a;
-    padding: 20px;
-    margin: 0;
-    color: white;
-    font-weight: 600;
-}
-
-fieldset {
-    margin-top: 30px !important;
-}
-
-fieldset legend {
-    font-weight: 600;
-    font-size: 18px;
-}
-
 aside {
     float: left;
     width: 300px;
@@ -89,6 +64,7 @@ footer div img {
 }
 
 input {
+    width: 30px;
     outline: none;
     /*elimino los estilos por defecto del navegador*/
 }
@@ -103,16 +79,33 @@ button {
     outline: none;
 }
 
+li {
+    margin-bottom: 10px;
+}
+
+a {
+    text-decoration: none;
+}
+
 button:hover {
     color: black;
     border-color: currentColor;
     background-color: white;
 }
 
-/*botón cesta de compra*/
-#continuar {
-    float: right;
-    margin-top: 25px;
+/*CERCADOR*/
+fieldset {
+    margin-top: 30px !important;
+}
+
+fieldset legend {
+    font-family: 'Indie Flower', cursive;
+    font-size: 30px;
+}
+
+#tipusHabCercador{
+    margin-top: 35px;
+    clear: both;
 }
 
 #cerca {
@@ -121,9 +114,53 @@ button:hover {
     margin-top: 15px;
 }
 
-input,
-textarea {
-    width: 30px;
+#cercarNom{
+    clear: both;
+    display: block;
+    margin-top: 25px;
+}
+
+#nomHotel{
+    width: 175px;
+}
+
+/*RESUMEN RESERVA*/
+#preu {
+    overflow: hidden;
+    display: none;
+    clear: both;
+    margin-right: 6%;
+}
+
+.fondoCaja {
+    border: 1px solid #ddd8cd;
+    background: linear-gradient(90deg, rgba(255, 255, 255, 1) 0%, rgba(179, 167, 143, 1) 100%);
+    width: fit-content;
+    padding: 2%;
+    padding-left: 5%;
+    padding-right: 5%;
+    margin: 0 auto;
+}
+
+.fondoCaja h3 {
+    background: #dca42a;
+    padding: 20px;
+    margin: 0;
+    color: white;
+    font-weight: 600;
+}
+
+#continuar {
+    float: right;
+    margin-top: 25px;
+}
+
+#total{
+    padding: 5%;
+    margin-top: 10px;
+    border: 1px solid #dca42a;
+    font-weight: 600;
+    width: fit-content;
 }
 
 #JsonText {
@@ -136,14 +173,6 @@ textarea {
 
 .elementHabitacio {
     margin-bottom: 10px;
-}
-
-li {
-    margin-bottom: 10px;
-}
-
-a {
-    text-decoration: none;
 }
 
 #logoWeb {
@@ -338,13 +367,6 @@ nav a {
     clear: both;
 }
 
-#preu {
-    overflow: hidden;
-    display: none;
-    clear: both;
-    margin-right: 6%;
-}
-
 #resultats {
     float: left;
     margin-bottom: 20px;
@@ -405,16 +427,6 @@ nav a {
     position: absolute;
 }
 
-#cercarNom{
-    clear: both;
-    display: block;
-    margin-top: 35px;
-}
-
-#nomHotel{
-    width: 175px;
-}
-
 .fa-trash-alt{
     margin-left:2%;
     color:red;
@@ -423,12 +435,4 @@ nav a {
 .fa-parking, .fa-wifi, .fa-paw{
     color: black;
     margin-right: 2%;
-}
-
-#total{
-    padding: 5%;
-    margin-top: 10px;
-    border: 1px solid #dca42a;
-    font-weight: 600;
-    width: fit-content;
 }
