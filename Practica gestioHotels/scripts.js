@@ -239,8 +239,8 @@ function calcularTotal(base,impost,total) {
     document.getElementById(total).value = base*impost;
 }
 
-function dosDecimals(dieta) {
-    document.getElementById(dieta).value = parseFloat(document.getElementById(dieta).value).toFixed(2);
+function dosDecimals(element) {
+    document.getElementById(element).value = parseFloat(document.getElementById(element).value).toFixed(2);
 }
 
 //Afegirem un hotel. Controlarem si les dades són correctes i el ficarem a la llista i generarem el Json.

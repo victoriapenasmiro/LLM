@@ -540,15 +540,10 @@ function removeHab(hotelId,habId,tempAlta,index,preu){
     var numHab = parseInt(document.getElementById("numHabitacions" + hotelId + "_habId_" + habId).innerText);
     //elimino la hab. seleccionada
     document.getElementById("hotelConfirmat_" + hotelId + "habId_" + habId + tempAlta + index).innerText = "";
-    //vacio la cantidad seleccionada en los inputs de las hab
-
-    //to do
-
     //resto precio actual del precio total
     document.getElementById("preuValor").innerText = valorActual - (preu * numHab);
     //elimino la seleccion de la lista de hab seleccionadas
     llistaHabitacionsSeleccionades.splice(index,index+1);
-
 }
 
 function comprobarhabSeleccionada(hotelId, habId){

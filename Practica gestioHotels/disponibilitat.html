@@ -131,7 +131,7 @@
             <div id="detallsHotel">
             </div>
             <div id="total">
-                <label><strong>PREU TOTAL: </strong></label><label id="preuValor"><strong>0</strong></label><label id="preuMoneda"></label>
+                <label><strong>PREU TOTAL: </strong></label><label id="preuValor" onchange="dosDecimals('preuValor');"><strong>0</strong></label><label id="preuMoneda"></label>
             </div>
             <p onclick="conversorMoneda();">Veure preu total en dolars ($):</p><label id="preuMonedaConversio"></label>
             <button id="continuar" type="button" onclick="continuar();">Continuar</button>
