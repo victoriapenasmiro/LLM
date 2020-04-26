@@ -132,6 +132,10 @@ fieldset legend {
     margin-right: 6%;
 }
 
+#preuValor{
+    width: 120px;
+}
+
 .fondoCaja {
     border: 1px solid #ddd8cd;
     background: linear-gradient(90deg, rgba(255, 255, 255, 1) 0%, rgba(179, 167, 143, 1) 100%);

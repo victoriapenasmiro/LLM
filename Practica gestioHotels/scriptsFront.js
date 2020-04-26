@@ -212,7 +212,8 @@ function resetBusqueda(){
     //oculto cabecera resultados
     document.getElementById("opcionesEncontradas").style.display = "none";
     //reseteo valores de la cesta
-    document.getElementById("preuValor").innerText = 0;
+    //document.getElementById("preuValor").innerText = 0;
+    document.getElementById("preuValor").value = 0;
     //document.getElementById("numHabitacions").innerText = 0; --> tendria que poner numHabitacions+loque sea borrar
     document.getElementById("preuMoneda").innerText = "";
     //oculto cesta de compra
@@ -521,7 +522,8 @@ function calcularPreuTotal(){
     for(hab of llistaHabitacionsSeleccionades){
         suma+= (hab.preu * hab.numHabSeleccionades)*document.getElementById("nits").value;
     }
-    document.getElementById("preuValor").innerText = suma;
+    //document.getElementById("preuValor").innerText = suma;
+    document.getElementById("preuValor").value = suma;
 }
 
 //funcio per incrementar el numero d'habitacions a un hotels ja seleccionat anteriorment
@@ -535,13 +537,15 @@ function incrementNumHab(hotelId, habId, tempAlta, provId, preu, quantitat){
 
 function removeHab(hotelId,habId,tempAlta,index,preu){
     //recupero el precio total
-    var valorActual = parseFloat(document.getElementById("preuValor").innerText);
+    //var valorActual = parseFloat(document.getElementById("preuValor").innerText);
+    var valorActual = parseFloat(document.getElementById("preuValor").value);
     //recupero el num. de habitaciones a restar
     var numHab = parseInt(document.getElementById("numHabitacions" + hotelId + "_habId_" + habId).innerText);
     //elimino la hab. seleccionada
     document.getElementById("hotelConfirmat_" + hotelId + "habId_" + habId + tempAlta + index).innerText = "";
     //resto precio actual del precio total
-    document.getElementById("preuValor").innerText = valorActual - (preu * numHab);
+    //document.getElementById("preuValor").innerText = valorActual - (preu * numHab);
+    document.getElementById("preuValor").value = valorActual - (preu * numHab);
     //elimino la seleccion de la lista de hab seleccionadas
     llistaHabitacionsSeleccionades.splice(index,index+1);
 }
@@ -598,6 +602,7 @@ function accesoLogin(){
 }
 
 function conversorMoneda(){
-    var euros = parseFloat(document.getElementById("preuValor").innerHTML);
+    //var euros = parseFloat(document.getElementById("preuValor").innerHTML);
+    var euros = parseFloat(document.getElementById("preuValor").value);
     document.getElementById("preuMonedaConversio").innerHTML = (euros * 1.08) + " USD";
 }
