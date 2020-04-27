@@ -137,7 +137,8 @@ function realitzarcerca() {
         //la var temporadAlta es un boolean, si lo que está en el parentesis se cumple se pondrá a true
         temporadaAlta = (getValorRadio("temporada") == "alta");
         nits = document.getElementById("nits").value;
-
+        //carregam numNits al resum de la reserva
+        document.getElementById("numNits").innerHTML = "Num de nits: " + document.getElementById("nits").value;
         //Quan feim una nova cerca, desmarcam tots els filtres seleccionats del lateral.
         desmarcarTotsElsFiltresDelLateral();
 
@@ -203,6 +204,7 @@ function resetBusqueda(){
     document.getElementById("individual").checked = false;
     document.getElementById("doble").checked = false;
     document.getElementById("nits").value = "";
+    document.getElementById("numNits").innerHTML = "Num de nits: ";
     document.getElementById("nomHotel").value = "";
     //cargo nuevamente hoteles destacados
     document.getElementById("resultats").innerHTML += "<h2 id=\"destacatsh2\">HOTELS DESTACATS</h2>";
@@ -212,9 +214,7 @@ function resetBusqueda(){
     //oculto cabecera resultados
     document.getElementById("opcionesEncontradas").style.display = "none";
     //reseteo valores de la cesta
-    //document.getElementById("preuValor").innerText = 0;
     document.getElementById("preuValor").value = 0;
-    //document.getElementById("numHabitacions").innerText = 0; --> tendria que poner numHabitacions+loque sea borrar
     document.getElementById("preuMoneda").innerText = "";
     //oculto cesta de compra
     document.getElementById("preu").style.display = "none";
@@ -487,12 +487,11 @@ function seleccionarHabitacio(hotelNom,hotelId, habId, habTipus, tempAlta, provI
             habitacioSeleccionada.numHabSeleccionades = numHabSeleccionades;
             habitacioSeleccionada.numNits = document.getElementById("nits").value;
             llistaHabitacionsSeleccionades.push(habitacioSeleccionada);
-            var index = llistaHabitacionsSeleccionades.length-1; //posicion del objeto dentro de la lista
 
-            var StrHtml = "<div id=\"hotelConfirmat_" + hotelId + "habId_" + habId + tempAlta + index + "\"><p id=\"hotelid_" + hotelId + "_habId_" + habId + "\"><strong>" + hotelNom + "</strong></p>";
+            var StrHtml = "<div id=\"hotelConfirmat_" + hotelId + "habId_" + habId + tempAlta + "\"><ul><li id=\"hotelid_" + hotelId + "_habId_" + habId + "\"><strong>" + hotelNom + "</strong></li></ul>";
             //en el a de a continuación pongo un #! para que no haga un scrollup al hacer el onclick
-            StrHtml += "<label id=\"numHabitacions" + hotelId + "_habId_" + habId + "\">0</label><label id=\"seleccioHotelid_" + hotelId + "_habId_" + habId + "\"> x habitacio/ns tipus </label><a href=\"#!\" onclick=\"removeHab(" + hotelId + "," + habId + "," + tempAlta + "," + index + "," + preu + ");\"><i class=\"fas fa-trash-alt\"></i></a></div>";
-            document.getElementById("detallsHotel").innerHTML += StrHtml;
+            StrHtml += "<label id=\"numHabitacions" + hotelId + "_habId_" + habId + "\">0</label><label id=\"seleccioHotelid_" + hotelId + "_habId_" + habId + "\"> x habitacio/ns tipus </label><a href=\"#!\" onclick=\"removeHab(" + hotelId + "," + habId + "," + tempAlta + "," + preu + ");\"><i class=\"fas fa-trash-alt\"></i></a></div>";
+            document.getElementById("detallsHotel").innerHTML += StrHtml + "<hr>";
             var quantitat = document.getElementById(hotelId + "_" + habId + "_" + tempAlta + "_" + provId).value;
             document.getElementById("numHabitacions" + hotelId + "_habId_" + habId + "").innerText = quantitat;
             document.getElementById("seleccioHotelid_" + hotelId + "_habId_" + habId).innerHTML += habTipus;
@@ -522,8 +521,8 @@ function calcularPreuTotal(){
     for(hab of llistaHabitacionsSeleccionades){
         suma+= (hab.preu * hab.numHabSeleccionades)*document.getElementById("nits").value;
     }
-    //document.getElementById("preuValor").innerText = suma;
     document.getElementById("preuValor").value = suma;
+    dosDecimals("preuValor");
 }
 
 //funcio per incrementar el numero d'habitacions a un hotels ja seleccionat anteriorment
@@ -535,18 +534,39 @@ function incrementNumHab(hotelId, habId, tempAlta, provId, preu, quantitat){
     }
 }
 
-function removeHab(hotelId,habId,tempAlta,index,preu){
+//funcio general per elimnar un element fill
+function removeElement(id) {
+    var elem = document.getElementById(id);
+    return elem.parentNode.removeChild(elem);
+}
+
+function removeHab(hotelId,habId,tempAlta,preu){
     //recupero el precio total
-    //var valorActual = parseFloat(document.getElementById("preuValor").innerText);
     var valorActual = parseFloat(document.getElementById("preuValor").value);
+    var nits = document.getElementById("nits").value;
     //recupero el num. de habitaciones a restar
     var numHab = parseInt(document.getElementById("numHabitacions" + hotelId + "_habId_" + habId).innerText);
     //elimino la hab. seleccionada
-    document.getElementById("hotelConfirmat_" + hotelId + "habId_" + habId + tempAlta + index).innerText = "";
+    removeElement("hotelConfirmat_" + hotelId + "habId_" + habId + tempAlta);
     //resto precio actual del precio total
-    //document.getElementById("preuValor").innerText = valorActual - (preu * numHab);
-    document.getElementById("preuValor").value = valorActual - (preu * numHab);
+    document.getElementById("preuValor").value = valorActual - (preu * numHab * nits);//no aplica bien
+    dosDecimals("preuValor");
     //elimino la seleccion de la lista de hab seleccionadas
+    eliminarHotelLista(hotelId,habId,tempAlta,preu);
+}
+
+function eliminarHotelLista(hotelId,habId,tempAlta,preu){
+    var trobat = false;
+    var index = 0;
+    while (trobat == false){
+        if (llistaHabitacionsSeleccionades[index].hotelId == hotelId && llistaHabitacionsSeleccionades[index].habId == habId &&
+            llistaHabitacionsSeleccionades[index].tempAlta == tempAlta && llistaHabitacionsSeleccionades[index].preu == preu){
+                trobat = true;
+        }
+        else{
+            index++;
+        }
+    }
     llistaHabitacionsSeleccionades.splice(index,index+1);
 }
 
@@ -602,7 +622,6 @@ function accesoLogin(){
 }
 
 function conversorMoneda(){
-    //var euros = parseFloat(document.getElementById("preuValor").innerHTML);
     var euros = parseFloat(document.getElementById("preuValor").value);
     document.getElementById("preuMonedaConversio").innerHTML = (euros * 1.08) + " USD";
 }
