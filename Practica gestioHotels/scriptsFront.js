@@ -159,17 +159,17 @@ function realitzarcerca() {
                         llistaPreus = objHab.tarifes.temporadaBaixa;
                     }
                     if ((document.getElementById("doble").checked && (objHab.tipus == "Doble" || objHab.tipus == "Suite")) || document.getElementById("individual").checked && objHab.tipus == "Individual"){
-                        var auxPreu;
+                        var auxPreu = null;
                         for (objPreu of llistaPreus){
                             //accedo a los precios de esa temporada
-                            if (auxPreu == null || auxPreu.preu.total < objPreu.preu.total){
+                            if (auxPreu == null || auxPreu.preu.total > objPreu.preu.total){
                                 auxPreu = objPreu;
                             }
                         }
                         var objCerca = new Object();
                         objCerca.hotel = objHotel;
                         objCerca.hab = objHab;
-                        objCerca.tarifa = objPreu;
+                        objCerca.tarifa = auxPreu;
                         objCerca.temporadaAlta = temporadaAlta;
 
                         //Guardarem dins una llista les dades bàsiques per identificar l'hotel, habitació i preu.
