@@ -1,36 +1,243 @@
 <!DOCTYPE html>
 <html>
+
 <head>
+
+    <!--
+        Formulario de datos inpirado en la plantilla incluida en el documento "ContactFrom_v5".
+        Formulario de pago seleccionado de: https://bootsnipp.com/snippets/Oe2vO
+        Falta per afefir html, css, javascript. Aplicar Jquery, Bootstrap. Aqui teniu un exemple de plantilla: https://bootsnipp.com/snippets/Oe2vO  
+        Podeu cercar plantilles per adaptar a la vostra informació: Cercau a google: checkout template bootstrap i trobareu molts d'exemples. 
+    -->
+
     <title>Cotització. CIFP Hotels. La web més cutre de reserves d'hotels.</title>
-    <script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="js/scripts.js"></script>
+    <script src="js/scriptsCotitzacio.js"></script>
 
-        //Funció per obtenir el parametre que hem enviat pel mètode GET.(strJSon).
-        function obtenirParametreJSON() {
-            //Recupera els parametres de la URL
-            var queryString = window.location.search;
-            //Ho convertim a un objecte que ens ajudarà a cercar els diferents parametres dins la URL
-            var urlParams = new URLSearchParams(queryString);
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="css/bootstrap.min.css">
 
-            //Obtenim el paràmetre strJson de la llista.
-            var strJsonEncodedURL = urlParams.get("parJson")
-            //Decodificam els paramtres, que si mirau com està codificat l'anterior string veureu que no es pot llegir.
-            var strJson = decodeURIComponent(strJsonEncodedURL)
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <script src="js/bootstrap/bootstrap.min.js"></script>
 
-            //Tornam el valor
-            return strJson;
-        }
+    <!--CSS-->
+    <link rel="stylesheet" type="text/css" href="css/styleGeneral.css">
+    <link rel="stylesheet" type="text/css" href="css/styleFront.css">
+    <link rel="stylesheet" type="text/css" href="css/cotitzacioStyles.css">
 
+    <!--Fontawesome-->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+        integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    <!--tipografias-->
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;600&family=Indie+Flower&display=swap');
+    </style>
 
-        function init() {
-            var strParametreJson = obtenirParametreJSON();
-            document.getElementById("json").innerHTML = strParametreJson;
-        }
-
-
-    </script>
-    <style></style>
 </head>
-<body onload="init();">
-    <div id="json"></div>
+
+<body>
+    <form id="dispo" action="final.html" method="get">
+        <input type="hidden" name="parJson" id="parJson" value="" />
+    </form>
+    <header id="head">
+        <div id="logoWeb">
+            <img
+                src="https://raw.githubusercontent.com/victoriapenasmiro/LLM/master/Practica%20gestioHotels/images/logo-front-web.png" />
+        </div>
+        <div id="titolPrinc">
+            <h1>RESERVA LES TEVES VACACIONS</h1>
+        </div>
+        <div id="headerOptions">
+            <a href="#!" onclick="accesoLogin();">Login</a>
+            <a href="#!">Canviar idioma</a>
+        </div>
+    </header>
+    <div class="container text-center bg-warning">
+        <p class="py-5">PINTAR RESULTADOS SELECCIONADOS</p>
+    </div>
+    <div id="serveis">
+        <h2>SERVICIOS ADICIONALES</h2>
+        <div>Assegurança cancel·lació 100€/dia<input type="checkbox" /></div>
+        <div>Berenar x€/dia<input type="checkbox" /></div>
+        <div>Cotxe 50€/dia<input type="checkbox" /></div>
+        <div>Bicicleta 5€/dia<input type="checkbox" /></div>
+        <div>Ca per poder passejar 10€/dia<input type="checkbox" /></div>
+    </div>
+    <div id="informacio"></div>
+    <div id="formDades" class="container-contact100">
+        <div class="wrap-contact100">
+            <span class="contact100-form-title">
+                COMPLETA LES TEVES DADES
+            </span>
+            <div class="wrap-input100 bg1">
+                <span class="label-input100">Nom complet *</span>
+                <input class="input100" type="text" placeholder="Indica el teu nom">
+            </div>
+            <div class="wrap-input100 bg1 rs1-wrap-input100">
+                <span class="label-input100">Email *</span>
+                <input class="input100" type="email" placeholder="Indica el teu email">
+            </div>
+
+            <div class="wrap-input100 bg1 rs1-wrap-input100">
+                <span class="label-input100">Telèfon</span>
+                <input class="input100" type="tel" placeholder="Indica el teu telèfon">
+            </div>
+            <div class="w-full dis-none js-show-service">
+                <div class="wrap-contact100-form-radio">
+                    <p class="mb-2">¿Vols contractar cualque serveis adicional?</p>
+                    <div class="contact100-form-radio m-t-15">
+                        <input class="input-radio100" id="radio1" type="checkbox" value="cotxo">
+                        <label class="label-radio100" for="radio1">
+                            Cotxo lloguer
+                        </label>
+                    </div>
+                    <div class="contact100-form-radio">
+                        <input class="input-radio100" id="radio2" type="checkbox" value="massatge">
+                        <label class="label-radio100" for="radio2">
+                            Massatge relaxant
+                        </label>
+                    </div>
+                    <div class="contact100-form-radio">
+                        <input class="input-radio100" id="radio3" type="checkbox" value="guarderia">
+                        <label class="label-radio100" for="radio3">
+                            Guarderia
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div id="preuTotal" class="wrap-input100 bg1 rs1-wrap-input100">
+                <span class="label-input100">PREU TOTAL</span>
+                <input class="input100" type="text" placeholder="0">
+            </div>
+            <div class="container-contact100-form-btn">
+                <button type="button" class="btn btn-outline-warning">
+                    FINALITZAR RESERVA
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class='container'>
+        <div class='row justify-content-center' style='padding-top:25px; padding-bottom:25px;'>
+            <div class='col-md-12'>
+                <h2>
+                    Review Your Order & Complete Checkout
+                </h2>
+                <hr />
+                <div class="shopping_cart">
+                    <div class="panel-group" id="accordion">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4 class="panel-title">
+                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">Revisa la
+                                        teva selecció</a>
+                                </h4>
+                            </div>
+                            <div id="collapseOne" class="panel-collapse collapse in">
+                                <p>PEGAR RESUMEN DE RESERVA</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
+                                    <b>Payment Information</b>
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="collapseThree" class="panel-collapse collapse">
+                            <div class="panel-body">
+                                <p>Selecciona un mètode pagament</p>
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label" for="card-holder-name">Titular de la
+                                        targeta</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control" stripe-data="name" id="name-on-card">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label" for="card-number">Numero de targeta</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control" stripe-data="number" id="card-number">
+                                        <br />
+                                        <div><img class="pull-right"
+                                                src="https://s3.amazonaws.com/hiresnetwork/imgs/cc.png"
+                                                style="max-width: 250px; padding-bottom: 20px;">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label" for="expiry-month">Caduca</label>
+                                        <div class="col-sm-9">
+                                            <div class="row">
+                                                <div class="col-xs-3 mr-2">
+                                                    <select class="form-control" data-stripe="exp-month"
+                                                        id="card-exp-month" style="margin-left:5px;">
+                                                        <option>Mes</option>
+                                                        <option value="01">Gen</option>
+                                                        <option value="02">Feb (02)</option>
+                                                        <option value="03">Mar (03)</option>
+                                                        <option value="04">Abr (04)</option>
+                                                        <option value="05">Mai (05)</option>
+                                                        <option value="06">Jun (06)</option>
+                                                        <option value="07">Jul (07)</option>
+                                                        <option value="08">Ago (08)</option>
+                                                        <option value="09">Sep (09)</option>
+                                                        <option value="10">Oct (10)</option>
+                                                        <option value="11">Nov (11)</option>
+                                                        <option value="12">Dec (12)</option>
+                                                    </select>
+                                                </div>
+                                                <div class="col-xs-3">
+                                                    <select class="form-control" data-stripe="exp-year"
+                                                        id="card-exp-year">
+                                                        <option value="2020">2020</option>
+                                                        <option value="2021">2021</option>
+                                                        <option value="2022">2022</option>
+                                                        <option value="2023">2023</option>
+                                                        <option value="2024">2024</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label" for="cvv">Card CVC</label>
+                                        <div class="col-sm-3">
+                                            <input type="text" class="form-control" stripe-data="cvc" id="card-cvc"
+                                                placeholder="Security Code">
+                                        </div>
+                                    </div>
+                                </div>
+                                <button type="submit" class="btn btn-success btn-lg">PAGAR</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer id="peu">
+        <div class="flotaI">
+            <p>LLENGUATGE DE MARQUES - 1er DAW - Una mostra realitzada per Victoria Peñas, Copyright © 2020</p>
+        </div>
+        <div class="flotaD">
+            <p>Síguenos en:</p>
+            <a href="https://www.facebook.com/" target="_blank"><img
+                    src="https://raw.githubusercontent.com/victoriapenasmiro/LLM/master/Practica%20gestioHotels/images/facebook.png"
+                    alt="logo facebook"></a>
+            <a href="https://www.instagram.com/?hl=es" target="_blank"><img
+                    src="https://raw.githubusercontent.com/victoriapenasmiro/LLM/master/Practica%20gestioHotels/images/instagram.png"
+                    alt="logo instagram"></a>
+        </div>
+    </footer>
 </body>
+
 </html>

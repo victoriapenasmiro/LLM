@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Exemple JQuery. Framework.</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script>
+        
+        //https://www.w3schools.com/jquery/default.asp ==> Jquery informació.
+        //Com l'onload del body. Però millor. 
+        $(document).ready(function () {
+            $("p").css('border', '1px solid black'); //https://www.w3schools.com/jquery/jquery_css.asp
+        });
+
+        //Botons exemples
+        function visibilitatExemple(index){
+            $("#exemple" + index).hide(500); //# ==> amb id de l'element. Com el getElementById.
+        }
+
+        //Botó tots
+        function visibilitatTots(){
+            $(".exemples").toggle(500); // . ==> Tots els elements amb la classe indicada. Ho aplica a tots! Va mel això.
+            //toggle! ==> per amagar hide, per mostrar show. Si un botó amaga o mostra. Hauriem de comprovar l'estat actual. No fa falta! toogle ho fa per noltros.            
+        }
+
+        //Botó tots
+        function visibilitatFadeTots() {
+            $(".exemples").fadeToggle(500); // . ==> Tots els elements amb la classe indicada. Ho aplica a tots! Va mel això.
+            //toggle! ==> per amagar hide, per mostrar show. Si un botó amaga o mostra. Hauriem de comprovar l'estat actual. No fa falta! toogle ho fa per noltros.            
+        }
+
+        function seleccionaTots() {
+            //Com podem saber que per seleccionar un checkbox es fa així?
+            //GIYF: Cercau una cosa com jquery checked checkbox. I veureu la reposta. Hi ha moltissima documentació de Jquery.
+            $(".filtre").prop("checked", true);
+        }
+    </script>
+    <style></style>
+</head>
+<body>
+    <div id="exemple1" class="exemples">
+        exemple1
+    </div>
+    <div id="exemple2" class="exemples">
+        exemple2
+    </div>
+    <div id="exemple3" class="exemples">
+        exemple3
+    </div>
+    <p>Troloroloro lorolo lorolo.</p>
+    <button type="button" onclick="visibilitatExemple('1')" >Exemple1</button>
+    <button type="button" onclick="visibilitatExemple('2')">Exemple2</button>
+    <button type="button" onclick="visibilitatExemple('3')">Exemple3</button>
+    <button type="button" onclick="visibilitatTots()">Tots</button>
+    <button type="button" onclick="visibilitatFadeTots()">Fade Tots</button>
+    
+    <input type="checkbox" class="filtre" id="gym"/>
+    <input type="checkbox" class="filtre" id="padel"/>
+    <input type="checkbox" class="filtre" id="pallbearers"/>
+    <input type="checkbox" class="filtre" id="tenis"/>
+    TOTS:<input type="checkbox" class="filtre" id="tots" onclick="seleccionaTots()" />
+</body>
+</html>
