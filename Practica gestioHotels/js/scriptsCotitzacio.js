@@ -1,4 +1,4 @@
-var llistatHotels;
+var objInformacio;
 var resultatsSeleccionats;
 
 //Funció per obtenir el parametre que hem enviat pel mètode GET.(strJSon).
@@ -36,7 +36,7 @@ function loadJSON(callback) {
 $(document).ready(function () {
     loadJSON(function (response) {
         // Parse JSON string into object
-        llistatHotels = response;//JSON.parse(response);
+        objInformacio = response;//JSON.parse(response);
         resultatsSeleccionats = obtenirParametreJSON();
         /*
         [{"hotelId":1,"habId":30,"tempAlta":true,"agregadorId":"2","preu":108.9,"numHabSeleccionades":1,"numNits":"1"}]
@@ -71,25 +71,24 @@ function getInfoExtesaResultat(resultat) {
     infoResultat.nits
     */
     //Cercarem la informació seleccionada. Per cada hotel, per cada habitacio, per cada preu. Com el recorregut que feiem a disponibilitat. 
-    for (objHotel of llistatHotels) {               
+    for (objHotel of objInformacio.hotels) {
         if (objHotel.id == resultat.hotelId) {
             infoResultat.hotel = objHotel;
             for (objHab of objHotel.habitacions) {
                 if (objHab.id == resultat.habId) {
                     infoResultat.hab = objHab;
-                    //jo tengo tarifas, temporada -- > precios
                     if(resultat.tempAlta){
                         for (objPreu of objHab.tarifes.temporadaAlta) {
-                            if ((objPreu.agregadorId == resultat.agregadorId)) {
-                                infoResultat.preu = objPreu.total;
+                            if ((objPreu.preu.agregadorId == resultat.preu.agregadorId)) {
+                                infoResultat.preu = objPreu.preu;
                                 infoResultat.quantitat = resultat.numHabSeleccionades;
                                 infoResultat.nits = resultat.numNits;
                             }
                         }
                     }else{
                         for (objPreu of objHab.tarifes.temporadaBaixa) {
-                            if ((objPreu.agregadorId == resultat.agregadorId)) {
-                                infoResultat.preu = objPreu.total;
+                            if ((objPreu.preu.agregadorId == resultat.agregadorId)) {
+                                infoResultat.preu = objPreu.preu;
                                 infoResultat.quantitat = resultat.numHabSeleccionades;
                                 infoResultat.nits = resultat.numNits;
                             }
@@ -117,11 +116,15 @@ function pintatResultats(llistaInfoPintar) {
         strHtml += "<div>Quantitat: " + infoPintar.quantitat + "</div>";
         strHtml += "<div>Hotel:" + infoPintar.hotel.nom + " estrelles:" + infoPintar.hotel.estrelles + "</div>";
         strHtml += "<div>Habitacio:" + infoPintar.hab.nom + " Llits individuals:" + infoPintar.hab.llitIndiv + " Llits Dobles:" + infoPintar.hab.llitDoble + "</div>";
-        strHtml += "<div>Preu net:" + infoPintar.preu.valorNet + " Impost:" + infoPintar.preu.impost + "% Preu Total:" + infoPintar.preu.valorTotal + "</div>";
+        strHtml += "<div>Preu net:" + infoPintar.preu.base + " Impost:" + infoPintar.preu.impostPercent + "% Preu Total:" + infoPintar.preu.total + "</div>";
         preuTotal += infoPintar.preu.valorTotal * infoPintar.quantitat;
         //strHtml +=  Array(16).join('wat' - 1) + ' Batman!';
         //Jquery. Com el innerHtml però d'una altra forma.
         $("#informacio").html(strHtml);
         $("#preuTotal").text(preuTotal);
     };            
-}      
+}
+
+//ocultam form finalització y desplegam pagament
+
+//finalitzar()
