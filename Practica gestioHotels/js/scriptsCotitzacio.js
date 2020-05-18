@@ -65,10 +65,12 @@ function getInfoExtesaResultat(resultat) {
     /*
     L'objecte tendrà aquest format. El mateix que disponibilitat. Però amb quantitat de resultats seleccionats.
     infoResultat.hotel 
-    infoResultat.hab 
+    infoResultat.hab
+    infoResultat.tipus
     infoResultat.preu 
     infoResultat.quantitat
     infoResultat.nits
+    infoResultat.foto
     */
     //Cercarem la informació seleccionada. Per cada hotel, per cada habitacio, per cada preu. Com el recorregut que feiem a disponibilitat. 
     for (objHotel of objInformacio.hotels) {
@@ -79,7 +81,7 @@ function getInfoExtesaResultat(resultat) {
                     infoResultat.hab = objHab;
                     if(resultat.tempAlta){
                         for (objPreu of objHab.tarifes.temporadaAlta) {
-                            if ((objPreu.preu.agregadorId == resultat.preu.agregadorId)) {
+                            if ((objPreu.preu.agregadorId == resultat.agregadorId)) {
                                 infoResultat.preu = objPreu.preu;
                                 infoResultat.quantitat = resultat.numHabSeleccionades;
                                 infoResultat.nits = resultat.numNits;
@@ -108,6 +110,7 @@ function pintatResultats(llistaInfoPintar) {
     llistaInfoPintar.hab 
     llistaInfoPintar.preu 
     llistaInfoPintar.quantitat
+    llistaInfoPintar.nits
     */
     var strHtml = "";
 
@@ -115,11 +118,11 @@ function pintatResultats(llistaInfoPintar) {
     for (infoPintar of llistaInfoPintar) {
         strHtml += "<div>Quantitat: " + infoPintar.quantitat + "</div>";
         strHtml += "<div>Hotel:" + infoPintar.hotel.nom + " estrelles:" + infoPintar.hotel.estrelles + "</div>";
-        strHtml += "<div>Habitacio:" + infoPintar.hab.nom + " Llits individuals:" + infoPintar.hab.llitIndiv + " Llits Dobles:" + infoPintar.hab.llitDoble + "</div>";
-        strHtml += "<div>Preu net:" + infoPintar.preu.base + " Impost:" + infoPintar.preu.impostPercent + "% Preu Total:" + infoPintar.preu.total + "</div>";
-        preuTotal += infoPintar.preu.valorTotal * infoPintar.quantitat;
-        //strHtml +=  Array(16).join('wat' - 1) + ' Batman!';
-        //Jquery. Com el innerHtml però d'una altra forma.
+        strHtml += "<div>Habitacio:" + infoPintar.hab.nom + " Tipus d'habitación:" + infoPintar.hab.tipus + "</div>";
+        strHtml += "<div>Preu net:" + (infoPintar.preu.base + infoPintar.preu.comissio) + " Impost:" + infoPintar.preu.impostPercent + "% Preu Total:" + infoPintar.preu.total + "</div>";
+        preuTotal += infoPintar.preu.total * infoPintar.quantitat * infoPintar.nits;
+        strHtml +=  Array(16).join('wat' - 1) + ' Batman!';
+        Jquery. Com el innerHtml però d'una altra forma.
         $("#informacio").html(strHtml);
         $("#preuTotal").text(preuTotal);
     };            

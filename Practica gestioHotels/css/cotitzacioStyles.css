@@ -1,3 +1,9 @@
-h1,h2{
+h1,h2,h3{
   font-family: 'Indie Flower', cursive;
+}
+
+.card {
+  margin: 0 auto;
+  float: none;
+  margin-bottom: 10px;
 }

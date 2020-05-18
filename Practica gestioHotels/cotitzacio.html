@@ -11,8 +11,6 @@
     -->
 
     <title>Cotització. CIFP Hotels. La web més cutre de reserves d'hotels.</title>
-    <script src="js/scripts.js"></script>
-    <script src="js/scriptsCotitzacio.js"></script>
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="css/bootstrap.min.css">
@@ -26,6 +24,8 @@
         integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
         crossorigin="anonymous"></script>
     <script src="js/bootstrap/bootstrap.min.js"></script>
+    <script src="js/scripts.js"></script>
+    <script src="js/scriptsCotitzacio.js"></script>
 
     <!--CSS-->
     <link rel="stylesheet" type="text/css" href="css/styleGeneral.css">
@@ -59,60 +59,103 @@
             <a href="#!">Canviar idioma</a>
         </div>
     </header>
-    <div class="container text-center bg-warning">
-    </div>
-    <div id="serveis">
-        <h2 class="text-center pt-5">SERVEIS ADICIONALS</h2>
-    </div>
-    <div class="container py-2">
-        <div class="card-group">
-            <div class="card">
-                <img src="https://raw.githubusercontent.com/victoriapenasmiro/LLM/master/Practica%20gestioHotels/images/alquiler-coche.jpg"
-                    class="card-img-top" height="150" alt="">
-                <div class="card-body text-center">
-                    <h5 class="card-title"><b>Cotxe de lloguer</b></h5>
-                    <p class="card-text"><small class="text-muted">Lloga un cotxe familiar per tan sols 50€/dia. Parking
-                            inclós.</small></p>
-                    <a href="#" class="btn btn-primary">Ho vull!</a>
-                    <!--poner un onclick, para que al pinchar se autoclique el checkbox correspondiente-->
+    <div class="container">
+        <h2 class="text-center py-5">LA TEVA SELECCIÓ https://getbootstrap.com/docs/4.3/components/card/</h2>
+        <div id="informacio" class="card mb-3 text-white bg-warning" style="max-width: 800px;">
+            <div class="row no-gutters">
+                <div class="col-md-4">
+                    <img src="https://raw.githubusercontent.com/victoriapenasmiro/LLM/master/Practica%20gestioHotels/images/alquiler-coche.jpg"
+                        class="card-img" alt="">
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <h5 class="card-title">Nom hotel ***</h5>
+                        <h6 class="card-title">Habitación nombre: 6 habitaciones.</h6>
+                        <p class="card-text"><small class="text-white">descripcio habitacio.</small></p>
+                    </div>
                 </div>
             </div>
-            <div class="card">
-                <img src="https://raw.githubusercontent.com/victoriapenasmiro/LLM/master/Practica%20gestioHotels/images/seguro-viaje.jpg"
-                    class="card-img-top" height="150" alt="">
-                <div class="card-body text-center">
-                    <h5 class="card-title"><b>Assegurança</b></h5>
-                    <p class="card-text"><small class="text-muted">Contracta una assegurança de cancel·lació per tan sols
-                            100€.</small></p>
-                    <a href="#" class="btn btn-primary">Ho vull!</a>
-                    <!--poner un onclick, para que al pinchar se autoclique el checkbox correspondiente-->
+        </div>
+        <div id="informacio" class="card mb-3 text-white bg-warning" style="max-width: 800px;">
+            <div class="row no-gutters">
+                <div class="col-md-4">
+                    <img src="https://raw.githubusercontent.com/victoriapenasmiro/LLM/master/Practica%20gestioHotels/images/alquiler-coche.jpg"
+                        class="card-img" alt="">
                 </div>
-            </div>
-            <div class="card">
-                <img src="https://raw.githubusercontent.com/victoriapenasmiro/LLM/master/Practica%20gestioHotels/images/seguro-viaje.jpg"
-                    class="card-img-top" height="150" alt="">
-                <div class="card-body text-center">
-                    <h5 class="card-title"><b>LLoga una bicicleta</b></h5>
-                    <p class="card-text"><small class="text-muted">Lloga un bicicleta per tan sols 5/dia.</small></p>
-                    <a href="#" class="btn btn-primary">Ho vull!</a>
-                    <!--poner un onclick, para que al pinchar se autoclique el checkbox correspondiente-->
-                </div>
-            </div>
-            <div class="card">
-                <img src="https://raw.githubusercontent.com/victoriapenasmiro/LLM/master/Practica%20gestioHotels/images/seguro-viaje.jpg"
-                    class="card-img-top" height="150" alt="">
-                <div class="card-body text-center">
-                    <h5 class="card-title"><b>Passejam el teu ca!</b></h5>
-                    <p class="card-text"><small class="text-muted">Passejam el teu ca per tan sols 7€/dia.</small></p>
-                    <a href="#" class="btn btn-primary">Ho vull!</a>
-                    <!--poner un onclick, para que al pinchar se autoclique el checkbox correspondiente-->
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <h5 class="card-title">Nom hotel ***</h5>
+                        <h6 class="card-title">Habitación nombre: 6 habitaciones.</h6>
+                        <p class="card-text"><small class="text-white">descripcio habitacio.</small></p>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+    <div id="serveis">
+        <h3 class="text-center pt-5">SERVEIS ADICIONALS</h3>
     </div>
     </div>
-    <div id="informacio"></div>
+    <div class="container py-2">
+        <div class="row">
+            <div class="col-sm-12 col-md-3 col-lg-3">
+                <div class="card">
+                    <img src="https://raw.githubusercontent.com/victoriapenasmiro/LLM/master/Practica%20gestioHotels/images/alquiler-coche.jpg"
+                        class="card-img-top" height="150" alt="">
+                    <div class="card-body text-center">
+                        <h5 class="card-title"><b>Cotxe de lloguer</b></h5>
+                        <p class="card-text"><small class="text-muted">Lloga un cotxe familiar per tan sols 50€/dia.
+                                Parking
+                                inclós.</small></p>
+                        <a href="#" class="btn btn-primary">Ho vull!</a>
+                        <!--poner un onclick, para que al pinchar se autoclique el checkbox correspondiente-->
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-3 col-lg-3">
+                <div class="card">
+                    <img src="https://raw.githubusercontent.com/victoriapenasmiro/LLM/master/Practica%20gestioHotels/images/alquiler-coche.jpg"
+                        class="card-img-top" height="150" alt="">
+                    <div class="card-body text-center">
+                        <h5 class="card-title"><b>Cotxe de lloguer</b></h5>
+                        <p class="card-text"><small class="text-muted">Lloga un cotxe familiar per tan sols 50€/dia.
+                                Parking
+                                inclós.</small></p>
+                        <a href="#" class="btn btn-primary">Ho vull!</a>
+                        <!--poner un onclick, para que al pinchar se autoclique el checkbox correspondiente-->
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-3 col-lg-3">
+                <div class="card">
+                    <img src="https://raw.githubusercontent.com/victoriapenasmiro/LLM/master/Practica%20gestioHotels/images/alquiler-coche.jpg"
+                        class="card-img-top" height="150" alt="">
+                    <div class="card-body text-center">
+                        <h5 class="card-title"><b>Cotxe de lloguer</b></h5>
+                        <p class="card-text"><small class="text-muted">Lloga un cotxe familiar per tan sols 50€/dia.
+                                Parking
+                                inclós.</small></p>
+                        <a href="#" class="btn btn-primary">Ho vull!</a>
+                        <!--poner un onclick, para que al pinchar se autoclique el checkbox correspondiente-->
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-3 col-lg-3">
+                <div class="card">
+                    <img src="https://raw.githubusercontent.com/victoriapenasmiro/LLM/master/Practica%20gestioHotels/images/alquiler-coche.jpg"
+                        class="card-img-top" height="150" alt="">
+                    <div class="card-body text-center">
+                        <h5 class="card-title"><b>Cotxe de lloguer</b></h5>
+                        <p class="card-text"><small class="text-muted">Lloga un cotxe familiar per tan sols 50€/dia.
+                                Parking
+                                inclós.</small></p>
+                        <a href="#" class="btn btn-primary">Ho vull!</a>
+                        <!--poner un onclick, para que al pinchar se autoclique el checkbox correspondiente-->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <div id="finalizarReserva" class="container">
         <hr>
         <div class="row justify-content-center">
