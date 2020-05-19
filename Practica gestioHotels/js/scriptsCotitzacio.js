@@ -1,6 +1,5 @@
 var objInformacio;
 var resultatsSeleccionats;
-var serveisAdicionals;
 
 //Funció per obtenir el parametre que hem enviat pel mètode GET.(strJSon).
 function obtenirParametreJSON() {
@@ -58,6 +57,9 @@ $(document).ready(function () {
         pintatResultats(infoExtesaResultatsSeleccionats);
     });
 
+    //slider habitacions al activar això deixa de funciona es meu js
+    //$('.slider').bxSlider();
+
     //verificamos que los campos mandatory esten rellenados para continuar
     $("#pagarToggle").click(function () { 
         if($("#name").val().length == 0 || $("#email").val().length == 0 || $("#telf").val().length == 0){
@@ -95,18 +97,25 @@ $(document).ready(function () {
 
     //checks serveis adicionals
     $('#guarderia').click(function() {
+        var preu = parseFloat($("#guarderiaC").val());
+        var actual = parseFloat($("#preuTotal").val());
+        if(actual==""){
+            actual=0
+        }; //esto no deberia pasar nunca
+        var nits = 0;
+        for (selec of resultatsSeleccionats){
+            if (parseInt(selec.numNits) > nits){
+                nits = parseInt(selec.numNits);
+            }
+        }//tengo que hacerlo por cada hotel*********************************************
         if($('#guarderiaC').prop('checked')){
             $("#guarderiaC").prop('checked', false);
-            var preu = $("#guarderiaC").val();
-            var actual = $("#preuTotal").val();
-            var total = actual - (preu*resultatsSeleccionats.numNits);
+            var total = actual - (preu*nits);
             $("#preuTotal").val(total);
             alert("s'ha eliminat el servei de guarderia");
         }else{
             $("#guarderiaC").prop('checked', true);
-            var preu = $("#guarderiaC").val();
-            var actual = $("#preuTotal").val();
-            var total = actual + (preu*resultatsSeleccionats.numNits);
+            var total = actual + (preu*nits);
             $("#preuTotal").val(total);
             alert("s'ha inclós el servei de guarderia");
         }
@@ -153,21 +162,33 @@ function verificarEnviar(){
         $("#aCad").removeClass("ocultar");
     }else{
         addServicios();
-        var jsonString = JSON.stringify(serveisAdicionals);
+        var jsonString = JSON.stringify(resultatsSeleccionats);
         document.getElementById("parJson").value = jsonString;
         document.getElementById("dispo").submit();
     }
 }
 
-//comprobamos servicios adicionales seleccionados
-function addServicios(){
+//comprobamos servicios adicionales seleccionados y añadimos para enviar el json con todo
+//¿Como doy formato para diferenciar hotel de servicio?
+/*function addServicios(){
     var servei = new Object;
     /*format:
     servei.nom
     servei.preuIndividual
     servei.quantitat --> només per bicis
     */
-}
+    /*var filtres = $(".serveisAd");
+    for (filtre of filtres){
+        if(filtre.checked){
+            servei.nom = $(filtre).attr("name");
+            servei.preuInd = $(filtre).val();
+            if (servei.nom == "bicicleta"){
+                servei.quantitat = $("#Qbici" input).val(); //revisar que no coge el valor por defecto 1, si se lo cambiamos
+            }
+            resultatsSeleccionats.push(servei);
+        }
+   }
+}*/
 
 //A partir de les ids que ens arriba per parametre. Obtindrem la informació extesa de cada entitat. Hotel, Habitacio i Preu.
 //Ho insetarem dins un objecte per tenir més accessible aquesta informació. 
@@ -231,8 +252,9 @@ function pintatResultats(llistaInfoPintar) {
         estrelles = recuperarEstrelles(infoPintar.hotel.estrelles);
         strHtml += "<div class=\"card mb-3 text-white bg-warning\" style=\"max-width: 800px;\">";
         strHtml += "<div class=\"row no-gutters\">";
-        strHtml += "<div class=\"col-md-4\">";
-        strHtml += "<img src=\""+ infoPintar.hab.fotosHabitacio[0] + "\" class=\"card-img\" alt=\"" + infoPintar.hab.nom + "\">";
+        strHtml += "<div class=\"col-md-4 slider\">";//no funciona el slider
+        strHtml += "<div><img src=\""+ infoPintar.hab.fotosHabitacio[0] + "\" class=\"card-img\" alt=\"" + infoPintar.hab.nom + "\"></div>";
+        strHtml += "<div><img src=\""+ infoPintar.hab.fotosHabitacio[0] + "\" class=\"card-img\" alt=\"" + infoPintar.hab.nom + "\"></div>";
         strHtml += "</div>";
         strHtml += "<div class=\"col-md-8\">";
         strHtml += "<div class=\"card-body\">";
