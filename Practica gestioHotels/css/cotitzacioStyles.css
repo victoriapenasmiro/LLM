@@ -7,3 +7,13 @@ h1,h2,h3{
   float: none;
   margin-bottom: 10px;
 }
+
+img.card-img {
+  height: 100%;
+}
+.ocultar{
+  display: none;
+}
+.mostrar{
+  display: ;
+}

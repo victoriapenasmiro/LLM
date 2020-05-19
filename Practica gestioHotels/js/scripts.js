@@ -421,3 +421,11 @@ function validarURL(str) {
 function rangeValues(val) {
     document.getElementById('textInputBooking').value=val; 
 }
+
+function recuperarEstrelles(estrelles){
+    var totalEstrelles = "";
+    for (var i = 0; i < estrelles;i++){
+        totalEstrelles += "*";
+    }
+    return totalEstrelles;
+}

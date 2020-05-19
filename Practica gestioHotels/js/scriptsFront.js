@@ -415,15 +415,6 @@ function pintarInformacioHotelHabPreu(objInformacioElement) {
     document.getElementById("resultats").innerHTML += StrHtml;
 }
 
-function recuperarEstrelles(estrelles){
-    var totalEstrelles = "";
-    for (var i = 0; i < estrelles;i++){
-        totalEstrelles += "*";
-    }
-    return totalEstrelles;
-}
-
-
 function recuperarFotosHab(habitacio){
     var imatgesHab = "";
     imatgesHab += "<div>";

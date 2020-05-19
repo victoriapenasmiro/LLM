@@ -54,7 +54,6 @@ footer {
     clear: left;
     background-color: #c8beb445;
     font-size: 14px;
-    height: 80px;
     padding-left: 5%;
     padding-right: 15%;
 }
@@ -194,10 +193,10 @@ fieldset legend {
 
 #headerOptions {
     float: right;
+    text-align: center;
 }
 
 #headerOptions a {
-    margin-left: 20px;
     color: white;
     font-weight: 600;
 }
