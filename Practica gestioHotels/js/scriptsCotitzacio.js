@@ -55,10 +55,12 @@ $(document).ready(function () {
         }
         //Ja tenim tota la informació dins l'array. Ara pintarem aqueta informació.
         pintatResultats(infoExtesaResultatsSeleccionats);
+        //slider habitacions al activar això deixa de funciona es meu js
+        $('.slider').bxSlider();
     });
 
-    //slider habitacions al activar això deixa de funciona es meu js
-    //$('.slider').bxSlider();
+    //cambiamos el style de las etiquetas a
+    $(".card-body a").css("cssText", "color: black !important;");
 
     //verificamos que los campos mandatory esten rellenados para continuar
     $("#pagarToggle").click(function () { 
@@ -252,9 +254,8 @@ function pintatResultats(llistaInfoPintar) {
         estrelles = recuperarEstrelles(infoPintar.hotel.estrelles);
         strHtml += "<div class=\"card mb-3 text-white bg-warning\" style=\"max-width: 800px;\">";
         strHtml += "<div class=\"row no-gutters\">";
-        strHtml += "<div class=\"col-md-4 slider\">";//no funciona el slider
-        strHtml += "<div><img src=\""+ infoPintar.hab.fotosHabitacio[0] + "\" class=\"card-img\" alt=\"" + infoPintar.hab.nom + "\"></div>";
-        strHtml += "<div><img src=\""+ infoPintar.hab.fotosHabitacio[0] + "\" class=\"card-img\" alt=\"" + infoPintar.hab.nom + "\"></div>";
+        strHtml += "<div class=\"col-md-4\">";//no funciona el slider
+        strHtml += "<img src=\""+ infoPintar.hab.fotosHabitacio[0] + "\" class=\"card-img\" alt=\"" + infoPintar.hab.nom + "\"/>";
         strHtml += "</div>";
         strHtml += "<div class=\"col-md-8\">";
         strHtml += "<div class=\"card-body\">";
@@ -262,6 +263,7 @@ function pintatResultats(llistaInfoPintar) {
         strHtml += "<h6 class=\"card-title\"><em>Habitació " + infoPintar.hab.nom + ": " + infoPintar.quantitat + " habitacions - Nits: " + infoPintar.nits + "</em></h6>";
         strHtml += "<p class=\"card-text\"><small class=\"text-white\">" + infoPintar.hab.descripcio + "</small></p>";
         strHtml += "<p class=\"card-text\">Preu net: " + (infoPintar.preu.base + infoPintar.preu.comissio) + " Impost: " + infoPintar.preu.impostPercent + "%.</p>"
+        strHtml += "<a href=\"!#\" onclick=\"mostrarFotos();\"><b>VEURE FOTOS HABITACIÓ</b></a>"
         strHtml += "<p class=\"card-text text-right mb-2\"><mark class=\"p-3 border border-success\"><b>TOTAL: " + (infoPintar.preu.total*infoPintar.quantitat*infoPintar.nits) + "</b></mark></p>";
         strHtml += "</div></div></div></div>";
         preuTotal += infoPintar.preu.total * infoPintar.quantitat * infoPintar.nits;
