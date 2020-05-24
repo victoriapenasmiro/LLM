@@ -1,0 +1,44 @@
+[
+    {
+        "hotelId": 3,
+        "habId": 3,
+        "tempAlta": true,
+        "agregadorId": "1",
+        "preu": 266.2,
+        "numHabSeleccionades": 2,
+        "numNits": "3"
+    },
+    [
+        {
+            "nom": "seguro",
+            "preuInd": 100
+        },
+        {
+            "nom": "cotxe",
+            "preuInd": 50
+        },
+        {
+            "nom": "bicicleta",
+            "preuInd": 5,
+            "quantitat": 4
+        },
+        {
+            "nom": "guarderia",
+            "preuInd": 25
+        }
+    ],
+    {
+        "nomClient": "Victoria Peñas Miro",
+        "email": "vicky@gmail.com",
+        "telefon": "234433222"
+    },
+    {
+        "titular": "Vickto Peñas",
+        "numTargeta": "1234567890987123",
+        "mesCad": "01",
+        "anyCad": 2022,
+        "codSeguretat": "123",
+        "preuTotal": 2182.2,
+        "comissioTotalReserva": 60
+    }
+]

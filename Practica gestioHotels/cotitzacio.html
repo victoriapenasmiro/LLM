@@ -198,10 +198,10 @@
                     <div class="card-body">
                         <h3 class="text-center">Pagament amb targeta</h3>
                         <hr>
-                        <div class="alert alert-info p-2 pb-3">
+                        <div id="dadesM" class="alert alert-info p-2 pb-3 ocultar">
                             <a class="close font-weight-normal initialism" data-dismiss="alert"
                                 href="#!"><samp>×</samp></a>
-                            CVC es obligatori.
+                            Les dades amb un * son obligatories.
                         </div>
                         <div id="aCad" class="alert alert-warning p-2 pb-3 ocultar">
                             <a class="close font-weight-normal initialism" data-dismiss="alert"
@@ -210,17 +210,17 @@
                         </div>
                         <form class="form" role="form" autocomplete="off">
                             <div class="form-group">
-                                <label for="cc_name">Titular de la targeta</label>
-                                <input type="text" class="form-control" id="cc_name" pattern="\w+ \w+.*"
+                                <label for="cc_name">Titular de la targeta*</label>
+                                <input type="text" id="titularT" class="form-control" id="cc_name" pattern="\w+ \w+.*"
                                     title="First and last name" required="required">
                             </div>
                             <div class="form-group">
-                                <label>Numero targeta</label>
-                                <input type="text" class="form-control" autocomplete="off" maxlength="20"
+                                <label>Numero targeta*</label>
+                                <input type="number" id="numT" class="form-control" autocomplete="off" maxlength="20"
                                     pattern="\d{16}" title="Credit card number" required="">
                             </div>
                             <div class="form-group row">
-                                <label class="col-md-12">Caduca el</label>
+                                <label class="col-md-12">Caduca el*</label>
                                 <div class="col-md-4">
                                     <select id="cad" class="form-control" name="cc_exp_mo" size="0">
                                         <option value="01">01</option>
@@ -238,7 +238,7 @@
                                     </select>
                                 </div>
                                 <div class="col-md-4">
-                                    <select class="form-control" name="cc_exp_yr" size="0">
+                                    <select id="anyCad" class="form-control" name="cc_exp_yr" size="0">
                                         <option>2020</option>
                                         <option>2021</option>
                                         <option>2022</option>
@@ -247,9 +247,9 @@
                                     </select>
                                 </div>
                                 <div class="col-md-4">
-                                    <input type="text" class="form-control" autocomplete="off" maxlength="3"
+                                    <input type="text" id="cvvId" class="form-control" autocomplete="off" maxlength="3"
                                         pattern="\d{3}" title="Three digits at back of your card" required=""
-                                        placeholder="CVC" />
+                                        placeholder="CVC*" />
                                 </div>
                             </div>
                             <div class="row">

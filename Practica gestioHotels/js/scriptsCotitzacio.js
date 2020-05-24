@@ -1,5 +1,6 @@
 var objInformacio;
 var resultatsSeleccionats;
+var llistaServ = new Array();
 
 //Funció per obtenir el parametre que hem enviat pel mètode GET.(strJSon).
 function obtenirParametreJSON() {
@@ -291,16 +292,22 @@ $(document).ready(function () {
             $("#serveis").addClass("ocultar");
         }
     });
-
 });
 
 function verificarEnviar(){
     var fecha = new Date();
     var mes = fecha.getMonth();
-    if($("#cad").val()<=mes){
+    var any = fecha.getFullYear();
+    if($("#cad").val()<=mes && $("#anyCad").val()<=any){
         $("#aCad").removeClass("ocultar");
-    }else{
+    }
+    if($("#numT").val() == null || $("#cvvId").val() == "" || $("#titularT").val().length == 0){
+        $("#dadesM").removeClass("ocultar");
+    }   
+    else{
         addServicios();
+        addTitularReserva();
+        addPagament();
         var jsonString = JSON.stringify(resultatsSeleccionats);
         document.getElementById("parJson").value = jsonString;
         document.getElementById("dispo").submit();
@@ -308,10 +315,7 @@ function verificarEnviar(){
 }
 
 //comprobamos servicios adicionales seleccionados y añadimos para enviar el json con todo
-//¿Como doy formato para diferenciar hotel de servicio?
 function addServicios(){
-    var servei = new Object();
-    var llistaServ = new Array();
     /*format:
     servei.nom
     servei.preuIndividual
@@ -319,16 +323,66 @@ function addServicios(){
     */
     var filtres = document.getElementsByClassName("serveisAd");//$(".serveisAd");
     for (filtre of filtres){
+        var servei = new Object();
         if(filtre.checked){
             servei.nom = $(filtre).attr("name");
-            servei.preuInd = $(filtre).val();
+            servei.preuInd = parseFloat($(filtre).val());
             if (servei.nom == "bicicleta"){
-                servei.quantitat = $("quantBicis").val();
+                servei.quantitat = parseInt($("#quantBicis").val());
             }
             llistaServ.push(servei);
-            resultatsSeleccionats.push(llistaServ);
         }
-   }
+    }
+    resultatsSeleccionats.push(llistaServ);
+}
+
+//añadimos datos del titular de la reserva
+function addTitularReserva(){
+    var client = new Object();
+    /*format:
+    client.nom
+    client.email
+    client.telefon
+    */
+    client.nomClient = $("#name").val();
+    client.email = $("#email").val();
+    client.telefon = $("#telf").val();
+    resultatsSeleccionats.push(client);
+}
+
+//añadimos datos de pago
+function addPagament(){
+    var pago = new Object();
+    /*format:
+    pago.titular
+    pago.numTargeta
+    pago.mesCad
+    pago.anyCad
+    pago.codSeguretat
+    pago.totalCost
+    */
+    pago.titular = $("#titularT").val();
+    pago.numTargeta = $("#numT").val();
+    pago.mesCad = $("#cad").val();
+    pago.anyCad = parseInt($("#anyCad").val());
+    pago.codSeguretat = $("#cvvId").val();
+    pago.preuTotal = parseFloat($("#preuTotal").val());
+    pago.comissioTotalReserva = calcularComissio();
+    resultatsSeleccionats.push(pago);
+}
+
+//funció per calcular la comissio total de la reserva
+function calcularComissio(){
+    var comissioTotal = 0;
+    var hotel = "";
+    var nits = 0;
+    hotelsJSON = obtenirParametreJSON();
+    for (resultSelect of hotelsJSON) {
+        hotel = getInfoExtesaResultat(resultSelect);
+        nits = parseInt(resultSelect.numNits);
+        comissioTotal += parseFloat(hotel.preu.comissio * nits);
+    }
+    return comissioTotal;
 }
 
 //A partir de les ids que ens arriba per parametre. Obtindrem la informació extesa de cada entitat. Hotel, Habitacio i Preu.
