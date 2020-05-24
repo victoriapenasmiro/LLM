@@ -64,9 +64,27 @@ $(document).ready(function () {
 
     //verificamos que los campos mandatory esten rellenados para continuar
     $("#pagarToggle").click(function () { 
-        if($("#name").val().length == 0 || $("#email").val().length == 0 || $("#telf").val().length == 0){
+        if($("#name").val().length == 0 || $("#email").val().length == 0 || $("#telf").val().length == 0 ||
+        (!$("#quantBicis").hasClass(".ocultar") && $("#quantBicis").val().length == 0)){
             $("#isMandatory").removeClass("ocultar");
         }else{
+            if(!$("#quantBicis").hasClass(".ocultar")){
+                var preu = parseFloat($("#biciC").val());
+                var actual = parseFloat($("#preuTotal").val());
+                var numBicis = parseInt($("#quantBicis").val());
+                if(actual==""){
+                    actual=0;
+                };
+                var nits = 0;
+                for (selec of resultatsSeleccionats){
+                    if (parseInt(selec.numNits) > nits){
+                        nits = parseInt(selec.numNits);
+                    }
+                }
+                var total = actual + (preu*nits*numBicis);
+                $("#preuTotal").val(total);
+            }
+
             $("#finalizarReserva").addClass("ocultar");
             $("#pagar").removeClass("ocultar");
             $("#informacio").parent().addClass("ocultar");
@@ -123,31 +141,16 @@ $(document).ready(function () {
         }
     });
 
+    //el preu de les bicis s'inclou una vegada s'ha indicat la quantita, ho controlant al fer click en #pagarToggle
     $('#bici').click(function() {
-        var preu = parseFloat($("#biciC").val());
-        var actual = parseFloat($("#preuTotal").val());
-        var numBicis = parseInt($("quantBicis").val()); //esto se tiene que revisar al darle a enviar y pagar
-        if(actual==""){
-            actual=0
-        };
-        var nits = 0;
-        for (selec of resultatsSeleccionats){
-            if (parseInt(selec.numNits) > nits){
-                nits = parseInt(selec.numNits);
-            }
-        }
         if($('#biciC').prop('checked')){
             $("#biciC").prop('checked', false);
             $("#Qbici").addClass("ocultar");
-            var total = actual - (preu*nits);
-            $("#preuTotal").val(total);
             alert("s'ha eliminat la bicicleta");
         }else{
             $("#biciC").prop('checked', true);
             $("#Qbici").removeClass("ocultar");
-            $("#Qbici input").focus();
-            var total = actual + (preu*nits);
-            $("#preuTotal").val(total);
+            $("#quantBicis").focus();
             alert("s'ha inclós el servei de bicicleta");
         }
     });
@@ -232,7 +235,7 @@ function addServicios(){
             servei.nom = $(filtre).attr("name");
             servei.preuInd = $(filtre).val();
             if (servei.nom == "bicicleta"){
-                servei.quantitat = $("#Qbici" input).val();
+                servei.quantitat = $("quantBicis").val();
             }
             llistaServ.push(servei);
             resultatsSeleccionats.push(llistaServ);
