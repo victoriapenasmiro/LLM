@@ -60,7 +60,7 @@ $(document).ready(function () {
     });
 
     //cambiamos el style de las etiquetas a
-    $(".card-body a").css("cssText", "color: black !important;");
+    $("#informacio a").css("cssText", "color: black !important;");
 
     //verificamos que los campos mandatory esten rellenados para continuar
     $("#pagarToggle").click(function () { 
@@ -103,13 +103,13 @@ $(document).ready(function () {
         var actual = parseFloat($("#preuTotal").val());
         if(actual==""){
             actual=0
-        }; //esto no deberia pasar nunca
+        };
         var nits = 0;
         for (selec of resultatsSeleccionats){
             if (parseInt(selec.numNits) > nits){
                 nits = parseInt(selec.numNits);
             }
-        }//tengo que hacerlo por cada hotel*********************************************
+        }
         if($('#guarderiaC').prop('checked')){
             $("#guarderiaC").prop('checked', false);
             var total = actual - (preu*nits);
@@ -124,34 +124,80 @@ $(document).ready(function () {
     });
 
     $('#bici').click(function() {
+        var preu = parseFloat($("#biciC").val());
+        var actual = parseFloat($("#preuTotal").val());
+        var numBicis = parseInt($("quantBicis").val()); //esto se tiene que revisar al darle a enviar y pagar
+        if(actual==""){
+            actual=0
+        };
+        var nits = 0;
+        for (selec of resultatsSeleccionats){
+            if (parseInt(selec.numNits) > nits){
+                nits = parseInt(selec.numNits);
+            }
+        }
         if($('#biciC').prop('checked')){
             $("#biciC").prop('checked', false);
             $("#Qbici").addClass("ocultar");
+            var total = actual - (preu*nits);
+            $("#preuTotal").val(total);
             alert("s'ha eliminat la bicicleta");
         }else{
             $("#biciC").prop('checked', true);
             $("#Qbici").removeClass("ocultar");
             $("#Qbici input").focus();
+            var total = actual + (preu*nits);
+            $("#preuTotal").val(total);
             alert("s'ha inclós el servei de bicicleta");
         }
     });
 
     $('#assegur').click(function() {
+        var preu = parseFloat($("#assegurC").val());
+        var actual = parseFloat($("#preuTotal").val());
+        if(actual==""){
+            actual=0
+        };
+        var nits = 0;
+        for (selec of resultatsSeleccionats){
+            if (parseInt(selec.numNits) > nits){
+                nits = parseInt(selec.numNits);
+            }
+        }
         if($('#assegurC').prop('checked')){
             $("#assegurC").prop('checked', false);
+            var total = actual - (preu*nits);
+            $("#preuTotal").val(total);
             alert("s'ha eliminat el seguro de cancelació");
         }else{
             $("#assegurC").prop('checked', true);
+            var total = actual + (preu*nits);
+            $("#preuTotal").val(total);
             alert("s'ha inclós l'assegurança");
         }
     });
 
     $('#cotxe').click(function() {
+        var preu = parseFloat($("#cotxeC").val());
+        var actual = parseFloat($("#preuTotal").val());
+        if(actual==""){
+            actual=0
+        };
+        var nits = 0;
+        for (selec of resultatsSeleccionats){
+            if (parseInt(selec.numNits) > nits){
+                nits = parseInt(selec.numNits);
+            }
+        }
         if($('#cotxeC').prop('checked')){
             $("#cotxeC").prop('checked', false);
+            var total = actual - (preu*nits);
+            $("#preuTotal").val(total);
             alert("s'ha eliminat el lloguer del cotxe");
         }else{
             $("#cotxeC").prop('checked', true);
+            var total = actual + (preu*nits);
+            $("#preuTotal").val(total);
             alert("s'ha inclós el cotxo de lloguer");
         }
     });
@@ -172,25 +218,27 @@ function verificarEnviar(){
 
 //comprobamos servicios adicionales seleccionados y añadimos para enviar el json con todo
 //¿Como doy formato para diferenciar hotel de servicio?
-/*function addServicios(){
-    var servei = new Object;
+function addServicios(){
+    var servei = new Object();
+    var llistaServ = new Array();
     /*format:
     servei.nom
     servei.preuIndividual
     servei.quantitat --> només per bicis
     */
-    /*var filtres = $(".serveisAd");
+    var filtres = document.getElementsByClassName("serveisAd");//$(".serveisAd");
     for (filtre of filtres){
         if(filtre.checked){
             servei.nom = $(filtre).attr("name");
             servei.preuInd = $(filtre).val();
             if (servei.nom == "bicicleta"){
-                servei.quantitat = $("#Qbici" input).val(); //revisar que no coge el valor por defecto 1, si se lo cambiamos
+                servei.quantitat = $("#Qbici" input).val();
             }
-            resultatsSeleccionats.push(servei);
+            llistaServ.push(servei);
+            resultatsSeleccionats.push(llistaServ);
         }
    }
-}*/
+}
 
 //A partir de les ids que ens arriba per parametre. Obtindrem la informació extesa de cada entitat. Hotel, Habitacio i Preu.
 //Ho insetarem dins un objecte per tenir més accessible aquesta informació. 
@@ -248,9 +296,11 @@ function pintatResultats(llistaInfoPintar) {
     */
     var estrelles = "";
     var strHtml = "";
+    var arrayFotos = "";
 
     var preuTotal = 0;
     for (infoPintar of llistaInfoPintar) {
+        arrayFotos = crearArrayFot(infoPintar.hab);
         estrelles = recuperarEstrelles(infoPintar.hotel.estrelles);
         strHtml += "<div class=\"card mb-3 text-white bg-warning\" style=\"max-width: 800px;\">";
         strHtml += "<div class=\"row no-gutters\">";
@@ -263,7 +313,7 @@ function pintatResultats(llistaInfoPintar) {
         strHtml += "<h6 class=\"card-title\"><em>Habitació " + infoPintar.hab.nom + ": " + infoPintar.quantitat + " habitacions - Nits: " + infoPintar.nits + "</em></h6>";
         strHtml += "<p class=\"card-text\"><small class=\"text-white\">" + infoPintar.hab.descripcio + "</small></p>";
         strHtml += "<p class=\"card-text\">Preu net: " + (infoPintar.preu.base + infoPintar.preu.comissio) + " Impost: " + infoPintar.preu.impostPercent + "%.</p>"
-        strHtml += "<a href=\"!#\" onclick=\"mostrarFotos();\"><b>VEURE FOTOS HABITACIÓ</b></a>"
+        strHtml += "<a href=\"#\" onclick=\"mostrarFotos("+ arrayFotos +");\"><b>VEURE FOTOS HABITACIÓ</b></a>"
         strHtml += "<p class=\"card-text text-right mb-2\"><mark class=\"p-3 border border-success\"><b>TOTAL: " + (infoPintar.preu.total*infoPintar.quantitat*infoPintar.nits) + "</b></mark></p>";
         strHtml += "</div></div></div></div>";
         preuTotal += infoPintar.preu.total * infoPintar.quantitat * infoPintar.nits;
@@ -274,4 +324,19 @@ function pintatResultats(llistaInfoPintar) {
     };            
 }
 
-//ocultam form finalització y desplegam pagament
+function crearArrayFot(hab){
+    var arrayFotos = new Array();
+    for (foto of hab.fotosHabitacio){
+        arrayFotos.push(foto);
+    }
+    return arrayFotos;
+}
+
+//mostram fotos habitació
+function mostrarFotos(fotosHab){
+    var strHtml = "";
+    for (foto of fotosHab){
+        strHtml += "<img src=\""+ foto + "\" alt=\"\"/>";
+    }
+    $("#fotosHab").html(strHtml);
+}

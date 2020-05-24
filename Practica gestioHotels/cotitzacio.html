@@ -62,9 +62,7 @@
     <div class="container">
         <h2 class="text-center py-3">LA TEVA SELECCIÓ</h2>
         <div id="informacio"></div>
-        <div id="fotosHab" class="slider">
-            <img src="https://raw.githubusercontent.com/victoriapenasmiro/LLM/master/Practica%20gestioHotels/images/suite1.jpg" class="pt-0" alt="SuperPlus" />
-        </div>
+        <div id="fotosHab" class="slider"></div>
     </div>
     <div id="serveis" class="container py-2">
         <h3 class="text-center pt-5 display-4">SERVEIS ADICIONALS</h3>
@@ -79,7 +77,6 @@
                         <p class="card-text"><small class="text-muted">Lloga un cotxe familiar per tan sols 50€/dia.
                                 Parking inclós.</small></p>
                         <a href="#!" id="cotxe" class="btn btn-primary">Ho vull!</a>
-                        <!--poner un onclick, para que al pinchar se autoclique el checkbox correspondiente-->
                     </div>
                 </div>
             </div>
@@ -92,7 +89,6 @@
                         <p class="card-text"><small class="text-muted">Contracta la teva assegurança per només
                                 100€/nit.</small></p>
                         <a href="#!" id="assegur" class="btn btn-primary">Ho vull!</a>
-                        <!--poner un onclick, para que al pinchar se autoclique el checkbox correspondiente-->
                     </div>
                 </div>
             </div>
@@ -104,7 +100,6 @@
                         <h5 class="card-title"><b>Lloguer de bicicletes</b></h5>
                         <p class="card-text"><small class="text-muted">Lloga una bicicleta per només 5€/dia.</small></p>
                         <a href="#!" id="bici" class="btn btn-primary">Ho vull!</a>
-                        <!--poner un onclick, para que al pinchar se autoclique el checkbox correspondiente-->
                     </div>
                 </div>
             </div>
@@ -173,7 +168,7 @@
                             <div class="form-row justify-content-center mt-2">
                                 <div id="Qbici" class="form-group col-md-6 ocultar">
                                     <label>Quantitat de bicicletes</label>
-                                    <input type="text" class="form-control" value="1">
+                                    <input type="text" id="quantBicis" class="form-control">
                                 </div> <!-- form-group end.// -->
                             </div> <!-- form-row.// -->
                             <div class="form-row justify-content-center">
@@ -263,7 +258,7 @@
                             <div class="form-inline">
                                 <div class="input-group">
                                     <div class="input-group-prepend"><span class="input-group-text">€</span></div>
-                                    <input type="number" id="preuTotal" class="form-control text-right" placeholder="0" />
+                                    <input type="number" id="preuTotal" class="form-control text-right" placeholder="0" readonly/>
                                 </div>
                             </div>
                             <hr>
