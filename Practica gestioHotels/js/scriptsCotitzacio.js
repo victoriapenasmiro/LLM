@@ -63,27 +63,33 @@ $(document).ready(function () {
     //cambiamos el style de las etiquetas a
     $("#informacio a").css("cssText", "color: black !important;");
 
+    $("#finalizarReserva").hide();
+    $("#pagar").hide();
+    $("#Qbici").hide();
+    $("#isMandatory").hide();
+    $("#dadesM").hide();
+    $("#aCad").hide();
+
     //ocultarmos botón finalizar
     $("#finalizarToggle").click(function () { 
-        $("#finalizarToggle").addClass("ocultar");
-        $("#finalizarReserva").removeClass("ocultar");
-        $("#finalizarReserva").addClass("row justify-content-center");
+        $("#finalizarToggle").hide();
+        $("#finalizarReserva").show();
     });
 
     //volvemos atras
     $("#volver").click(function () { 
-        $("#informacio").parent().removeClass("ocultar");
-        $("#serveis").removeClass("ocultar");
-        $("#finalizarToggle").removeClass("ocultar");
-        $("#pagar").addClass("ocultar");
+        $("#informacio").parent().show();
+        $("#serveis").show();
+        $("#finalizarToggle").show();
+        $("#pagar").hide();
     });
 
     //cancelamos el pago y volvermos a tras
     $("#cancelarCompra").click(function () { 
-        $("#informacio").parent().removeClass("ocultar");
-        $("#serveis").removeClass("ocultar");
-        $("#finalizarToggle").removeClass("ocultar");
-        $("#pagar").addClass("ocultar");
+        $("#informacio").parent().show();
+        $("#serveis").show();
+        $("#finalizarToggle").show();
+        $("#pagar").hide();
     });
 
     //checks serveis adicionals
@@ -118,14 +124,13 @@ $(document).ready(function () {
     $('#bici').click(function() {
         if($('#biciC').prop('checked')){
             $("#biciC").prop('checked', false);
-            $("#Qbici").addClass("ocultar");
             alert("s'ha eliminat la bicicleta");
         }else{
             $("#biciC").prop('checked', true);
-            $("#Qbici").removeClass("ocultar");
             $("#quantBicis").focus();
             alert("s'ha inclós el servei de bicicleta");
         }
+        $("#Qbici").toggle();
     });
 
     //click al call to action
@@ -182,12 +187,11 @@ $(document).ready(function () {
 
     //click al checkbox
     $("#biciC").click(function() {
+        $("#Qbici").toggle();
         if($("#biciC").prop("checked")){
-            $("#Qbici").removeClass("ocultar");
             $("#quantBicis").focus();
             alert("s'ha inclós el servei de bicicleta");
         }else{
-            $("#Qbici").addClass("ocultar");
             alert("s'ha eliminat la bicicleta");
         }
     });
@@ -267,10 +271,10 @@ $(document).ready(function () {
     //verificamos que los campos mandatory esten rellenados para continuar
     $("#pagarToggle").click(function () { 
         if($("#name").val().length == 0 || $("#email").val().length == 0 || $("#telf").val().length == 0 ||
-        (!$("#Qbici").hasClass("ocultar") && $("#quantBicis").val() == null)){
-            $("#isMandatory").removeClass("ocultar");
+        ($("#Qbici").is(":visible") && $("#quantBicis").val() == "")){
+            $("#isMandatory").show();
         }else{
-            if(!$("#Qbici").hasClass("ocultar")){
+            if($("#Qbici").is(":visible")){
                 var preu = parseFloat($("#biciC").val());
                 var actual = parseFloat($("#preuTotal").val());
                 var numBicis = parseInt($("#quantBicis").val());
@@ -286,10 +290,11 @@ $(document).ready(function () {
                 var total = actual + (preu*nits*numBicis);
                 $("#preuTotal").val(total);
             }
-            $("#finalizarReserva").addClass("ocultar");
-            $("#pagar").removeClass("ocultar");
-            $("#informacio").parent().addClass("ocultar");
-            $("#serveis").addClass("ocultar");
+            $("#finalizarReserva").hide();
+            $("#pagar").show();
+            $("#informacio").parent().hide();
+            $("#serveis").hide();
+            $("#isMandatory").hide();
         }
     });
 });
@@ -299,10 +304,10 @@ function verificarEnviar(){
     var mes = fecha.getMonth();
     var any = fecha.getFullYear();
     if($("#cad").val()<=mes && $("#anyCad").val()<=any){
-        $("#aCad").removeClass("ocultar");
+        $("#aCad").show();
     }
     if($("#numT").val() == null || $("#cvvId").val() == "" || $("#titularT").val().length == 0){
-        $("#dadesM").removeClass("ocultar");
+        $("#dadesM").show();
     }   
     else{
         addServicios();
@@ -460,34 +465,32 @@ function pintatResultats(llistaInfoPintar) {
         strHtml += "<a href=\"#\" onclick=\"mostrarFotos();\"><b>VEURE FOTOS HABITACIÓ</b></a>"
         strHtml += "<p class=\"card-text text-right mb-2\"><mark class=\"p-3 border border-success\"><b>TOTAL: " + (infoPintar.preu.total*infoPintar.quantitat*infoPintar.nits) + "</b></mark></p>";
         strHtml += "</div></div></div></div>";
-        divF += "<div id='" + infoPintar.hotel.nom + "_" + infoPintar.hab.nom + "' class='slider'></div>";
+        divF += "<div id='" + infoPintar.hotel.id + "_" + infoPintar.hab.nom + "' class='slider'></div>";
         preuTotal += infoPintar.preu.total * infoPintar.quantitat * infoPintar.nits;
         dosDecimals("preuTotal");
         
         //Jquery. Com el innerHtml però d'una altra forma.
         $("#informacio").html(strHtml);
         $("#fotosHab").html(divF);
+        $("#fotosHab").hide();
         $("#preuTotal").val(preuTotal);
 
         //añadimos las fotos
-        crearSlider(infoPintar.hab, infoPintar.hotel.nom + "_" + infoPintar.hab.nom);
+        crearSlider(infoPintar.hab, infoPintar.hotel.id + "_" + infoPintar.hab.nom);
     };            
 }
 
-//agregam les fotos al div ocult de cada hotel --no funciona, no agrega strHtml al element amb l'id indicat
+//agregam les fotos al div ocult de cada hotel
+
 function crearSlider(hab, id){
     var strHtml = "";
     for (foto of hab.fotosHabitacio){
-        strHtml += "<div><img src='"+ foto + "' alt=''/></div>";
+        strHtml += "<div><img src='"+ foto + "' alt=\"\"/></div>";
     }
-    $(id).html(strHtml);
+    $("#" + id).html(strHtml);
 }
 
 //mostram fotos habitació
 function mostrarFotos(){
-    if ($("#fotosHab").hasClass("ocultar")){
-        $("#fotosHab").removeClass("ocultar");
-    }else{
-        $("#fotosHab").addClass("ocultar");
-    }
+    $("#fotosHab").toggle();
 }

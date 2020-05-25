@@ -278,15 +278,12 @@ nav a {
     clear: both;
     overflow: hidden;
     padding: 2%;
+    width: 500px;
+    margin: 0 auto;
 }
 
 #fotosHab h3{
     margin-top: 0px;
-}
-
-#fotosHab div{
-    width: 650px;
-    margin: 0 auto;
 }
 
 #fotosHab img{
