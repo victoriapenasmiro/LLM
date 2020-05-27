@@ -56,8 +56,6 @@ $(document).ready(function () {
         }
         //Ja tenim tota la informació dins l'array. Ara pintarem aqueta informació.
         pintatResultats(infoExtesaResultatsSeleccionats);
-        //slider habitacions al activar això deixa de funciona es meu js
-        $('.slider').bxSlider();
     });
 
     //cambiamos el style de las etiquetas a
@@ -94,18 +92,10 @@ $(document).ready(function () {
 
     //checks serveis adicionals
     //click al call to action
-    $('#guarderia').click(function() {
+    $("#guarderia").click(function() {
         var preu = parseFloat($("#guarderiaC").val());
         var actual = parseFloat($("#preuTotal").val());
-        if(actual==""){
-            actual=0;
-        }
-        var nits = 0;
-        for (selec of resultatsSeleccionats){
-            if (parseInt(selec.numNits) > nits){
-                nits = parseInt(selec.numNits);
-            }
-        }
+        var nits = recuperarNumNits();
         if($('#guarderiaC').prop('checked')){
             $("#guarderiaC").prop('checked', false);
             var total = actual - (preu*nits);
@@ -137,15 +127,7 @@ $(document).ready(function () {
     $('#assegur').click(function() {
         var preu = parseFloat($("#assegurC").val());
         var actual = parseFloat($("#preuTotal").val());
-        if(actual==""){
-            actual=0;
-        }
-        var nits = 0;
-        for (selec of resultatsSeleccionats){
-            if (parseInt(selec.numNits) > nits){
-                nits = parseInt(selec.numNits);
-            }
-        }
+        var nits = recuperarNumNits();
         if($("#assegurC").prop("checked")){
             $("#assegurC").prop('checked', false);
             var total = actual - (preu*nits);
@@ -163,15 +145,7 @@ $(document).ready(function () {
     $('#cotxe').click(function() {
         var preu = parseFloat($("#cotxeC").val());
         var actual = parseFloat($("#preuTotal").val());
-        if(actual==""){
-            actual=0;
-        }
-        var nits = 0;
-        for (selec of resultatsSeleccionats){
-            if (parseInt(selec.numNits) > nits){
-                nits = parseInt(selec.numNits);
-            }
-        }
+        var nits = recuperarNumNits();
         if($('#cotxeC').prop('checked')){
             $("#cotxeC").prop('checked', false);
             var total = actual - (preu*nits);
@@ -200,15 +174,7 @@ $(document).ready(function () {
     $("#cotxeC").click(function() {
         var preu = parseFloat($("#cotxeC").val());
         var actual = parseFloat($("#preuTotal").val());
-        if(actual==""){
-            actual=0;
-        }
-        var nits = 0;
-        for (selec of resultatsSeleccionats){
-            if (parseInt(selec.numNits) > nits){
-                nits = parseInt(selec.numNits);
-            }
-        }
+        var nits = recuperarNumNits();
         if($("#cotxeC").prop("checked")){
             var total = actual + (preu*nits);
             $("#preuTotal").val(total);
@@ -224,15 +190,7 @@ $(document).ready(function () {
     $("#guarderiaC").click(function() {
         var preu = parseFloat($("#guarderiaC").val());
         var actual = parseFloat($("#preuTotal").val());
-        if(actual==""){
-            actual=0;
-        }
-        var nits = 0;
-        for (selec of resultatsSeleccionats){
-            if (parseInt(selec.numNits) > nits){
-                nits = parseInt(selec.numNits);
-            }
-        }
+        var nits = recuperarNumNits();
         if($("#guarderiaC").prop("checked")){
             var total = actual + (preu*nits);
             $("#preuTotal").val(total);
@@ -248,15 +206,7 @@ $(document).ready(function () {
     $("#assegurC").click(function() {
         var preu = parseFloat($("#assegurC").val());
         var actual = parseFloat($("#preuTotal").val());
-        if(actual==""){
-            actual=0;
-        }
-        var nits = 0;
-        for (selec of resultatsSeleccionats){
-            if (parseInt(selec.numNits) > nits){
-                nits = parseInt(selec.numNits);
-            }
-        }
+        var nits = recuperarNumNits();
         if($("#assegurC").prop("checked")){
             var total = actual + (preu*nits);
             $("#preuTotal").val(total);
@@ -278,15 +228,7 @@ $(document).ready(function () {
                 var preu = parseFloat($("#biciC").val());
                 var actual = parseFloat($("#preuTotal").val());
                 var numBicis = parseInt($("#quantBicis").val());
-                if(actual==""){
-                    actual=0;
-                }
-                var nits = 0;
-                for (selec of resultatsSeleccionats){
-                    if (parseInt(selec.numNits) > nits){
-                        nits = parseInt(selec.numNits);
-                    }
-                }
+                var nits = recuperarNumNits();
                 var total = actual + (preu*nits*numBicis);
                 $("#preuTotal").val(total);
             }
@@ -298,6 +240,17 @@ $(document).ready(function () {
         }
     });
 });
+
+function recuperarNumNits(){
+    var nits = 0;
+    for (selec of resultatsSeleccionats){
+        if (parseInt(selec.numNits) > nits){
+            nits = parseInt(selec.numNits);
+        }
+    }
+
+    return nits;
+}
 
 function verificarEnviar(){
     var fecha = new Date();
@@ -453,7 +406,7 @@ function pintatResultats(llistaInfoPintar) {
         estrelles = recuperarEstrelles(infoPintar.hotel.estrelles);
         strHtml += "<div class=\"card mb-3 text-white bg-warning\" style=\"max-width: 800px;\">";
         strHtml += "<div class=\"row no-gutters\">";
-        strHtml += "<div class=\"col-md-4\">";//no funciona el slider
+        strHtml += "<div class=\"col-md-4\">";
         strHtml += "<img src=\""+ infoPintar.hab.fotosHabitacio[0] + "\" class=\"card-img\" alt=\"" + infoPintar.hab.nom + "\"/>";
         strHtml += "</div>";
         strHtml += "<div class=\"col-md-8\">";
@@ -481,7 +434,6 @@ function pintatResultats(llistaInfoPintar) {
 }
 
 //agregam les fotos al div ocult de cada hotel
-
 function crearSlider(hab, id){
     var strHtml = "";
     for (foto of hab.fotosHabitacio){
@@ -490,7 +442,8 @@ function crearSlider(hab, id){
     $("#" + id).html(strHtml);
 }
 
-//mostram fotos habitació
+//mostram fotos habitació - slider
 function mostrarFotos(){
     $("#fotosHab").toggle();
+    $(".slider").bxSlider().redrawSlider();
 }
